@@ -119,6 +119,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
 Plug 'maxbrunsfeld/vim-emacs-bindings'
+Plug 'tmsvg/pear-tree'
 call plug#end()
 
 "if empty(glob("~/.vim/plugins"))
@@ -137,4 +138,5 @@ set mouse=nicr
 set mouse=a
 set pastetoggle=<F3>
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+let g:powerline_pycmd="py3"
 
