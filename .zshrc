@@ -1,6 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # u
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/home/matheus/.cargo/bin:$PATH
+
 # Path to your oh-my-zsh installation.
 export ZSH="/home/matheus/.oh-my-zsh"
 
@@ -99,11 +101,11 @@ HISTFILE=~/.cache/zsh/history
 export KEYTIMEOUT=1
 
 # Use vim keys in tab complete menu:
-#bindkey -M menuselect 'h' vi-backward-char
-#bindkey -M menuselect 'k' vi-up-line-or-history
-#bindkey -M menuselect 'l' vi-forward-char
-#bindkey -M menuselect 'j' vi-down-line-or-history
-#bindkey -v '^?' backward-delete-char
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -200,6 +202,11 @@ else
 fi
 
 
+source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
+
+
+
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -259,11 +266,60 @@ fi
 #  fi
 #fi
 
-xport http_proxy=''
+
+remove=/opt/anaconda/bin
+PATH=${PATH//$remove/}
+export PATH="$PATH:/home/matheus/programs/flutter/bin"
+export PATH=/home/matheus/mxe/usr/bin:$PATH
+export PATH=$PATH:/opt/anaconda/bin
+export http_proxy=''
 export https_proxy=''
 export ftp_proxy=''
 export socks_proxy=''
 
+PATH=/home/matheus/programs/simFlow/simFlow-3.1:${PATH};export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 8F1FFBF3-4166-531F-536F-118E03C20EE2 588C0655-079F-B357-8FA5-5CEF1F102B8D
+
+export ANDROID_HOME="/home/matheus/BACKUP/programs/android-sdk-linux/"
+export NVPACK_ROOT="/media/matheus/Elements SE/CodeWorksforAndroid"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/matheus/.sdkman"
+[[ -s "/home/matheus/.sdkman/bin/sdkman-init.sh" ]] && source "/home/matheus/.sdkman/bin/sdkman-init.sh"
+[ -z "$DISPLAY" ] && export DISPLAY=:0 
+
+
+
 alias pacman="sudo pacman"
+alias finds="grep -rn '.' -e "
+alias findd="find . -type d -name "
+alias findf="find . -type f -name "
+alias lw="awk '{print \$NF}'"
+alias fw="awk '{print \$1}'"
+alias arec="parec -d 0 | lame -r -V0 - "
+
+function gw {
+  awk -v wc="$1" '{print $wc}'
+}
+
+
+# catch stdin, pipe it to stdout and save to a file
+catch () { 
+  cat - | tee /tmp/catch.out
+  LAST=$(cat /tmp/catch.out)
+  l=$(cat /tmp/catch.out)
+}
+# print whatever output was saved to a file
+res () {
+  cat /tmp/catch.out 
+}
+
 . /opt/asdf-vm/asdf.sh
+
+
+bindkey -s '^O' 'lfcd\n'
+bindkey -s '^F' 'retfile=$(finder.sh) \n $retfile'
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
 

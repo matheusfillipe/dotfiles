@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/matheus/.config/vifm/colors'
+let g:netrw_dirhist_6='/home/matheus/.config/vifm'
+let g:netrw_dirhist_5='/home/matheus/tmp/droidcam'
+let g:netrw_dirhist_4='/usr/lib/python3.8/site-packages/kazam'
+let g:netrw_dirhist_3='/home/matheus/tmp'
+let g:netrw_dirhist_2='/home/matheus'
+let g:netrw_dirhist_1='/home/matheus/.config/vifm/colors'
+let g:netrw_dirhist_0='/home/matheus/.config/vifm'
+let g:netrw_dirhist_9='/home/matheus/.config/vifm/colors'
+let g:netrw_dirhist_8='/home/matheus/.config/vifm'
