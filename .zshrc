@@ -85,8 +85,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 HISTFILE=~/.cache/zsh/history
 
 # Basic auto/tab complete:
@@ -202,7 +202,16 @@ else
 fi
 
 
+PATH="$HOME/.local/bin${PATH:+:${PATH}}"
+
 source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
+bindkey '^n' expand-or-complete
+bindkey '^p' reverse-menu-complete
+bindkey '^k' up-history
+bindkey '^j' down-history
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
 
 
@@ -241,6 +250,8 @@ source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias cx='chmod +x'
+alias gitclone='git clone $(xclip -o)'
 export EDITOR='vim'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -320,6 +331,6 @@ bindkey -s '^F' 'retfile=$(finder.sh) \n $retfile'
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
+bindkey '' edit-command-line
 
 

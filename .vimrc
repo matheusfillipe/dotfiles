@@ -52,6 +52,9 @@ runtime! macros/matchit.vim
 nnoremap j gj
 nnoremap k gk
 
+" shebang bash
+let @b='ggO#!/bin/bash'
+
 " Allow hidden buffers
 set hidden
 
