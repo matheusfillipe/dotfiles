@@ -331,6 +331,6 @@ bindkey -s '^F' 'retfile=$(finder.sh) \n $retfile'
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
-bindkey '' edit-command-line
+bindkey '' edit-command-line
 
 
