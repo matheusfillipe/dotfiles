@@ -251,7 +251,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias cx='chmod +x'
-alias gitclone='git clone $(xclip -o)'
 export EDITOR='vim'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -306,12 +305,17 @@ alias findf="find . -type f -name "
 alias lw="awk '{print \$NF}'"
 alias fw="awk '{print \$1}'"
 alias arec="parec -d 0 | lame -r -V0 - "
+alias gitclone='git clone $(xclip -o | lw)'
 
 function gw {
   awk -v wc="$1" '{print $wc}'
 }
 
 
+lns(){
+    touch $2
+    ln -s $(realpath $1) $(realpath $2)
+}
 # catch stdin, pipe it to stdout and save to a file
 catch () { 
   cat - | tee /tmp/catch.out
@@ -326,11 +330,16 @@ res () {
 . /opt/asdf-vm/asdf.sh
 
 
-bindkey -s '^O' 'lfcd'
-bindkey -s '^F' 'retfile=$(finder.sh) $retfile'
+bindkey -s '^O' 'lfcd
+'
+bindkey -s '^F' 'retfile=$(finder.sh)
+ $retfile'
 
-# Edit line in vim with ctrl-e:
+# Edit line in vim with ctrl-G:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '' edit-command-line
 
 
+LC_ALL=en_US
+
+source /home/matheus/.config/broot/launcher/bash/br

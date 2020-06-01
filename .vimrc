@@ -55,6 +55,8 @@ nnoremap k gk
 " shebang bash
 let @b='ggO#!/bin/bash'
 
+
+
 " Allow hidden buffers
 set hidden
 
@@ -101,6 +103,12 @@ set listchars=tab:?\ ,eol:?
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
+set number relativenumber
+set nu rnu
+nnoremap S :%s//g<left><left>
+vnoremap S :s//g<left><left>
+vnoremap . :normal .<CR> 
+
 " Color scheme (terminal)
 set t_Co=256
 set background=dark
@@ -123,6 +131,7 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
 Plug 'maxbrunsfeld/vim-emacs-bindings'
 Plug 'tmsvg/pear-tree'
+Plug 'vim-scripts/AutoComplPop'
 call plug#end()
 
 "if empty(glob("~/.vim/plugins"))
@@ -136,6 +145,9 @@ hi LineNr     ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 set guioptions+=a
 set clipboard=unnamedplus
+set complete+=kspell
+set completeopt=menuone,longest
+set shortmess+=c
 "set guioptions?
 set mouse=nicr
 set mouse=a
@@ -143,3 +155,10 @@ set pastetoggle=<F3>
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 let g:powerline_pycmd="py3"
 
+inoremap <c-Left> <C-\><C-O>b
+inoremap <c-Right> <C-\><C-O>w
+
+inoremap <C-H> <C-\><C-O>h 
+inoremap <C-L> <C-\><C-O>w
+inoremap <C-J> <C-\><C-O>j
+inoremap <C-K> <C-\><C-O>k
