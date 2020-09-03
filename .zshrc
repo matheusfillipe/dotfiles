@@ -72,6 +72,8 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
 
+export PER_DIRECTORY_HISTORY_TOGGLE='^ '
+
 plugins=(
     archlinux
     git
@@ -79,6 +81,7 @@ plugins=(
     colored-man-pages
     zsh-autosuggestions
     zsh-syntax-highlighting
+    per-directory-history
    # zsh-vim-mode
 )
 
@@ -251,6 +254,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias cx='chmod +x'
+alias hotreload="ag -l | entr -r "
 export EDITOR='vim'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -282,6 +286,7 @@ PATH=${PATH//$remove/}
 export PATH="$PATH:/home/matheus/programs/flutter/bin"
 export PATH=/home/matheus/mxe/usr/bin:$PATH
 export PATH=$PATH:/opt/anaconda/bin
+export PATH=$PATH:~/.emacs.d/bin
 export http_proxy=''
 export https_proxy=''
 export ftp_proxy=''
@@ -305,7 +310,8 @@ alias findf="find . -type f -name "
 alias lw="awk '{print \$NF}'"
 alias fw="awk '{print \$1}'"
 alias arec="parec -d 0 | lame -r -V0 - "
-alias gitclone='git clone $(xclip -o | lw)'
+alias gitclone='git clone --depth 1 $(xclip -o | lw)'
+alias ema="emacs -nw"
 
 function gw {
   awk -v wc="$1" '{print $wc}'
@@ -313,7 +319,7 @@ function gw {
 
 
 lns(){
-    touch $2
+    [ "$3" = "-f" ] && rm -rf $2
     ln -s $(realpath $1) $(realpath $2)
 }
 # catch stdin, pipe it to stdout and save to a file
@@ -340,6 +346,23 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '' edit-command-line
 
 
-LC_ALL=en_US
-
 source /home/matheus/.config/broot/launcher/bash/br
+
+# >>> conda initialize >>>
+function condainit(){
+#
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+}
+# <<< conda initialize <<<
+

@@ -103,11 +103,13 @@ set listchars=tab:?\ ,eol:?
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
+" set number relativenumber
 set number relativenumber
+
 set nu rnu
 nnoremap S :%s//g<left><left>
-vnoremap S :s//g<left><left>
-vnoremap . :normal .<CR> 
+vnoremap s :s//g<left><left>
+vnoremap . :normal .<cr> 
 
 " Color scheme (terminal)
 set t_Co=256
@@ -132,8 +134,19 @@ Plug 'tpope/vim-sensible'
 Plug 'maxbrunsfeld/vim-emacs-bindings'
 Plug 'tmsvg/pear-tree'
 Plug 'vim-scripts/AutoComplPop'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'fidian/hexmode' 
+Plug 'davidhalter/jedi-vim'
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'bkad/CamelCaseMotion'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'voldikss/vim-floaterm'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-repeat'
 call plug#end()
-
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
@@ -153,7 +166,7 @@ set mouse=nicr
 set mouse=a
 set pastetoggle=<F3>
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
-let g:powerline_pycmd="py3"
+"let g:powerline_pycmd="py3"
 
 inoremap <c-Left> <C-\><C-O>b
 inoremap <c-Right> <C-\><C-O>w
@@ -162,3 +175,68 @@ inoremap <C-H> <C-\><C-O>h
 inoremap <C-L> <C-\><C-O>w
 inoremap <C-J> <C-\><C-O>j
 inoremap <C-K> <C-\><C-O>k
+noremap  ZS :w
+inoremap <C-Z> :w
+
+" Spell Check
+let g:myLang=0
+function! ToggleSpell()
+  let g:myLangList=["nospell","en_us","pt_br"]
+  let g:myLang=g:myLang+1
+  if g:myLang>=len(g:myLangList) | let g:myLang=0 | endif
+  if g:myLang==0
+    setlocal nospell
+  else
+    execute "setlocal spell spelllang=".get(g:myLangList, g:myLang)
+  endif
+  echo "spell checking language:" g:myLangList[g:myLang]
+endfunction
+nmap <silent> <F7> :call ToggleSpell()<CR>
+
+nnoremap <C-a> :bn<CR>
+nnoremap <C-S-a> :bp<CR>
+
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+"map <silent> w <Plug>CamelCaseMotion_w
+"map <silent> b <Plug>CamelCaseMotion_b
+"map <silent> e <Plug>CamelCaseMotion_e
+"map <silent> ge <Plug>CamelCaseMotion_ge
+"sunmap w
+"sunmap b
+"sunmap e
+"sunmap ge
+"
+let g:airline_powerline_fonts = 1
+nnoremap <leader>s :set syntax=
+
+let g:camelcasemotion_key = '<leader>'
+
+nnoremap <A-f> :FloatermNew lf<CR>
+nnoremap <A-d> :FloatermNew --wintype='normal' --position='bottom' --height=0.25 
+vnoremap <A-s> :'<,'>FloatermSend<CR>
+let g:floaterm_keymap_new    = '<A-t>'
+let g:floaterm_keymap_prev   = '<A-p>'
+let g:floaterm_keymap_next   = '<A-n>'
+let g:floaterm_keymap_toggle = '<A-q>'
+
+nnoremap <Tab> :bn<CR>
+noremap ZW :bd<CR>
+
+nnoremap <leader>pt :set dictionary+=/usr/share/dict/pt_BR.dic<CR>
+nnoremap <leader>en :set dictionary+=/usr/share/dict/american-english <CR>
+nnoremap <leader>c :set dictionary=<CR>
+
+function! Spell_correct(n)
+"  let n = nr2char(getchar())
+  let n = a:n
+  if a:n<=0
+    let n=1
+  endif
+  execute ":normal [s".n."z=\<C-o>"
+endfunction
+
+imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+nmap <silent> <c-l> :<C-u>call Spell_correct(v:count)<cr>
+
