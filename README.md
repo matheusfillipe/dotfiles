@@ -5,7 +5,7 @@ My personal optimal tmux, zsh and vim configurations.
 
 Don't do this!
 
-`cd ~; git clone https://github.com/matheusfillipe/My-Terminal-Setup.git ~/; rm -rf ~/.git`
+```cd ~; git clone https://github.com/matheusfillipe/My-Terminal-Setup.git /tmp/dotfiles; cp -rf /tmp/dotfiles/* ~/; rm -rf /tmp/dotfiles/```
 
 ![alt text](https://github.com/matheusfillipe/My-Terminal-Setup/blob/master/screenshot.png?raw=true)
 
