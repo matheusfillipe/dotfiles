@@ -80,6 +80,25 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
+function! s:IsFirenvimActive(event) abort
+  if !exists('*nvim_get_chan_info')
+    return 0
+  endif
+  let l:ui = nvim_get_chan_info(a:event.chan)
+  return has_key(l:ui, 'client') && has_key(l:ui.client, 'name') &&
+      \ l:ui.client.name =~? 'Firenvim'
+endfunction
+
+function! OnUIEnter(event) abort
+  if s:IsFirenvimActive(a:event)
+    set formatoptions= 
+    nnoremap <space> :set lines=28 columns=110 <CR>
+    nnoremap <leader-e> :setlocal spell spelllang=en_us <CR>
+    nnoremap <leader-p> :setlocal spell spelllang=pt_br <CR>
+endif
+endfunction
+autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
+
 " Remap help key.
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
@@ -141,12 +160,22 @@ Plug 'fidian/hexmode'
 Plug 'davidhalter/jedi-vim'
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'bkad/CamelCaseMotion'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'voldikss/vim-floaterm'
+Plug 'reedes/vim-wordy'
 Plug 'easymotion/vim-easymotion'
+Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-repeat'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 Plug 'stanangeloff/php.vim'
+Plug 'preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -192,6 +221,7 @@ function! ToggleSpell()
   endif
   echo "spell checking language:" g:myLangList[g:myLang]
 endfunction
+
 nmap <silent> <F7> :call ToggleSpell()<CR>
 
 nnoremap <C-a> :bn<CR>
@@ -199,30 +229,62 @@ nnoremap <C-S-a> :bp<CR>
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-
-"map <silent> w <Plug>CamelCaseMotion_w
-"map <silent> b <Plug>CamelCaseMotion_b
-"map <silent> e <Plug>CamelCaseMotion_e
-"map <silent> ge <Plug>CamelCaseMotion_ge
-"sunmap w
-"sunmap b
-"sunmap e
-"sunmap ge
-"
-let g:airline_powerline_fonts = 1
-nnoremap <leader>s :set syntax=
-
 let g:camelcasemotion_key = '<leader>'
+" map <silent> w <Plug>CamelCaseMotion_w
+" map <silent> b <Plug>CamelCaseMotion_b
+" map <silent> e <Plug>CamelCaseMotion_e
+" map <silent> ge <Plug>CamelCaseMotion_ge
+" sunmap w
+" sunmap b
+" sunmap e
+" sunmap ge
+let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+set  guifont=SauceCodePro\ Nerd\ Font:h14
+set background=light
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+
+
+  let g:firenvim_config = { 
+      \ 'globalSettings': {
+          \ 'alt': 'all',
+      \  },
+      \ 'localSettings': {
+          \ '.*': {
+              \ 'cmdline': 'neovim',
+              \ 'priority': 0,
+              \ 'selector': 'textarea',
+              \ 'takeover': 'never',
+          \ },
+      \ }
+  \ }
+  " let fc = g:firenvim_config['localSettings']
+  " let fc['.*'] = { 'takeover': 'never', 'priority': 1 }
+
+nnoremap <leader>s :set syntax=
 
 nnoremap <A-f> :FloatermNew lf<CR>
 nnoremap <A-d> :FloatermNew --wintype='normal' --position='bottom' --height=0.25 
 vnoremap <A-s> :'<,'>FloatermSend<CR>
+
 let g:floaterm_keymap_new    = '<A-t>'
 let g:floaterm_keymap_prev   = '<A-p>'
 let g:floaterm_keymap_next   = '<A-n>'
 let g:floaterm_keymap_toggle = '<A-q>'
 
-nnoremap <Tab> :bn<CR>
+tnoremap <C-M-h> <C-\><C-n><C-w>h
+tnoremap <C-M-j> <C-\><C-n><C-w>j
+tnoremap <C-M-k> <C-\><C-n><C-w>k
+tnoremap <C-M-l> <C-\><C-n><C-w>l
+tnoremap <C-M-n> <C-\><C-n>
+
+nnoremap <C-M-h> <C-w>h
+nnoremap <C-M-j> <C-w>j
+nnoremap <C-M-k> <C-w>k
+nnoremap <C-M-l> <C-w>l
+
+"nnoremap <Tab> :bn<CR>
 noremap ZW :bd<CR>
 
 nnoremap <leader>pt :set dictionary+=/usr/share/dict/pt_BR.dic<CR>
@@ -235,9 +297,24 @@ function! Spell_correct(n)
   if a:n<=0
     let n=1
   endif
-  execute ":normal [s".n."z=\<C-o>"
+  execute ":normal [s".n."z="
 endfunction
 
 imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 nmap <silent> <c-l> :<C-u>call Spell_correct(v:count)<cr>
+nnoremap <leader>q :Bclose<cr>
+
+let g:session_autosave_periodic = 1 
+nnoremap <leader>O :OpenTabSession
+nnoremap <leader>S :SaveTabSession
+let g:session_autosave = 'yes'
+
+nnoremap <A-b> :NERDTreeToggle<CR>
+nmap td :tab split<CR>
+nmap tn :tabn<CR>
+nmap tp :tabp<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeGitStatusWithFlags = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+set encoding=utf8
 
