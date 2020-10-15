@@ -147,6 +147,9 @@ Plug 'voldikss/vim-floaterm'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-repeat'
 Plug 'stanangeloff/php.vim'
+Plug 'lervag/vimtex'
+Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -240,4 +243,9 @@ endfunction
 
 imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 nmap <silent> <c-l> :<C-u>call Spell_correct(v:count)<cr>
+"nnoremap <esc> :noh<return><esc>
 
+vmap < <gv
+vmap > >gv
+let g:rustfmt_autosave = 1
+let g:tex_flavor = 'latex'
