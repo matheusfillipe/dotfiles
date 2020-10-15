@@ -11,7 +11,7 @@ fi
 
 if command -v apt &> /dev/null 
 then
-  sudo apt install mosh curl vim neovim tmux git vifm -y
+  sudo apt install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline -y 
 fi
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -22,6 +22,7 @@ git clone https://github.com/kutsan/zsh-system-clipboard ~/.zsh/plugins/zsh-syst
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 mkdir -p ~/.config/nvim/
 mkdir -p ~/.config/vifm/
+mkdir -p ~/.cache/zsh/
 
 curl https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/.vimrc -o ~/.vimrc
 curl https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/.zshrc -o ~/.zshrc
@@ -31,6 +32,7 @@ curl https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/v
 
 vim +PlugInstall +qall +silent
 nvim +PlugInstall +qall +silent
+~/.tmux/plugins/tpm/scripts/install_plugins.sh
 
 echo "Allowing mosh"
 sudo ufw allow 60000:61000/udp
