@@ -5,7 +5,7 @@ My personal optimal tmux, zsh and vim configurations.
  
 Please backup your files! This will overwrite them. 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/install.sh)"
 ```
 
 Don't do this!
