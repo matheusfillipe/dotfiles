@@ -333,7 +333,7 @@ res () {
   cat /tmp/catch.out 
 }
 
-. /opt/asdf-vm/asdf.sh
+#. /opt/asdf-vm/asdf.sh
 
 
 bindkey -s '^O' 'lfcd
@@ -346,7 +346,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '' edit-command-line
 
 
-source /home/matheus/.config/broot/launcher/bash/br
+#source /home/matheus/.config/broot/launcher/bash/br
 
 # >>> conda initialize >>>
 function condainit(){
