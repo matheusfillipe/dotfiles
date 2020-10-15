@@ -19,9 +19,9 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://github.com/kutsan/zsh-system-clipboard ~/.zsh/plugins/zsh-system-clipboard
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 mkdir -p ~/.config/nvim/
 mkdir -p ~/.config/vifm/
-cp ~/.vim/plugged ~/.config/nvim/plugged -r
 
 curl https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/.vimrc -o ~/.vimrc
 curl https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/.zshrc -o ~/.zshrc
@@ -32,5 +32,7 @@ curl https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/v
 vim +PlugInstall +qall +silent
 nvim +PlugInstall +qall +silent
 
+echo "Allowing mosh"
+sudo ufw allow 60000:61000/udp
 chsh -s $(which zsh)
 zsh
