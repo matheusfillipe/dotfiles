@@ -30,3 +30,4 @@ vim +PlugInstall +qall +silent
 nvim +PlugInstall +qall +silent
 
 chsh -s $(which zsh)
+zsh
