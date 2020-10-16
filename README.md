@@ -17,9 +17,9 @@ cd ~; git clone https://github.com/matheusfillipe/My-Terminal-Setup.git dotfiles
 ```
 
 ## Update 
-`
+```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/update.sh)"
-`
+```
 
 ## What is this does
 
