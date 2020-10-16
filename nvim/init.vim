@@ -351,3 +351,4 @@ cnoremap <C-H> <C-Left>
 cnoremap <C-f> q:
 autocmd BufEnter * silent! lcd %:p:h
 let g:tagbar_sort=0
+set cedit=

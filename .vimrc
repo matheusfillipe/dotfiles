@@ -249,3 +249,4 @@ vmap < <gv
 vmap > >gv
 let g:rustfmt_autosave = 1
 let g:tex_flavor = 'latex'
+set cedit=
