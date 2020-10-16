@@ -349,3 +349,5 @@ cnoremap <C-A> <Home>
 cnoremap <C-L> <C-Right>
 cnoremap <C-H> <C-Left>
 cnoremap <C-f> q:
+autocmd BufEnter * silent! lcd %:p:h
+let g:tagbar_sort=0
