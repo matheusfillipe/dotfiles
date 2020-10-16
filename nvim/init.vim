@@ -176,6 +176,13 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdcommenter'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'rust-lang/rust.vim'
+Plug 'preservim/tagbar'
+Plug 'lervag/vimtex'
+Plug 'qpkorr/vim-bufkill'
+Plug 'chr4/nginx.vim'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -265,6 +272,8 @@ highlight NonText ctermbg=none
 nnoremap <leader>s :set syntax=
 
 nnoremap <A-f> :FloatermNew lf<CR>
+nnoremap <A-S-h> :FloatermHide<CR>
+tnoremap <A-S-h> <C-\><C-N>:FloatermHide<CR>
 nnoremap <A-d> :FloatermNew --wintype='normal' --position='bottom' --height=0.25 
 vnoremap <A-s> :'<,'>FloatermSend<CR>
 
@@ -305,11 +314,13 @@ nmap <silent> <c-l> :<C-u>call Spell_correct(v:count)<cr>
 nnoremap <leader>q :Bclose<cr>
 
 let g:session_autosave_periodic = 1 
-nnoremap <leader>O :OpenTabSession
-nnoremap <leader>S :SaveTabSession
+nnoremap <leader>O :OpenTabSession 
+nnoremap <leader>S :SaveTabSession 
+nnoremap <leader>D :DeleteSession 
 let g:session_autosave = 'yes'
 
 nnoremap <A-b> :NERDTreeToggle<CR>
+nmap tt :tabnew<CR>
 nmap td :tab split<CR>
 nmap tn :tabn<CR>
 nmap tp :tabp<CR>
@@ -317,4 +328,24 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDTreeGitStatusWithFlags = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 set encoding=utf8
+set inccommand=split
 
+vmap < <gv
+vmap > >gv
+let g:rustfmt_autosave = 1
+let g:tex_flavor = 'latex'
+let g:dart_format_on_save = 1
+nnoremap <A-z> :TagbarToggle<CR>
+nnoremap <A-c> :!ctags -R .<CR>
+nnoremap <A-w> :tabnext <CR>
+nnoremap <A-2> :tabnext <CR>
+nnoremap <A-1> :tabprevious <CR>
+nnoremap <A-q> :tabprevious <CR>
+nnoremap ZD :BD<CR>
+
+nnoremap <C-Space> :nnoremap <lt>Space> :! <lt>CR><left><left><left><left><left>
+nmap <Esc> :noh<CR>
+cnoremap <C-A> <Home>
+cnoremap <C-L> <C-Right>
+cnoremap <C-H> <C-Left>
+cnoremap <C-f> q:
