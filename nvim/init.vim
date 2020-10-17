@@ -152,7 +152,7 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
 Plug 'maxbrunsfeld/vim-emacs-bindings'
 Plug 'tmsvg/pear-tree'
-Plug 'vim-scripts/AutoComplPop'
+" Plug 'vim-scripts/AutoComplPop'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -184,6 +184,7 @@ Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
 Plug 'jeetsukumaran/vim-buffergator'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -354,5 +355,8 @@ autocmd BufEnter * silent! lcd %:p:h
 let g:tagbar_sort=0
 set cedit=
 nnoremap <A-v> :BuffergatorToggle<CR>
-
-
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+nmap <leader>r <Plug>(coc-rename)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)

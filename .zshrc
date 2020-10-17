@@ -364,5 +364,4 @@ else
 fi
 unset __conda_setup
 }
-# <<< conda initialize <<<
-
+export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin

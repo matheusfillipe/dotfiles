@@ -7,4 +7,6 @@ curl https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/v
 
 vim +PlugInstall +qall +silent
 nvim +PlugInstall +qall +silent
+nvim +"CocInstall coc-solargraph" +qall +silent
+nvim +"CocInstall coc-solargraph" +qall +silent
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
