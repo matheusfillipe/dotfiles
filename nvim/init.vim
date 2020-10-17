@@ -183,6 +183,7 @@ Plug 'preservim/tagbar'
 Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
+Plug 'jeetsukumaran/vim-buffergator'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -352,3 +353,6 @@ cnoremap <C-f> q:
 autocmd BufEnter * silent! lcd %:p:h
 let g:tagbar_sort=0
 set cedit=
+nnoremap <A-v> :BuffergatorToggle<CR>
+
+

@@ -1,0 +1,515 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/e852ee0e/
+.	.vimrc	/^vnoremap . :normal .<cr> $/;"	m
+.	nvim/init.vim	/^vnoremap . :normal .<cr> $/;"	m
+<	.vimrc	/^vmap < <gv$/;"	m
+<	nvim/init.vim	/^vmap < <gv$/;"	m
+<A-1>	nvim/init.vim	/^nnoremap <A-1> :tabprevious <CR>$/;"	m
+<A-2>	nvim/init.vim	/^nnoremap <A-2> :tabnext <CR>$/;"	m
+<A-S-h>	nvim/init.vim	/^nnoremap <A-S-h> :FloatermHide<CR>$/;"	m
+<A-b>	nvim/init.vim	/^nnoremap <A-b> :NERDTreeToggle<CR>$/;"	m
+<A-c>	nvim/init.vim	/^nnoremap <A-c> :!ctags -R .<CR>$/;"	m
+<A-d>	.vimrc	/^nnoremap <A-d> :FloatermNew --wintype='normal' --position='bottom' --height=0.25 $/;"	m
+<A-d>	nvim/init.vim	/^nnoremap <A-d> :FloatermNew --wintype='normal' --position='bottom' --height=0.25 $/;"	m
+<A-f>	.vimrc	/^nnoremap <A-f> :FloatermNew lf<CR>$/;"	m
+<A-f>	nvim/init.vim	/^nnoremap <A-f> :FloatermNew lf<CR>$/;"	m
+<A-q>	nvim/init.vim	/^nnoremap <A-q> :tabprevious <CR>$/;"	m
+<A-s>	.vimrc	/^vnoremap <A-s> :'<,'>FloatermSend<CR>$/;"	m
+<A-s>	nvim/init.vim	/^vnoremap <A-s> :'<,'>FloatermSend<CR>$/;"	m
+<A-w>	nvim/init.vim	/^nnoremap <A-w> :tabnext <CR>$/;"	m
+<A-z>	nvim/init.vim	/^nnoremap <A-z> :TagbarToggle<CR>$/;"	m
+<C-A>	nvim/init.vim	/^cnoremap <C-A> <Home>$/;"	m
+<C-H>	.vimrc	/^inoremap <C-H> <C-\\><C-O>h $/;"	m
+<C-H>	nvim/init.vim	/^cnoremap <C-H> <C-Left>$/;"	m
+<C-H>	nvim/init.vim	/^inoremap <C-H> <C-\\><C-O>h $/;"	m
+<C-J>	.vimrc	/^inoremap <C-J> <C-\\><C-O>j$/;"	m
+<C-J>	nvim/init.vim	/^inoremap <C-J> <C-\\><C-O>j$/;"	m
+<C-K>	.vimrc	/^inoremap <C-K> <C-\\><C-O>k$/;"	m
+<C-K>	nvim/init.vim	/^inoremap <C-K> <C-\\><C-O>k$/;"	m
+<C-L>	.vimrc	/^inoremap <C-L> <C-\\><C-O>w$/;"	m
+<C-L>	nvim/init.vim	/^cnoremap <C-L> <C-Right>$/;"	m
+<C-L>	nvim/init.vim	/^inoremap <C-L> <C-\\><C-O>w$/;"	m
+<C-M-h>	nvim/init.vim	/^nnoremap <C-M-h> <C-w>h$/;"	m
+<C-M-j>	nvim/init.vim	/^nnoremap <C-M-j> <C-w>j$/;"	m
+<C-M-k>	nvim/init.vim	/^nnoremap <C-M-k> <C-w>k$/;"	m
+<C-M-l>	nvim/init.vim	/^nnoremap <C-M-l> <C-w>l$/;"	m
+<C-S-a>	.vimrc	/^nnoremap <C-S-a> :bp<CR>$/;"	m
+<C-S-a>	nvim/init.vim	/^nnoremap <C-S-a> :bp<CR>$/;"	m
+<C-Space>	nvim/init.vim	/^nnoremap <C-Space> :nnoremap <lt>Space> :! <lt>CR><left><left><left><left><left>$/;"	m
+<C-Z>	.vimrc	/^inoremap <C-Z> :w$/;"	m
+<C-Z>	nvim/init.vim	/^inoremap <C-Z> :w$/;"	m
+<C-a>	.vimrc	/^nnoremap <C-a> :bn<CR>$/;"	m
+<C-a>	nvim/init.vim	/^nnoremap <C-a> :bn<CR>$/;"	m
+<C-f>	nvim/init.vim	/^cnoremap <C-f> q:$/;"	m
+<C-j>	.vimrc	/^inoremap <expr> <C-j> pumvisible() ? "\\<C-n>" : "\\<C-j>"$/;"	m
+<C-j>	nvim/init.vim	/^inoremap <expr> <C-j> pumvisible() ? "\\<C-n>" : "\\<C-j>"$/;"	m
+<C-k>	.vimrc	/^inoremap <expr> <C-k> pumvisible() ? "\\<C-p>" : "\\<C-k>"$/;"	m
+<C-k>	nvim/init.vim	/^inoremap <expr> <C-k> pumvisible() ? "\\<C-p>" : "\\<C-k>"$/;"	m
+<Esc>	nvim/init.vim	/^nmap <Esc> :noh<CR>$/;"	m
+<F1>	.vimrc	/^inoremap <F1> <ESC>:set invfullscreen<CR>a$/;"	m
+<F1>	.vimrc	/^nnoremap <F1> :set invfullscreen<CR>$/;"	m
+<F1>	.vimrc	/^vnoremap <F1> :set invfullscreen<CR>$/;"	m
+<F1>	nvim/init.vim	/^inoremap <F1> <ESC>:set invfullscreen<CR>a$/;"	m
+<F1>	nvim/init.vim	/^nnoremap <F1> :set invfullscreen<CR>$/;"	m
+<F1>	nvim/init.vim	/^vnoremap <F1> :set invfullscreen<CR>$/;"	m
+<F7>	.vimrc	/^nmap <silent> <F7> :call ToggleSpell()<CR>$/;"	m
+<F7>	nvim/init.vim	/^nmap <silent> <F7> :call ToggleSpell()<CR>$/;"	m
+<Tab>	.vimrc	/^nnoremap <Tab> :bn<CR>$/;"	m
+<c-Left>	.vimrc	/^inoremap <c-Left> <C-\\><C-O>b$/;"	m
+<c-Left>	nvim/init.vim	/^inoremap <c-Left> <C-\\><C-O>b$/;"	m
+<c-Right>	.vimrc	/^inoremap <c-Right> <C-\\><C-O>w$/;"	m
+<c-Right>	nvim/init.vim	/^inoremap <c-Right> <C-\\><C-O>w$/;"	m
+<c-l>	.vimrc	/^imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u$/;"	m
+<c-l>	.vimrc	/^nmap <silent> <c-l> :<C-u>call Spell_correct(v:count)<cr>$/;"	m
+<c-l>	nvim/init.vim	/^imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u$/;"	m
+<c-l>	nvim/init.vim	/^nmap <silent> <c-l> :<C-u>call Spell_correct(v:count)<cr>$/;"	m
+<cr>	.vim/autoload/plug.vim	/^      nmap <buffer> <cr> <plug>(plug-preview)$/;"	m
+<leader-e>	nvim/init.vim	/^    nnoremap <leader-e> :setlocal spell spelllang=en_us <CR>$/;"	m
+<leader-p>	nvim/init.vim	/^    nnoremap <leader-p> :setlocal spell spelllang=pt_br <CR>$/;"	m
+<leader><space>	.vimrc	/^map <leader><space> :let @\/=''<cr> " clear search$/;"	m
+<leader><space>	nvim/init.vim	/^map <leader><space> :let @\/=''<cr> " clear search$/;"	m
+<leader>D	nvim/init.vim	/^nnoremap <leader>D :DeleteSession $/;"	m
+<leader>O	nvim/init.vim	/^nnoremap <leader>O :OpenTabSession $/;"	m
+<leader>S	nvim/init.vim	/^nnoremap <leader>S :SaveTabSession $/;"	m
+<leader>c	.vimrc	/^nnoremap <leader>c :set dictionary=<CR>$/;"	m
+<leader>c	nvim/init.vim	/^nnoremap <leader>c :set dictionary=<CR>$/;"	m
+<leader>en	.vimrc	/^nnoremap <leader>en :set dictionary+=\/usr\/share\/dict\/american-english <CR>$/;"	m
+<leader>en	nvim/init.vim	/^nnoremap <leader>en :set dictionary+=\/usr\/share\/dict\/american-english <CR>$/;"	m
+<leader>l	.vimrc	/^map <leader>l :set list!<CR> " Toggle tabs and EOL$/;"	m
+<leader>l	nvim/init.vim	/^map <leader>l :set list!<CR> " Toggle tabs and EOL$/;"	m
+<leader>pt	.vimrc	/^nnoremap <leader>pt :set dictionary+=\/usr\/share\/dict\/pt_BR.dic<CR>$/;"	m
+<leader>pt	nvim/init.vim	/^nnoremap <leader>pt :set dictionary+=\/usr\/share\/dict\/pt_BR.dic<CR>$/;"	m
+<leader>q	.vimrc	/^map <leader>q gqip$/;"	m
+<leader>q	nvim/init.vim	/^map <leader>q gqip$/;"	m
+<leader>q	nvim/init.vim	/^nnoremap <leader>q :Bclose<cr>$/;"	m
+<leader>s	.vimrc	/^nnoremap <leader>s :set syntax=$/;"	m
+<leader>s	nvim/init.vim	/^nnoremap <leader>s :set syntax=$/;"	m
+<plug>(plug-preview)	.vim/autoload/plug.vim	/^    nnoremap <silent> <buffer> <plug>(plug-preview) :silent! call <SID>preview_commit()<cr>$/;"	m
+<space>	nvim/init.vim	/^    nnoremap <space> :set lines=28 columns=110 <CR>$/;"	m
+>	.vimrc	/^vmap > >gv$/;"	m
+>	nvim/init.vim	/^vmap > >gv$/;"	m
+D	.vim/autoload/plug.vim	/^  nnoremap <silent> <buffer> D  :PlugDiff<cr>$/;"	m
+DISPLAY	.tmux.conf	/^bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'DISPLAY=:0 xclip -in -selectio/;"	k
+DISPLAY	.tmux.conf	/^bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "DISPLAY=:0 xclip -/;"	k
+DISPLAY	.tmux.conf	/^bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'DISPLAY=:0 xclip -in -selection cl/;"	k
+Installation	README.md	/^## Installation $/;"	s	chapter:My-Terminal-Setup
+L	.vim/autoload/plug.vim	/^    nnoremap <silent> <buffer> L :call <SID>status_load(line('.'))<cr>$/;"	m
+L	.vim/autoload/plug.vim	/^    xnoremap <silent> <buffer> L :call <SID>status_load(line('.'))<cr>$/;"	m
+My-Terminal-Setup	README.md	/^# My-Terminal-Setup$/;"	c
+OnUIEnter	nvim/init.vim	/^function! OnUIEnter(event) abort$/;"	f
+Plug	.vim/autoload/plug.vim	/^  command! -nargs=+ -bar Plug call plug#(<args>)$/;"	c
+PlugClean	.vim/autoload/plug.vim	/^  command! -nargs=0 -bar -bang PlugClean call s:clean(<bang>0)$/;"	c
+PlugDiff	.vim/autoload/plug.vim	/^  command! -nargs=0 -bar PlugDiff    call s:diff()$/;"	c
+PlugInstall	.vim/autoload/plug.vim	/^  command! -nargs=* -bar -bang -complete=customlist,s:names PlugInstall call s:install(<bang>0, /;"	c
+PlugLOD	.vim/autoload/plug.vim	/^    augroup PlugLOD$/;"	a
+PlugSnapshot	.vim/autoload/plug.vim	/^  command! -nargs=? -bar -bang -complete=file PlugSnapshot call s:snapshot(<bang>0, <f-args>)$/;"	c
+PlugStatus	.vim/autoload/plug.vim	/^  command! -nargs=0 -bar PlugStatus  call s:status()$/;"	c
+PlugUpdate	.vim/autoload/plug.vim	/^  command! -nargs=* -bar -bang -complete=customlist,s:names PlugUpdate  call s:update(<bang>0, [/;"	c
+PlugUpgrade	.vim/autoload/plug.vim	/^  command! -nargs=0 -bar PlugUpgrade if s:upgrade() | execute 'source' s:esc(s:me) | endif$/;"	c
+R	.vim/autoload/plug.vim	/^  nnoremap <silent> <buffer> R  :call <SID>retry()<cr>$/;"	m
+S	.vim/autoload/plug.vim	/^  nnoremap <silent> <buffer> S  :PlugStatus<cr>$/;"	m
+S	.vimrc	/^nnoremap S :%s\/\/g<left><left>$/;"	m
+S	nvim/init.vim	/^nnoremap S :%s\/\/g<left><left>$/;"	m
+SessionLoad	.vim/sessions/config.vim	/^let SessionLoad = 1$/;"	v
+SessionLoad	.vim/sessions/ircbot.vim	/^let SessionLoad = 1$/;"	v
+SolarizedHiTrail	.vim/colors/solarized.vim	/^augroup SolarizedHiTrail$/;"	a
+SolarizedMenu	.vim/colors/solarized.vim	/^function! SolarizedMenu()$/;"	f
+SolarizedOptions	.vim/colors/solarized.vim	/^    command SolarizedOptions :call s:SolarizedOptions()$/;"	c
+Spell_correct	.vimrc	/^function! Spell_correct(n)$/;"	f
+Spell_correct	nvim/init.vim	/^function! Spell_correct(n)$/;"	f
+ToggleSpell	.vimrc	/^function! ToggleSpell()$/;"	f
+ToggleSpell	nvim/init.vim	/^function! ToggleSpell()$/;"	f
+U	.vim/autoload/plug.vim	/^  nnoremap <silent> <buffer> U  :call <SID>status_update()<cr>$/;"	m
+U	.vim/autoload/plug.vim	/^  xnoremap <silent> <buffer> U  :call <SID>status_update()<cr>$/;"	m
+Update	README.md	/^## Update $/;"	s	chapter:My-Terminal-Setup
+W	.vimrc	/^command W :execute ':silent w !sudo tee % > \/dev\/null' | :edit!$/;"	c
+W	nvim/init.vim	/^command W :execute ':silent w !sudo tee % > \/dev\/null' | :edit!$/;"	c
+What is this does	README.md	/^## What is this does$/;"	s	chapter:My-Terminal-Setup
+X	.vim/autoload/plug.vim	/^    nnoremap <silent> <buffer> X :call <SID>revert()<cr>$/;"	m
+ZD	nvim/init.vim	/^nnoremap ZD :BD<CR>$/;"	m
+ZS	.vimrc	/^noremap  ZS :w$/;"	m
+ZS	nvim/init.vim	/^noremap  ZS :w$/;"	m
+ZW	.vimrc	/^noremap ZW :bd<CR>$/;"	m
+ZW	nvim/init.vim	/^noremap ZW :bd<CR>$/;"	m
+[[	.vim/autoload/plug.vim	/^  nnoremap <silent> <buffer> [[ :silent! call <SID>section('b')<cr>$/;"	m
+]]	.vim/autoload/plug.vim	/^  nnoremap <silent> <buffer> ]] :silent! call <SID>section('')<cr>$/;"	m
+colors_name	.vim/colors/solarized.vim	/^let colors_name = "solarized"$/;"	v
+d	.vim/autoload/plug.vim	/^      nnoremap <silent> <buffer> d :set opfunc=<sid>delete_op<cr>g@$/;"	m
+d	.vim/autoload/plug.vim	/^      xnoremap <silent> <buffer> d :<c-u>call <sid>delete_op(visualmode(), 1)<cr>$/;"	m
+dd	.vim/autoload/plug.vim	/^      nmap     <silent> <buffer> dd d_$/;"	m
+filetypedetect	.vim/autoload/plug.vim	/^        augroup filetypedetect$/;"	a
+g:NERDTreeGitStatusWithFlags	nvim/init.vim	/^let g:NERDTreeGitStatusWithFlags = 1$/;"	v
+g:WebDevIconsUnicodeDecorateFolderNodes	nvim/init.vim	/^let g:WebDevIconsUnicodeDecorateFolderNodes = 1$/;"	v
+g:_plug_bang	.vim/autoload/plug.vim	/^    let g:_plug_bang = (s:is_win && has('gui_running') ? 'silent ' : '').'!'.escape(cmd, '#!%')$/;"	v
+g:airline_powerline_fonts	.vimrc	/^let g:airline_powerline_fonts = 1$/;"	v
+g:airline_powerline_fonts	nvim/init.vim	/^let g:airline_powerline_fonts = 1$/;"	v
+g:airline_theme	nvim/init.vim	/^let g:airline_theme='luna'$/;"	v
+g:camelcasemotion_key	.vimrc	/^let g:camelcasemotion_key = '<leader>'$/;"	v
+g:camelcasemotion_key	nvim/init.vim	/^let g:camelcasemotion_key = '<leader>'$/;"	v
+g:colors_name	.vim/colors/molokai.vim	/^let g:colors_name="molokai"$/;"	v
+g:dart_format_on_save	nvim/init.vim	/^let g:dart_format_on_save = 1$/;"	v
+g:firenvim_config	nvim/init.vim	/^  let g:firenvim_config = { $/;"	v
+g:floaterm_keymap_new	.vimrc	/^let g:floaterm_keymap_new    = '<A-t>'$/;"	v
+g:floaterm_keymap_new	nvim/init.vim	/^let g:floaterm_keymap_new    = '<A-t>'$/;"	v
+g:floaterm_keymap_next	.vimrc	/^let g:floaterm_keymap_next   = '<A-n>'$/;"	v
+g:floaterm_keymap_next	nvim/init.vim	/^let g:floaterm_keymap_next   = '<A-n>'$/;"	v
+g:floaterm_keymap_prev	.vimrc	/^let g:floaterm_keymap_prev   = '<A-p>'$/;"	v
+g:floaterm_keymap_prev	nvim/init.vim	/^let g:floaterm_keymap_prev   = '<A-p>'$/;"	v
+g:floaterm_keymap_toggle	.vimrc	/^let g:floaterm_keymap_toggle = '<A-q>'$/;"	v
+g:floaterm_keymap_toggle	nvim/init.vim	/^let g:floaterm_keymap_toggle = '<A-q>'$/;"	v
+g:loaded_plug	.vim/autoload/plug.vim	/^let g:loaded_plug = 1$/;"	v
+g:loaded_solarized_menu	.vim/colors/solarized.vim	/^    let g:loaded_solarized_menu = 1$/;"	v
+g:myLang	.vimrc	/^  let g:myLang=g:myLang+1$/;"	v
+g:myLang	.vimrc	/^let g:myLang=0$/;"	v
+g:myLang	nvim/init.vim	/^  let g:myLang=g:myLang+1$/;"	v
+g:myLang	nvim/init.vim	/^let g:myLang=0$/;"	v
+g:myLangList	.vimrc	/^  let g:myLangList=["nospell","en_us","pt_br"]$/;"	v
+g:myLangList	nvim/init.vim	/^  let g:myLangList=["nospell","en_us","pt_br"]$/;"	v
+g:plug_home	.vim/autoload/plug.vim	/^  let g:plug_home = home$/;"	v
+g:plugs	.vim/autoload/plug.vim	/^    let g:plugs[name] = spec$/;"	v
+g:plugs	.vim/autoload/plug.vim	/^  let g:plugs = {}$/;"	v
+g:plugs_order	.vim/autoload/plug.vim	/^  let g:plugs_order = []$/;"	v
+g:plugs_order	.vim/autoload/plug.vim	/^  let g:plugs_order = get(g:, 'plugs_order', keys(g:plugs))$/;"	v
+g:rustfmt_autosave	.vimrc	/^let g:rustfmt_autosave = 1$/;"	v
+g:rustfmt_autosave	nvim/init.vim	/^let g:rustfmt_autosave = 1$/;"	v
+g:session_autosave	nvim/init.vim	/^let g:session_autosave = 'yes'$/;"	v
+g:session_autosave_periodic	nvim/init.vim	/^let g:session_autosave_periodic = 1 $/;"	v
+g:solarized_termcolors	.vimrc	/^let g:solarized_termcolors=256$/;"	v
+g:solarized_termcolors	nvim/init.vim	/^let g:solarized_termcolors=256$/;"	v
+g:solarized_termtrans	.vimrc	/^let g:solarized_termtrans=1$/;"	v
+g:solarized_termtrans	nvim/init.vim	/^let g:solarized_termtrans=1$/;"	v
+g:tagbar_sort	nvim/init.vim	/^let g:tagbar_sort=0$/;"	v
+g:tex_flavor	.vimrc	/^let g:tex_flavor = 'latex'$/;"	v
+g:tex_flavor	nvim/init.vim	/^let g:tex_flavor = 'latex'$/;"	v
+hs_highlight_boolean	.vim/colors/solarized.vim	/^let hs_highlight_boolean=1$/;"	v
+hs_highlight_delimiters	.vim/colors/solarized.vim	/^let hs_highlight_delimiters=1$/;"	v
+j	.vimrc	/^nnoremap j gj$/;"	m
+j	nvim/init.vim	/^nnoremap j gj$/;"	m
+k	.vimrc	/^nnoremap k gk$/;"	m
+k	nvim/init.vim	/^nnoremap k gk$/;"	m
+o	.vim/autoload/plug.vim	/^      nmap <buffer> o <plug>(plug-preview)$/;"	m
+plug#	.vim/autoload/plug.vim	/^function! plug#(repo, ...)$/;"	f
+plug#begin	.vim/autoload/plug.vim	/^function! plug#begin(...)$/;"	f
+plug#end	.vim/autoload/plug.vim	/^function! plug#end()$/;"	f
+plug#helptags	.vim/autoload/plug.vim	/^function! plug#helptags()$/;"	f
+plug#load	.vim/autoload/plug.vim	/^function! plug#load(...)$/;"	f
+plug#shellescape	.vim/autoload/plug.vim	/^function! plug#shellescape(arg, ...)$/;"	f
+q	.vim/autoload/plug.vim	/^  nnoremap <silent> <buffer> q  :if b:plug_preview==1<bar>pc<bar>endif<bar>bd<cr>$/;"	m
+q	.vim/autoload/plug.vim	/^  nnoremap <silent> <buffer> q :q<cr>$/;"	m
+s	.vimrc	/^vnoremap s :s\/\/g<left><left>$/;"	m
+s	nvim/init.vim	/^vnoremap s :s\/\/g<left><left>$/;"	m
+s:IsFirenvimActive	nvim/init.vim	/^function! s:IsFirenvimActive(event) abort$/;"	f
+s:SetOption	.vim/colors/solarized.vim	/^function! s:SetOption(name,default)$/;"	f
+s:SolarizedHiTrail	.vim/colors/solarized.vim	/^function! s:SolarizedHiTrail()$/;"	f
+s:SolarizedOptions	.vim/colors/solarized.vim	/^function! s:SolarizedOptions()$/;"	f
+s:TYPE	.vim/autoload/plug.vim	/^let s:TYPE = {$/;"	v
+s:append_ul	.vim/autoload/plug.vim	/^function! s:append_ul(lnum, text)$/;"	f
+s:ask	.vim/autoload/plug.vim	/^function! s:ask(message, ...)$/;"	f
+s:ask_no_interrupt	.vim/autoload/plug.vim	/^function! s:ask_no_interrupt(...)$/;"	f
+s:assign_name	.vim/autoload/plug.vim	/^function! s:assign_name()$/;"	f
+s:assoc	.vim/autoload/plug.vim	/^function! s:assoc(dict, key, val)$/;"	f
+s:b	.vim/colors/solarized.vim	/^    let s:b           = ""$/;"	v
+s:b	.vim/colors/solarized.vim	/^    let s:b           = ",bold"$/;"	v
+s:back	.vim/colors/solarized.vim	/^        let s:back    = s:base03$/;"	v
+s:back	.vim/colors/solarized.vim	/^    let s:back        = "NONE"$/;"	v
+s:back	.vim/colors/solarized.vim	/^    let s:back        = s:back$/;"	v
+s:back	.vim/colors/solarized.vim	/^    let s:back        = s:base02$/;"	v
+s:back	.vim/colors/solarized.vim	/^    let s:back        = s:base03$/;"	v
+s:bang	.vim/autoload/plug.vim	/^function! s:bang(cmd, ...)$/;"	f
+s:bar	.vim/autoload/plug.vim	/^function! s:bar()$/;"	f
+s:base0	.vim/colors/solarized.vim	/^    let s:base0       = "#808080"$/;"	v
+s:base0	.vim/colors/solarized.vim	/^    let s:base0       = "#839496"$/;"	v
+s:base0	.vim/colors/solarized.vim	/^    let s:base0       = "12"$/;"	v
+s:base0	.vim/colors/solarized.vim	/^    let s:base0       = "244"$/;"	v
+s:base0	.vim/colors/solarized.vim	/^    let s:base0       = "LightBlue"     " 4*$/;"	v
+s:base0	.vim/colors/solarized.vim	/^    let s:base0       = s:base1$/;"	v
+s:base0	.vim/colors/solarized.vim	/^    let s:base0       = s:temp00$/;"	v
+s:base00	.vim/colors/solarized.vim	/^    let s:base00      = "#585858"$/;"	v
+s:base00	.vim/colors/solarized.vim	/^    let s:base00      = "#657b83"$/;"	v
+s:base00	.vim/colors/solarized.vim	/^    let s:base00      = "11"$/;"	v
+s:base00	.vim/colors/solarized.vim	/^    let s:base00      = "240"$/;"	v
+s:base00	.vim/colors/solarized.vim	/^    let s:base00      = "LightYellow"   " 3*$/;"	v
+s:base00	.vim/colors/solarized.vim	/^    let s:base00      = s:base0$/;"	v
+s:base01	.vim/colors/solarized.vim	/^    let s:base01      = "#4e4e4e"$/;"	v
+s:base01	.vim/colors/solarized.vim	/^    let s:base01      = "#586e75"$/;"	v
+s:base01	.vim/colors/solarized.vim	/^    let s:base01      = "10"$/;"	v
+s:base01	.vim/colors/solarized.vim	/^    let s:base01      = "239"$/;"	v
+s:base01	.vim/colors/solarized.vim	/^    let s:base01      = "LightGreen"    " 2*$/;"	v
+s:base01	.vim/colors/solarized.vim	/^    let s:base01      = s:base00$/;"	v
+s:base01	.vim/colors/solarized.vim	/^    let s:base01      = s:base1$/;"	v
+s:base02	.vim/colors/solarized.vim	/^    let s:base02      = "#073642"$/;"	v
+s:base02	.vim/colors/solarized.vim	/^    let s:base02      = "#262626"$/;"	v
+s:base02	.vim/colors/solarized.vim	/^    let s:base02      = "0"$/;"	v
+s:base02	.vim/colors/solarized.vim	/^    let s:base02      = "235"$/;"	v
+s:base02	.vim/colors/solarized.vim	/^    let s:base02      = "Black"         " 0$/;"	v
+s:base02	.vim/colors/solarized.vim	/^    let s:base02      = s:base2$/;"	v
+s:base03	.vim/colors/solarized.vim	/^    let s:base03      = "#002b36"$/;"	v
+s:base03	.vim/colors/solarized.vim	/^    let s:base03      = "#1c1c1c"$/;"	v
+s:base03	.vim/colors/solarized.vim	/^    let s:base03      = "234"$/;"	v
+s:base03	.vim/colors/solarized.vim	/^    let s:base03      = "8"$/;"	v
+s:base03	.vim/colors/solarized.vim	/^    let s:base03      = "DarkGray"      " 0*$/;"	v
+s:base03	.vim/colors/solarized.vim	/^    let s:base03      = s:base3$/;"	v
+s:base1	.vim/colors/solarized.vim	/^    let s:base1       = "#8a8a8a"$/;"	v
+s:base1	.vim/colors/solarized.vim	/^    let s:base1       = "#93a1a1"$/;"	v
+s:base1	.vim/colors/solarized.vim	/^    let s:base1       = "14"$/;"	v
+s:base1	.vim/colors/solarized.vim	/^    let s:base1       = "245"$/;"	v
+s:base1	.vim/colors/solarized.vim	/^    let s:base1       = "LightCyan"     " 6*$/;"	v
+s:base1	.vim/colors/solarized.vim	/^    let s:base1       = s:base2$/;"	v
+s:base1	.vim/colors/solarized.vim	/^    let s:base1       = s:temp01$/;"	v
+s:base2	.vim/colors/solarized.vim	/^    let s:base2       = "#d7d7af"$/;"	v
+s:base2	.vim/colors/solarized.vim	/^    let s:base2       = "#eee8d5"$/;"	v
+s:base2	.vim/colors/solarized.vim	/^    let s:base2       = "187"$/;"	v
+s:base2	.vim/colors/solarized.vim	/^    let s:base2       = "7"$/;"	v
+s:base2	.vim/colors/solarized.vim	/^    let s:base2       = "LightGray"     " 7$/;"	v
+s:base2	.vim/colors/solarized.vim	/^    let s:base2       = s:base3$/;"	v
+s:base2	.vim/colors/solarized.vim	/^    let s:base2       = s:temp02$/;"	v
+s:base3	.vim/colors/solarized.vim	/^    let s:base3       = "#fdf6e3"$/;"	v
+s:base3	.vim/colors/solarized.vim	/^    let s:base3       = "#ffffd7"$/;"	v
+s:base3	.vim/colors/solarized.vim	/^    let s:base3       = "15"$/;"	v
+s:base3	.vim/colors/solarized.vim	/^    let s:base3       = "230"$/;"	v
+s:base3	.vim/colors/solarized.vim	/^    let s:base3       = "White"         " 7*$/;"	v
+s:base3	.vim/colors/solarized.vim	/^    let s:base3       = s:temp03$/;"	v
+s:base_spec	.vim/autoload/plug.vim	/^let s:base_spec = { 'branch': 'master', 'frozen': 0 }$/;"	v
+s:batchfile	.vim/autoload/plug.vim	/^  function! s:batchfile(cmd)$/;"	f
+s:bb	.vim/colors/solarized.vim	/^    let s:bb          = ""$/;"	v
+s:bb	.vim/colors/solarized.vim	/^    let s:bb          = ",bold"$/;"	v
+s:blue	.vim/colors/solarized.vim	/^    let s:blue        = "#0087ff"$/;"	v
+s:blue	.vim/colors/solarized.vim	/^    let s:blue        = "#268bd2"$/;"	v
+s:blue	.vim/colors/solarized.vim	/^    let s:blue        = "33"$/;"	v
+s:blue	.vim/colors/solarized.vim	/^    let s:blue        = "4"$/;"	v
+s:blue	.vim/colors/solarized.vim	/^    let s:blue        = "DarkBlue"      " 4$/;"	v
+s:bright	.vim/colors/solarized.vim	/^    let s:bright      = "* term=bold cterm=bold"$/;"	v
+s:c	.vim/colors/solarized.vim	/^    let s:c               = ",undercurl"$/;"	v
+s:check_ruby	.vim/autoload/plug.vim	/^function! s:check_ruby()$/;"	f
+s:checkout	.vim/autoload/plug.vim	/^function! s:checkout(spec)$/;"	f
+s:chsh	.vim/autoload/plug.vim	/^function! s:chsh(swap)$/;"	f
+s:clean	.vim/autoload/plug.vim	/^function! s:clean(force)$/;"	f
+s:colorscheme_list	.vim/colors/solarized.vim	/^let s:colorscheme_list=[$/;"	v
+s:compare_git_uri	.vim/autoload/plug.vim	/^function! s:compare_git_uri(a, b)$/;"	f
+s:cpo_save	.vim/autoload/plug.vim	/^let s:cpo_save = &cpo$/;"	v
+s:cyan	.vim/colors/solarized.vim	/^    let s:cyan        = "#00afaf"$/;"	v
+s:cyan	.vim/colors/solarized.vim	/^    let s:cyan        = "#2aa198"$/;"	v
+s:cyan	.vim/colors/solarized.vim	/^    let s:cyan        = "37"$/;"	v
+s:cyan	.vim/colors/solarized.vim	/^    let s:cyan        = "6"$/;"	v
+s:cyan	.vim/colors/solarized.vim	/^    let s:cyan        = "DarkCyan"      " 6$/;"	v
+s:defaults_list	.vim/colors/solarized.vim	/^let s:defaults_list=[$/;"	v
+s:define_commands	.vim/autoload/plug.vim	/^function! s:define_commands()$/;"	f
+s:delete	.vim/autoload/plug.vim	/^function! s:delete(range, force)$/;"	f
+s:delete_op	.vim/autoload/plug.vim	/^function! s:delete_op(type, ...)$/;"	f
+s:diff	.vim/autoload/plug.vim	/^function! s:diff()$/;"	f
+s:dirpath	.vim/autoload/plug.vim	/^  function! s:dirpath(path)$/;"	f
+s:do	.vim/autoload/plug.vim	/^function! s:do(pull, force, todo)$/;"	f
+s:doautocmd	.vim/autoload/plug.vim	/^function! s:doautocmd(...)$/;"	f
+s:dobufread	.vim/autoload/plug.vim	/^function! s:dobufread(names)$/;"	f
+s:err	.vim/autoload/plug.vim	/^function! s:err(msg)$/;"	f
+s:esc	.vim/autoload/plug.vim	/^function! s:esc(path)$/;"	f
+s:escrtp	.vim/autoload/plug.vim	/^function! s:escrtp(path)$/;"	f
+s:extract_name	.vim/autoload/plug.vim	/^function! s:extract_name(str, prefix, suffix)$/;"	f
+s:fg_pdef	.vim/colors/solarized.vim	/^let s:fg_pdef = s:fg_violet$/;"	v
+s:fg_phead	.vim/colors/solarized.vim	/^let s:fg_phead = s:fg_orange$/;"	v
+s:fg_ptable	.vim/colors/solarized.vim	/^let s:fg_ptable = s:fg_blue$/;"	v
+s:find_name	.vim/autoload/plug.vim	/^function! s:find_name(lnum)$/;"	f
+s:finish	.vim/autoload/plug.vim	/^function! s:finish(pull)$/;"	f
+s:finish_bindings	.vim/autoload/plug.vim	/^function! s:finish_bindings()$/;"	f
+s:format_git_log	.vim/autoload/plug.vim	/^function! s:format_git_log(line)$/;"	f
+s:format_message	.vim/autoload/plug.vim	/^function! s:format_message(bullet, name, message)$/;"	f
+s:git_validate	.vim/autoload/plug.vim	/^function! s:git_validate(spec, check_branch)$/;"	f
+s:git_version_requirement	.vim/autoload/plug.vim	/^function! s:git_version_requirement(...)$/;"	f
+s:glob	.vim/autoload/plug.vim	/^function! s:glob(from, pattern)$/;"	f
+s:glob_dir	.vim/autoload/plug.vim	/^function! s:glob_dir(path)$/;"	f
+s:green	.vim/colors/solarized.vim	/^    let s:green       = "#5f8700"$/;"	v
+s:green	.vim/colors/solarized.vim	/^    let s:green       = "#719e07" "experimental$/;"	v
+s:green	.vim/colors/solarized.vim	/^    let s:green       = "2"$/;"	v
+s:green	.vim/colors/solarized.vim	/^    let s:green       = "64"$/;"	v
+s:green	.vim/colors/solarized.vim	/^    let s:green       = "DarkGreen"     " 2$/;"	v
+s:hash_match	.vim/autoload/plug.vim	/^function! s:hash_match(a, b)$/;"	f
+s:i	.vim/colors/solarized.vim	/^    let s:i           = ""$/;"	v
+s:i	.vim/colors/solarized.vim	/^    let s:i           = ",italic"$/;"	v
+s:infer_properties	.vim/autoload/plug.vim	/^function! s:infer_properties(name, repo)$/;"	f
+s:install	.vim/autoload/plug.vim	/^function! s:install(force, names)$/;"	f
+s:is_local_plug	.vim/autoload/plug.vim	/^  function! s:is_local_plug(repo)$/;"	f
+s:is_managed	.vim/autoload/plug.vim	/^function! s:is_managed(name)$/;"	f
+s:is_preview_window_open	.vim/autoload/plug.vim	/^function! s:is_preview_window_open()$/;"	f
+s:is_updated	.vim/autoload/plug.vim	/^function! s:is_updated(dir)$/;"	f
+s:is_win	.vim/autoload/plug.vim	/^let s:is_win = has('win32')$/;"	v
+s:job_abort	.vim/autoload/plug.vim	/^function! s:job_abort()$/;"	f
+s:job_cb	.vim/autoload/plug.vim	/^function! s:job_cb(fn, job, ch, data)$/;"	f
+s:job_exit_cb	.vim/autoload/plug.vim	/^function! s:job_exit_cb(self, data) abort$/;"	f
+s:job_out_cb	.vim/autoload/plug.vim	/^function! s:job_out_cb(self, data) abort$/;"	f
+s:l	.vim/sessions/config.vim	/^let s:l = 303 - ((26 * winheight(0) + 13) \/ 27)$/;"	v
+s:l	.vim/sessions/ircbot.vim	/^let s:l = 15 - ((8 * winheight(0) + 10) \/ 20)$/;"	v
+s:l	.vim/sessions/ircbot.vim	/^let s:l = 3 - ((2 * winheight(0) + 4) \/ 8)$/;"	v
+s:l	.vim/sessions/ircbot.vim	/^let s:l = 88 - ((3 * winheight(0) + 10) \/ 20)$/;"	v
+s:last_non_empty_line	.vim/autoload/plug.vim	/^function! s:last_non_empty_line(lines)$/;"	f
+s:lastline	.vim/autoload/plug.vim	/^function! s:lastline(msg)$/;"	f
+s:lazy	.vim/autoload/plug.vim	/^function! s:lazy(plug, opt)$/;"	f
+s:lazycat_list	.vim/colors/solarized.vim	/^let s:lazycat_list=[$/;"	v
+s:lines	.vim/autoload/plug.vim	/^function! s:lines(msg)$/;"	f
+s:load_plugin	.vim/autoload/plug.vim	/^function! s:load_plugin(spec)$/;"	f
+s:loaded	.vim/autoload/plug.vim	/^let s:loaded = get(s:, 'loaded', {})$/;"	v
+s:loaded_names	.vim/autoload/plug.vim	/^function! s:loaded_names()$/;"	f
+s:lod	.vim/autoload/plug.vim	/^function! s:lod(names, types, ...)$/;"	f
+s:lod_cmd	.vim/autoload/plug.vim	/^function! s:lod_cmd(cmd, bang, l1, l2, args, names)$/;"	f
+s:lod_ft	.vim/autoload/plug.vim	/^function! s:lod_ft(pat, names)$/;"	f
+s:lod_map	.vim/autoload/plug.vim	/^function! s:lod_map(map, names, with_prefix, prefix)$/;"	f
+s:log	.vim/autoload/plug.vim	/^function! s:log(bullet, name, lines)$/;"	f
+s:log4	.vim/autoload/plug.vim	/^function! s:log4(name, msg)$/;"	f
+s:logpos	.vim/autoload/plug.vim	/^function! s:logpos(name)$/;"	f
+s:lpad	.vim/autoload/plug.vim	/^function! s:lpad(str, len)$/;"	f
+s:mac_gui	.vim/autoload/plug.vim	/^let s:mac_gui = has('gui_macvim') && has('gui_running')$/;"	v
+s:magenta	.vim/colors/solarized.vim	/^    let s:magenta     = "#af005f"$/;"	v
+s:magenta	.vim/colors/solarized.vim	/^    let s:magenta     = "#d33682"$/;"	v
+s:magenta	.vim/colors/solarized.vim	/^    let s:magenta     = "125"$/;"	v
+s:magenta	.vim/colors/solarized.vim	/^    let s:magenta     = "5"$/;"	v
+s:magenta	.vim/colors/solarized.vim	/^    let s:magenta     = "DarkMagenta"   " 5$/;"	v
+s:me	.vim/autoload/plug.vim	/^  let s:me = resolve(expand('<sfile>:p'))$/;"	v
+s:molokai_original	.vim/colors/molokai.vim	/^    let s:molokai_original = 0$/;"	v
+s:molokai_original	.vim/colors/molokai.vim	/^    let s:molokai_original = g:molokai_original$/;"	v
+s:n	.vim/colors/solarized.vim	/^    let s:n               = "NONE"$/;"	v
+s:names	.vim/autoload/plug.vim	/^function! s:names(...)$/;"	f
+s:new_window	.vim/autoload/plug.vim	/^function! s:new_window()$/;"	f
+s:none	.vim/colors/solarized.vim	/^    let s:none            = "NONE"$/;"	v
+s:nvim	.vim/autoload/plug.vim	/^let s:nvim = has('nvim-0.2') || (has('nvim') && exists('*jobwait') && !s:is_win)$/;"	v
+s:nvim_cb	.vim/autoload/plug.vim	/^function! s:nvim_cb(job_id, data, event) dict abort$/;"	f
+s:ob	.vim/colors/solarized.vim	/^    let s:ob              = ""$/;"	v
+s:options_list	.vim/colors/solarized.vim	/^let s:options_list=[$/;"	v
+s:orange	.vim/colors/solarized.vim	/^    let s:orange      = "#cb4b16"$/;"	v
+s:orange	.vim/colors/solarized.vim	/^    let s:orange      = "#d75f00"$/;"	v
+s:orange	.vim/colors/solarized.vim	/^    let s:orange      = "166"$/;"	v
+s:orange	.vim/colors/solarized.vim	/^    let s:orange      = "9"$/;"	v
+s:orange	.vim/colors/solarized.vim	/^    let s:orange      = "LightRed"      " 1*$/;"	v
+s:ou	.vim/colors/solarized.vim	/^    let s:ou              = ""$/;"	v
+s:ou	.vim/colors/solarized.vim	/^    let s:ou          = ",underline"$/;"	v
+s:parse_options	.vim/autoload/plug.vim	/^function! s:parse_options(arg)$/;"	f
+s:path	.vim/autoload/plug.vim	/^  function! s:path(path)$/;"	f
+s:plug_buf	.vim/autoload/plug.vim	/^let s:plug_buf = get(s:, 'plug_buf', -1)$/;"	v
+s:plug_call	.vim/autoload/plug.vim	/^  function! s:plug_call(fn, ...)$/;"	f
+s:plug_expand	.vim/autoload/plug.vim	/^function! s:plug_expand(fmt)$/;"	f
+s:plug_fnamemodify	.vim/autoload/plug.vim	/^function! s:plug_fnamemodify(fname, mods)$/;"	f
+s:plug_getcwd	.vim/autoload/plug.vim	/^function! s:plug_getcwd()$/;"	f
+s:plug_src	.vim/autoload/plug.vim	/^let s:plug_src = 'https:\/\/github.com\/junegunn\/vim-plug.git'$/;"	v
+s:plug_tab	.vim/autoload/plug.vim	/^let s:plug_tab = get(s:, 'plug_tab', -1)$/;"	v
+s:plug_tempname	.vim/autoload/plug.vim	/^function! s:plug_tempname()$/;"	f
+s:plug_window_exists	.vim/autoload/plug.vim	/^function! s:plug_window_exists()$/;"	f
+s:prepare	.vim/autoload/plug.vim	/^function! s:prepare(...)$/;"	f
+s:preview_commit	.vim/autoload/plug.vim	/^function! s:preview_commit()$/;"	f
+s:progress_bar	.vim/autoload/plug.vim	/^function! s:progress_bar(line, bar, total)$/;"	f
+s:progress_opt	.vim/autoload/plug.vim	/^function! s:progress_opt(base)$/;"	f
+s:r	.vim/colors/solarized.vim	/^    let s:r               = ",reverse"$/;"	v
+s:reap	.vim/autoload/plug.vim	/^function! s:reap(name)$/;"	f
+s:red	.vim/colors/solarized.vim	/^    let s:red         = "#af0000"$/;"	v
+s:red	.vim/colors/solarized.vim	/^    let s:red         = "#dc322f"$/;"	v
+s:red	.vim/colors/solarized.vim	/^    let s:red         = "1"$/;"	v
+s:red	.vim/colors/solarized.vim	/^    let s:red         = "124"$/;"	v
+s:red	.vim/colors/solarized.vim	/^    let s:red         = "DarkRed"       " 1$/;"	v
+s:regress_bar	.vim/autoload/plug.vim	/^function! s:regress_bar()$/;"	f
+s:reload_plugins	.vim/autoload/plug.vim	/^function! s:reload_plugins()$/;"	f
+s:remove_rtp	.vim/autoload/plug.vim	/^function! s:remove_rtp()$/;"	f
+s:remove_triggers	.vim/autoload/plug.vim	/^function! s:remove_triggers(name)$/;"	f
+s:reorg_rtp	.vim/autoload/plug.vim	/^function! s:reorg_rtp()$/;"	f
+s:retry	.vim/autoload/plug.vim	/^function! s:retry()$/;"	f
+s:revert	.vim/autoload/plug.vim	/^function! s:revert()$/;"	f
+s:rm_rf	.vim/autoload/plug.vim	/^function! s:rm_rf(dir)$/;"	f
+s:rtp	.vim/autoload/plug.vim	/^function! s:rtp(spec)$/;"	f
+s:s	.vim/colors/solarized.vim	/^    let s:s               = ",standout"$/;"	v
+s:section	.vim/autoload/plug.vim	/^function! s:section(flags)$/;"	f
+s:shellesc_cmd	.vim/autoload/plug.vim	/^function! s:shellesc_cmd(arg, script)$/;"	f
+s:shellesc_ps1	.vim/autoload/plug.vim	/^function! s:shellesc_ps1(arg)$/;"	f
+s:shellesc_sh	.vim/autoload/plug.vim	/^function! s:shellesc_sh(arg)$/;"	f
+s:snapshot	.vim/autoload/plug.vim	/^function! s:snapshot(force, ...) abort$/;"	f
+s:so_save	.vim/sessions/config.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
+s:so_save	.vim/sessions/ircbot.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
+s:solarized_termtrans_default	.vim/colors/solarized.vim	/^    let s:solarized_termtrans_default = 0$/;"	v
+s:solarized_termtrans_default	.vim/colors/solarized.vim	/^    let s:solarized_termtrans_default = 1$/;"	v
+s:source	.vim/autoload/plug.vim	/^function! s:source(from, ...)$/;"	f
+s:sp_back	.vim/colors/solarized.vim	/^    let s:sp_back      = ""$/;"	v
+s:sp_base0	.vim/colors/solarized.vim	/^    let s:sp_base0     = ""$/;"	v
+s:sp_base00	.vim/colors/solarized.vim	/^    let s:sp_base00    = ""$/;"	v
+s:sp_base01	.vim/colors/solarized.vim	/^    let s:sp_base01    = ""$/;"	v
+s:sp_base02	.vim/colors/solarized.vim	/^    let s:sp_base02    = ""$/;"	v
+s:sp_base03	.vim/colors/solarized.vim	/^    let s:sp_base03    = ""$/;"	v
+s:sp_base1	.vim/colors/solarized.vim	/^    let s:sp_base1     = ""$/;"	v
+s:sp_base2	.vim/colors/solarized.vim	/^    let s:sp_base2     = ""$/;"	v
+s:sp_base3	.vim/colors/solarized.vim	/^    let s:sp_base3     = ""$/;"	v
+s:sp_blue	.vim/colors/solarized.vim	/^    let s:sp_blue      = ""$/;"	v
+s:sp_cyan	.vim/colors/solarized.vim	/^    let s:sp_cyan      = ""$/;"	v
+s:sp_green	.vim/colors/solarized.vim	/^    let s:sp_green     = ""$/;"	v
+s:sp_magenta	.vim/colors/solarized.vim	/^    let s:sp_magenta   = ""$/;"	v
+s:sp_none	.vim/colors/solarized.vim	/^    let s:sp_none      = ""$/;"	v
+s:sp_orange	.vim/colors/solarized.vim	/^    let s:sp_orange    = ""$/;"	v
+s:sp_red	.vim/colors/solarized.vim	/^    let s:sp_red       = ""$/;"	v
+s:sp_violet	.vim/colors/solarized.vim	/^    let s:sp_violet    = ""$/;"	v
+s:sp_yellow	.vim/colors/solarized.vim	/^    let s:sp_yellow    = ""$/;"	v
+s:spawn	.vim/autoload/plug.vim	/^function! s:spawn(name, cmd, opts)$/;"	f
+s:split_rtp	.vim/autoload/plug.vim	/^function! s:split_rtp()$/;"	f
+s:status	.vim/autoload/plug.vim	/^function! s:status()$/;"	f
+s:status_load	.vim/autoload/plug.vim	/^function! s:status_load(lnum)$/;"	f
+s:status_update	.vim/autoload/plug.vim	/^function! s:status_update() range$/;"	f
+s:switch_in	.vim/autoload/plug.vim	/^function! s:switch_in()$/;"	f
+s:switch_out	.vim/autoload/plug.vim	/^function! s:switch_out(...)$/;"	f
+s:sx	.vim/sessions/config.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:sx	.vim/sessions/ircbot.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:syntax	.vim/autoload/plug.vim	/^function! s:syntax()$/;"	f
+s:system	.vim/autoload/plug.vim	/^function! s:system(cmd, ...)$/;"	f
+s:system_chomp	.vim/autoload/plug.vim	/^function! s:system_chomp(...)$/;"	f
+s:t_none	.vim/colors/solarized.vim	/^    let s:t_none          = "NONE"$/;"	v
+s:temp00	.vim/colors/solarized.vim	/^    let s:temp00      = s:base00$/;"	v
+s:temp01	.vim/colors/solarized.vim	/^    let s:temp01      = s:base01$/;"	v
+s:temp02	.vim/colors/solarized.vim	/^    let s:temp02      = s:base02$/;"	v
+s:temp03	.vim/colors/solarized.vim	/^    let s:temp03      = s:base03$/;"	v
+s:terminal_italic	.vim/colors/solarized.vim	/^            let s:terminal_italic=1$/;"	v
+s:terminal_italic	.vim/colors/solarized.vim	/^    let s:terminal_italic=0 " terminals will be guilty until proven compatible$/;"	v
+s:terminal_italic	.vim/colors/solarized.vim	/^    let s:terminal_italic=1 " TODO: could refactor to not require this at all$/;"	v
+s:terms_italic	.vim/colors/solarized.vim	/^let s:terms_italic=[$/;"	v
+s:terms_noitalic	.vim/colors/solarized.vim	/^let s:terms_noitalic=[$/;"	v
+s:tick	.vim/autoload/plug.vim	/^function! s:tick()$/;"	f
+s:to_a	.vim/autoload/plug.vim	/^function! s:to_a(v)$/;"	f
+s:to_s	.vim/autoload/plug.vim	/^function! s:to_s(v)$/;"	f
+s:triggers	.vim/autoload/plug.vim	/^let s:triggers = get(s:, 'triggers', {})$/;"	v
+s:trim	.vim/autoload/plug.vim	/^function! s:trim(str)$/;"	f
+s:u	.vim/colors/solarized.vim	/^    let s:u           = ""$/;"	v
+s:u	.vim/colors/solarized.vim	/^    let s:u           = ",underline"$/;"	v
+s:update	.vim/autoload/plug.vim	/^function! s:update(force, names)$/;"	f
+s:update_finish	.vim/autoload/plug.vim	/^function! s:update_finish()$/;"	f
+s:update_impl	.vim/autoload/plug.vim	/^function! s:update_impl(pull, force, args) abort$/;"	f
+s:update_python	.vim/autoload/plug.vim	/^function! s:update_python()$/;"	f
+s:update_ruby	.vim/autoload/plug.vim	/^function! s:update_ruby()$/;"	f
+s:update_vim	.vim/autoload/plug.vim	/^function! s:update_vim()$/;"	f
+s:upgrade	.vim/autoload/plug.vim	/^function! s:upgrade()$/;"	f
+s:upgrade_specs	.vim/autoload/plug.vim	/^function! s:upgrade_specs()$/;"	f
+s:version_requirement	.vim/autoload/plug.vim	/^function! s:version_requirement(val, min)$/;"	f
+s:vim8	.vim/autoload/plug.vim	/^let s:vim8 = has('patch-8.0.0039') && exists('*job_start')$/;"	v
+s:violet	.vim/colors/solarized.vim	/^    let s:violet      = "#5f5faf"$/;"	v
+s:violet	.vim/colors/solarized.vim	/^    let s:violet      = "#6c71c4"$/;"	v
+s:violet	.vim/colors/solarized.vim	/^    let s:violet      = "13"$/;"	v
+s:violet	.vim/colors/solarized.vim	/^    let s:violet      = "61"$/;"	v
+s:violet	.vim/colors/solarized.vim	/^    let s:violet      = "LightMagenta"  " 5*$/;"	v
+s:vmode	.vim/colors/solarized.vim	/^    let s:vmode       = "cterm"$/;"	v
+s:vmode	.vim/colors/solarized.vim	/^    let s:vmode       = "gui"$/;"	v
+s:warn	.vim/autoload/plug.vim	/^function! s:warn(cmd, msg)$/;"	f
+s:winrestcmd	.vim/sessions/config.vim	/^let s:winrestcmd = winrestcmd()$/;"	v
+s:winrestcmd	.vim/sessions/ircbot.vim	/^let s:winrestcmd = winrestcmd()$/;"	v
+s:wipebuf	.vim/sessions/config.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
+s:wipebuf	.vim/sessions/ircbot.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
+s:wipebuflines	.vim/sessions/config.vim	/^  let s:wipebuflines = getbufline(s:wipebuf, 1, '$')$/;"	v
+s:wipebuflines	.vim/sessions/ircbot.vim	/^  let s:wipebuflines = getbufline(s:wipebuf, 1, '$')$/;"	v
+s:with_cd	.vim/autoload/plug.vim	/^function! s:with_cd(cmd, dir, ...)$/;"	f
+s:wrap_cmds	.vim/autoload/plug.vim	/^  function! s:wrap_cmds(cmds)$/;"	f
+s:yellow	.vim/colors/solarized.vim	/^    let s:yellow      = "#af8700"$/;"	v
+s:yellow	.vim/colors/solarized.vim	/^    let s:yellow      = "#b58900"$/;"	v
+s:yellow	.vim/colors/solarized.vim	/^    let s:yellow      = "136"$/;"	v
+s:yellow	.vim/colors/solarized.vim	/^    let s:yellow      = "3"$/;"	v
+s:yellow	.vim/colors/solarized.vim	/^    let s:yellow      = "DarkYellow"    " 3$/;"	v
+t:this_session	.vim/sessions/config.vim	/^let t:this_session=expand("<sfile>:p")$/;"	v
+t:this_session	.vim/sessions/ircbot.vim	/^let t:this_session=expand("<sfile>:p")$/;"	v
+td	nvim/init.vim	/^nmap td :tab split<CR>$/;"	m
+tn	nvim/init.vim	/^nmap tn :tabn<CR>$/;"	m
+tp	nvim/init.vim	/^nmap tp :tabp<CR>$/;"	m
+tt	nvim/init.vim	/^nmap tt :tabnew<CR>$/;"	m
