@@ -360,3 +360,70 @@ nmap <leader>gr <Plug>(coc-references)
 nmap <leader>r <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+
+
+" COC
+"
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+inoremap <silent><expr> <c-space> coc#refresh()
+"
+" INSERT mode floating window scrolling {{{
+function! s:coc_float_scroll(amount) abort
+  let float = coc#util#get_float()
+  if !float | return '' | endif
+  let buf = nvim_win_get_buf(float)
+  let buf_height = nvim_buf_line_count(buf)
+  let win_height = nvim_win_get_height(float)
+  if buf_height < win_height | return '' | endif
+  let pos = nvim_win_get_cursor(float)
+  try
+    let last_amount = nvim_win_get_var(float, 'coc_float_scroll_last_amount')
+  catch
+    let last_amount = 0
+  endtry
+  if a:amount > 0
+    if pos[0] == 1
+      let pos[0] += a:amount + win_height - 2
+    elseif last_amount > 0
+      let pos[0] += a:amount
+    else
+      let pos[0] += a:amount + win_height - 3
+    endif
+    let pos[0] = pos[0] < buf_height ? pos[0] : buf_height
+  elseif a:amount < 0
+    if pos[0] == buf_height
+      let pos[0] += a:amount - win_height + 2
+    elseif last_amount < 0
+      let pos[0] += a:amount
+    else
+      let pos[0] += a:amount - win_height + 3
+    endif
+    let pos[0] = pos[0] > 1 ? pos[0] : 1
+  endif
+  call nvim_win_set_var(float, 'coc_float_scroll_last_amount', a:amount)
+  call nvim_win_set_cursor(float, pos)
+  return ''
+endfunction
+let g:coc_snippet_next = '<c-l>'
+let g:coc_snippet_prev = '<c-h>'
+inoremap <silent><expr> <A-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<c-j>"
+inoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
+vnoremap <silent><expr> <A-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<c-j>"
+vnoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
