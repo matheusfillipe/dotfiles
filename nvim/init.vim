@@ -35,7 +35,6 @@ set encoding=utf-8
 " Whitespace
 set wrap
 set textwidth=79
-set formatoptions=cqrn1
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -232,6 +231,7 @@ function! ToggleSpell()
 endfunction
 
 nmap <silent> <F7> :call ToggleSpell()<CR>
+imap <silent> <F7> <Esc>:call ToggleSpell()<CR>a
 
 nnoremap <C-a> :bn<CR>
 nnoremap <C-S-a> :bp<CR>
@@ -321,7 +321,7 @@ nnoremap <leader>S :SaveTabSession
 nnoremap <leader>D :DeleteSession 
 let g:session_autosave = 'yes'
 
-nnoremap <A-b> :NERDTreeToggle<CR>
+nnoremap <A-v> :NERDTreeToggle<CR>
 nmap tt :tabnew<CR>
 nmap td :tab split<CR>
 nmap tn :tabn<CR>
@@ -354,7 +354,7 @@ cnoremap <C-f> q:
 autocmd BufEnter * silent! lcd %:p:h
 let g:tagbar_sort=0
 set cedit=
-nnoremap <A-v> :BuffergatorToggle<CR>
+autocmd VimEnter * nmap <A-b> :BuffergatorToggle<CR>
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>r <Plug>(coc-rename)
@@ -427,3 +427,7 @@ inoremap <silent><expr> <A-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : 
 inoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
 vnoremap <silent><expr> <A-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<c-j>"
 vnoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
+
+set formatoptions=cqrn1
+nnoremap <leader>F :set formatoptions=cqrn1<CR>
+
