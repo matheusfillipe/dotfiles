@@ -13,7 +13,7 @@ fi
 
 if command -v apt &> /dev/null 
 then
-  sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat 
+  sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat silversearcher-ag
 fi
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

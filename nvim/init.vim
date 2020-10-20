@@ -512,7 +512,12 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <M-C-R> :source $MYVIMRC<CR>
 
-set pumblend=5
+" Neovim-qt
+if exists('g:GuiLoaded')
+  set pumblend=5
+endif
+nnoremap <C-F> :Ag 
+
 autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
 
 " Mappings for CoCList
