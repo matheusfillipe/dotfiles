@@ -250,3 +250,8 @@ vmap > >gv
 let g:rustfmt_autosave = 1
 let g:tex_flavor = 'latex'
 set cedit=
+
+nnoremap L vg_
+inoremap <C-BS> <Esc>vbc
+inoremap <M-b> <Esc>bi
+inoremap  <M-w> <Esc>wi

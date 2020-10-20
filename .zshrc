@@ -142,8 +142,8 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-#bindkey -s '^O' 'lfcd'
-#bindkey -s '^F' 'retfile=$(finder.sh) # $retfile'
+bindkey -s '^O' 'lfcd'
+bindkey -s '^F' 'retfile=$(finder.sh) # $retfile'
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
@@ -365,3 +365,4 @@ fi
 unset __conda_setup
 }
 export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
+export PATH=$PATH:$HOME/.pub-cache/bin

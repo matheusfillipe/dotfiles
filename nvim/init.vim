@@ -125,7 +125,7 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 set number relativenumber
 
 set nu rnu
-nnoremap S :%s//g<left><left>
+nnoremap s :%s//g<left><left>
 vnoremap s :s//g<left><left>
 vnoremap . :normal .<cr> 
 
@@ -151,13 +151,12 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
 Plug 'maxbrunsfeld/vim-emacs-bindings'
 Plug 'tmsvg/pear-tree'
-" Plug 'vim-scripts/AutoComplPop'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'fidian/hexmode' 
-Plug 'davidhalter/jedi-vim'
-Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'davidhalter/jedi-vim'
+" Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'bkad/CamelCaseMotion'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'vim-airline/vim-airline'
@@ -167,8 +166,6 @@ Plug 'reedes/vim-wordy'
 Plug 'easymotion/vim-easymotion'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-repeat'
-Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc'
 Plug 'stanangeloff/php.vim'
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -182,8 +179,8 @@ Plug 'preservim/tagbar'
 Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
-Plug 'jeetsukumaran/vim-buffergator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf.vim'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -203,7 +200,7 @@ set shortmess+=c
 set mouse=nicr
 set mouse=a
 set pastetoggle=<F3>
-command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 "let g:powerline_pycmd="py3"
 
 inoremap <c-Left> <C-\><C-O>b
@@ -234,7 +231,8 @@ nmap <silent> <F7> :call ToggleSpell()<CR>
 imap <silent> <F7> <Esc>:call ToggleSpell()<CR>a
 
 nnoremap <C-a> :bn<CR>
-nnoremap <C-S-a> :bp<CR>
+nnoremap <C-Tab> :bn<CR>
+nnoremap <C-S-Tab> :bp<CR>
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
@@ -282,7 +280,6 @@ vnoremap <A-s> :'<,'>FloatermSend<CR>
 let g:floaterm_keymap_new    = '<A-t>'
 let g:floaterm_keymap_prev   = '<A-p>'
 let g:floaterm_keymap_next   = '<A-n>'
-let g:floaterm_keymap_toggle = '<A-q>'
 
 tnoremap <C-M-h> <C-\><C-n><C-w>h
 tnoremap <C-M-j> <C-\><C-n><C-w>j
@@ -315,17 +312,52 @@ imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 nmap <silent> <c-l> :<C-u>call Spell_correct(v:count)<cr>
 nnoremap <leader>q :Bclose<cr>
 
-let g:session_autosave_periodic = 1 
-nnoremap <leader>O :OpenTabSession 
-nnoremap <leader>S :SaveTabSession 
-nnoremap <leader>D :DeleteSession 
-let g:session_autosave = 'yes'
+" let g:session_autosave_periodic = 1 
+" let session_autosave = 'yes'
+" nnoremap <leader>O :OpenSession 
+" nnoremap <leader>S :SaveSession 
+" nnoremap <leader>D :DeleteSession 
+set sessionoptions=buffers,curdir,folds,help,tabpages,winsize
 
-nnoremap <A-v> :NERDTreeToggle<CR>
+function! s:SaveSession(name)
+  execute "!mkdir -p ~/.vim/sessions"
+  execute "mks! ~/.vim/sessions/".a:name.".vim"
+endfunction
+
+function! s:LoadSession(name)
+  execute "source ~/.vim/sessions/".a:name.".vim"
+endfunction
+
+function! s:DeleteSession(name)
+  execute "!rm ~/.vim/sessions/".a:name.".vim"
+endfunction
+
+function! s:Sessions(argl, cmdl, pos) abort
+  let l=split(a:cmdl, " ")
+  if len(l) > 1
+    let x=l[-1]
+  else
+    let x=""
+  endif
+  return map(split(globpath('~/.vim/sessions/', x.'*.vim'), '\n'), {idx, val -> substitute(fnamemodify(val,':t'), ".vim", "", "g")})
+endfunction
+
+command! -nargs=1 -complete=customlist,s:Sessions SaveSession call s:SaveSession(<f-args>)
+command! -nargs=1 -complete=customlist,s:Sessions LoadSession call s:LoadSession(<f-args>)
+command! -nargs=1 -complete=customlist,s:Sessions DeleteSession call s:DeleteSession(<f-args>)
+
+nnoremap <leader>S :SaveSession 
+nnoremap <leader>O :LoadSession 
+nnoremap <leader>D :DeleteSession 
+set path=.,,**
+
+nnoremap <A-\> :NERDTreeToggle<CR>
 nmap tt :tabnew<CR>
 nmap td :tab split<CR>
 nmap tn :tabn<CR>
+nmap <Tab> :tabn<CR>
 nmap tp :tabp<CR>
+nmap <S-Tab> :tabp<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeGitStatusWithFlags = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -354,7 +386,6 @@ cnoremap <C-f> q:
 autocmd BufEnter * silent! lcd %:p:h
 let g:tagbar_sort=0
 set cedit=
-autocmd VimEnter * nmap <A-b> :BuffergatorToggle<CR>
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>r <Plug>(coc-rename)
@@ -430,4 +461,48 @@ vnoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) :
 
 set formatoptions=cqrn1
 nnoremap <leader>F :set formatoptions=cqrn1<CR>
+
+" Flutter
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+let g:tagbar_type_dart = { 'ctagsbin': '~/.pub-cache/bin/dart_ctags' }
+
+" Autocomplete
+"
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <c-space> coc#refresh()
+nnoremap <M-C-R> :source $MYVIMRC<CR>
+
+set pumblend=20
+autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
+
+" FZF
+"
+nnoremap <A-g> :GFiles<CR>
+nnoremap <A-f> :Files<CR>
+autocmd VimEnter * nmap <A-b> :Buffers<CR>
+nmap <A-h> :History
+nmap <M-:> :Commands<CR>
+let g:fzf_tags_command = "ctags -R"
+let g:fzf_preview_window = 'right:60%'
+let g:fzf_layout = { 'window': 'botright new' }
+command! -bang -nargs=? -complete=dir Files
+	\ call fzf#vim#files(<q-args>, {'options': ['--preview', 'BAT_THEME="Dracula" bat --color=always {}']}, <bang>0)
+command! -bang -nargs=? -complete=dir GFiles
+	\ call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'BAT_THEME="Dracula" bat --color=always {}']}, <bang>0)
+
+
+nnoremap L vg_
+inoremap <C-BS> <Esc>vbc
+inoremap <M-b> <Esc>bi
+inoremap  <M-w> <Esc>wi
 

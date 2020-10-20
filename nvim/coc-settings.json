@@ -1,0 +1,24 @@
+{
+  "solargraph.commandPath" :  "/home/matheus/.gem/ruby/2.7.0/bin/solargraph",
+  "signature.preferShownAbove": false,
+  "signature.target": "float",
+  "codeLens.enable": true,
+
+  "coc.preferences.formatOnSaveFiletypes": [
+    "svg",    // coc-svg support svg format
+    "dart",   // coc-flutter support dart format */
+    "elixir", // diagnostic-languageserver support elixir format
+    "eelixir" // diagnostic-languageserver support elixir format
+  ],
+  "flutter.openDevLogSplitCommand": "botright 10split",
+  "html.autoClosingTags": true,
+  "pairs.enableCharacters": [
+    "(",
+    "[",
+    "{",
+    "'",
+    "\"",
+    "`"
+  ]
+
+}

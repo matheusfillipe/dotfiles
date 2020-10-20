@@ -5,6 +5,7 @@ then
   cp ~/.zshrc .
   cp ~/.tmux.conf .
   cp ~/.config/nvim/init.vim nvim/
+  cp ~/.config/nvim/coc-settings.json nvim/
   cp ~/.config/vifm/vifmrc vifm/
   git add .; git commit -m "$2"; git push origin master
   exit
@@ -12,7 +13,7 @@ fi
 
 if command -v apt &> /dev/null 
 then
-  sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs
+  sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat 
 fi
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
