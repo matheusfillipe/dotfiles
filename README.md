@@ -25,6 +25,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/matheusfillipe/dotfiles/
 
 ![alt text](https://github.com/matheusfillipe/dotfiles/blob/master/screenshot.png?raw=true)
 
+![alt text](https://github.com/matheusfillipe/dotfiles/blob/master/nvim1.png?raw=true)
+
+![alt text](https://github.com/matheusfillipe/dotfiles/blob/master/nvim2.png?raw=true)
+
 * **ZSH**: Stuff like ctrl+F to start a file search in the current path using retfile, ctrl+O to lfcd, intuitive vim mode, oh-my-zsh and many other keybindings and plugins and theme. Esc enters vi mode, the clipboard is synced with the X's. 
 
 * **VIM**: Line number display, dark theme, clipboard synced with Xorg...
