@@ -181,6 +181,7 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf.vim'
+Plug 'jceb/vim-orgmode'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -318,18 +319,30 @@ nnoremap <leader>q :Bclose<cr>
 " nnoremap <leader>S :SaveSession 
 " nnoremap <leader>D :DeleteSession 
 set sessionoptions=buffers,curdir,folds,help,tabpages,winsize
+let g:session_dir="~/.vim/sessions/"
 
 function! s:SaveSession(name)
-  execute "!mkdir -p ~/.vim/sessions"
-  execute "mks! ~/.vim/sessions/".a:name.".vim"
+  if (exists("g:last_saved_session"))
+    execute "mks! ".g:session_dir.g:last_saved_session.".vim"
+    echo "Saved Session ".g:last_saved_session
+  else
+    execute "!mkdir -p ".g:session_dir
+    execute "mks! ".g:session_dir.a:name.".vim"
+    exe "let g:last_saved_session=a:name"
+    command! SaveSessionRepeat call s:SaveSession("")
+    nnoremap <leader>S :SaveSessionRepeat<CR>
+  endif
 endfunction
 
 function! s:LoadSession(name)
-  execute "source ~/.vim/sessions/".a:name.".vim"
+  execute "source ".g:session_dir.a:name.".vim"
+  exe "let g:last_saved_session=a:name"
+  command! SaveSessionRepeat call s:SaveSession("")
+  nnoremap <leader>S :SaveSessionRepeat<CR>
 endfunction
 
 function! s:DeleteSession(name)
-  execute "!rm ~/.vim/sessions/".a:name.".vim"
+  execute "!rm "g:session_dir.a:name.".vim"
 endfunction
 
 function! s:Sessions(argl, cmdl, pos) abort
@@ -369,13 +382,20 @@ vmap > >gv
 let g:rustfmt_autosave = 1
 let g:tex_flavor = 'latex'
 let g:dart_format_on_save = 1
-nnoremap <A-z> :TagbarToggle<CR>
+nnoremap <A-z> :TagbarToggle<CR><C-M-l>
 nnoremap <A-c> :!ctags -R .<CR>
 nnoremap <A-w> :tabnext <CR>
-nnoremap <A-2> :tabnext <CR>
-nnoremap <A-1> :tabprevious <CR>
 nnoremap <A-q> :tabprevious <CR>
 nnoremap ZD :BD<CR>
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
 
 nnoremap <C-Space> :nnoremap <lt>Space> :! <lt>CR><left><left><left><left><left>
 nmap <Esc> :noh<CR>
@@ -386,11 +406,16 @@ cnoremap <C-f> q:
 autocmd BufEnter * silent! lcd %:p:h
 let g:tagbar_sort=0
 set cedit=
+nmap <silent> <leader>i :call CocActionAsync('doHover') <cr>
+autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>d <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>r <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>qf  <Plug>(coc-fix-current)
+
 
 
 " COC
@@ -414,6 +439,8 @@ set updatetime=300
 set shortmess+=c
 
 inoremap <silent><expr> <c-space> coc#refresh()
+
+
 "
 " INSERT mode floating window scrolling {{{
 function! s:coc_float_scroll(amount) abort
@@ -459,12 +486,15 @@ inoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) :
 vnoremap <silent><expr> <A-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<c-j>"
 vnoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
 
+nnoremap <leader>E :CocDiagnostics<CR>
+
 set formatoptions=cqrn1
 nnoremap <leader>F :set formatoptions=cqrn1<CR>
 
 " Flutter
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>ac  <Plug>(coc-codeaction)
 let g:tagbar_type_dart = { 'ctagsbin': '~/.pub-cache/bin/dart_ctags' }
 
 " Autocomplete
@@ -482,8 +512,26 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <M-C-R> :source $MYVIMRC<CR>
 
-set pumblend=20
+set pumblend=5
 autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " FZF
 "
@@ -501,8 +549,12 @@ command! -bang -nargs=? -complete=dir GFiles
 	\ call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'BAT_THEME="Dracula" bat --color=always {}']}, <bang>0)
 
 
-nnoremap L vg_
+nnoremap <C-S-l> vg_
+nnoremap <C-S-h> v0
 inoremap <C-BS> <Esc>vbc
 inoremap <M-b> <Esc>bi
 inoremap  <M-w> <Esc>wi
-
+inoremap <C-S> <Esc>:w<CR>a
+nnoremap <C-S> :w<CR>
+inoremap <M-BS> <Esc>dba
+inoremap <M-d> <Esc>dwi
