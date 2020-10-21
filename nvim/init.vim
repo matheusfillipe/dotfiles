@@ -564,3 +564,8 @@ inoremap <C-S> <Esc>:w<CR>a
 nnoremap <C-S> :w<CR>
 inoremap <M-BS> <Esc>dba
 inoremap <M-d> <Esc>dwi
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+cnoremap <M-BS> <C-w>

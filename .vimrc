@@ -251,7 +251,17 @@ let g:rustfmt_autosave = 1
 let g:tex_flavor = 'latex'
 set cedit=
 
-nnoremap L vg_
+nnoremap <C-S-l> vg_
+nnoremap <C-S-h> v0
 inoremap <C-BS> <Esc>vbc
 inoremap <M-b> <Esc>bi
 inoremap  <M-w> <Esc>wi
+inoremap <C-S> <Esc>:w<CR>a
+nnoremap <C-S> :w<CR>
+inoremap <M-BS> <Esc>dba
+inoremap <M-d> <Esc>dwi
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+cnoremap <M-BS> <C-w>
