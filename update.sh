@@ -10,4 +10,5 @@ vim +PlugInstall +qall +silent
 nvim +PlugInstall +qall +silent
 nvim +"CocInstall coc-solargraph" +qall +silent
 nvim +"CocInstall coc-solargraph" +qall +silent
+nvim --headless -u init.vim +UpdateRemotePlugins +qa
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh

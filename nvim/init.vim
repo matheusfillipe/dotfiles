@@ -183,6 +183,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jceb/vim-orgmode'
+Plug  'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -517,7 +518,7 @@ nnoremap <M-C-R> :source $MYVIMRC<CR>
 if exists('g:GuiLoaded')
   set pumblend=5
 endif
-nnoremap <C-F> :Ag 
+nnoremap <A-s> :Ag 
 
 autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
 
@@ -554,6 +555,25 @@ command! -bang -nargs=? -complete=dir Files
 command! -bang -nargs=? -complete=dir GFiles
 	\ call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'BAT_THEME="Dracula" bat --color=always {}']}, <bang>0)
 
+" nvim-gdb
+
+ function! NvimGdbNoTKeymaps()
+   tnoremap <silent> <buffer> <esc> <c-\><c-n>
+ endfunction
+ 
+ let g:nvimgdb_config_override = {
+   \ 'key_next': 'n',
+   \ 'key_step': 's',
+   \ 'key_finish': 'f',
+   \ 'key_continue': 'c',
+   \ 'key_until': 'u',
+   \ 'key_breakpoint': 'b',
+   \ 'set_tkeymaps': "NvimGdbNoTKeymaps",
+   \ }
+
+ autocmd VimEnter * noremap <Leader>dp :GdbStartPDB python -m pdb %
+ autocmd VimEnter * noremap <Leader>db :GdbStartBashDB bashdb %
+ 
 
 nnoremap <C-S-l> vg_
 nnoremap <C-S-h> v0
