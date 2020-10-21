@@ -180,6 +180,7 @@ Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jceb/vim-orgmode'
 call plug#end()
