@@ -143,6 +143,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
         endif
 "TERM_FANCY_CURSOR  = 'true'
+set nocompatible
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
 call plug#begin()
 Plug 'liuchengxu/space-vim-dark'
@@ -183,17 +184,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jceb/vim-orgmode'
-Plug  'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
+Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
+Plug 'sheerun/vim-polyglot'
+Plug 'joshdick/onedark.vim'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
 
-colorscheme space-vim-dark
-hi Comment guifg=#5C6370 ctermfg=59
-hi Normal     ctermbg=NONE guibg=NONE
-hi LineNr     ctermbg=NONE guibg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
 set guioptions+=a
 set clipboard=unnamedplus
 set complete+=kspell
@@ -234,7 +232,7 @@ nmap <silent> <F7> :call ToggleSpell()<CR>
 imap <silent> <F7> <Esc>:call ToggleSpell()<CR>a
 
 nnoremap <C-a> :bn<CR>
-nnoremap <C-Tab> :bn<CR>
+"nnoremap <C-Tab> :bn<CR>
 nnoremap <C-S-Tab> :bp<CR>
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
@@ -366,13 +364,15 @@ nnoremap <leader>O :LoadSession
 nnoremap <leader>D :DeleteSession 
 set path=.,,**
 
+ 	
 nnoremap <A-\> :NERDTreeToggle<CR>
-nmap tt :tabnew<CR>
-nmap td :tab split<CR>
-nmap tn :tabn<CR>
-nmap <Tab> :tabn<CR>
-nmap tp :tabp<CR>
-nmap <S-Tab> :tabp<CR>
+nnoremap tt :tabnew<CR>
+nnoremap td :tab split<CR>
+nnoremap tn :tabn<CR>
+nnoremap tp :tabp<CR>
+nnoremap tc :tabclose<CR>
+" nnoremap <Tab> :tabn<CR>
+nnoremap <S-Tab> :tabp<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeGitStatusWithFlags = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -514,10 +514,19 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <M-C-R> :source $MYVIMRC<CR>
 
+syntax on
 " Neovim-qt
 if exists('g:GuiLoaded')
   set pumblend=5
+  colorscheme onedark
+else
+  colorscheme space-vim-dark
 endif
+hi Normal     ctermbg=NONE
+"hi Comment guifg=#5C6370 ctermfg=59
+"hi Normal     ctermbg=NONE guibg=NONE
+"hi LineNr     ctermbg=NONE guibg=NONE
+"hi SignColumn ctermbg=NONE guibg=NONE
 nnoremap <A-s> :Ag 
 
 autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
@@ -573,19 +582,27 @@ command! -bang -nargs=? -complete=dir GFiles
 
  autocmd VimEnter * noremap <Leader>dp :GdbStartPDB python -m pdb %
  autocmd VimEnter * noremap <Leader>db :GdbStartBashDB bashdb %
- 
 
+" Workarounds for vim-orgmode
+autocmd FileType org nnoremap <C-Space> :OrgCheckBoxToggle<CR>
 nnoremap <C-S-l> vg_
 nnoremap <C-S-h> v0
 inoremap <C-BS> <Esc>vbc
 inoremap <M-b> <Esc>bi
-inoremap  <M-w> <Esc>wi
+inoremap <M-w> <Esc>wi
 inoremap <C-S> <Esc>:w<CR>a
 nnoremap <C-S> :w<CR>
-inoremap <M-BS> <Esc>dba
-inoremap <M-d> <Esc>dwi
+inoremap <M-BS> <Esc>vbxa
+inoremap <M-d> <Esc>vexi
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 cnoremap <M-BS> <C-w>
+nnoremap <BS> :cd ..<cr>
+nnoremap <M-BS> :cd -<cr>
+nnoremap <C-Right> :vertical resize +5<CR>
+nnoremap <C-Left>  :vertical resize -5<CR>
+nnoremap <C-Up>   :resize +5<CR>
+nnoremap <C-Down> :resize -5<CR>
+
