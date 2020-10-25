@@ -399,6 +399,16 @@ nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> 9gt
 
+inoremap <A-1> <Esc>1gt
+inoremap <A-2> <Esc>2gt
+inoremap <A-3> <Esc>3gt
+inoremap <A-4> <Esc>4gt
+inoremap <A-5> <Esc>5gt
+inoremap <A-6> <Esc>6gt
+inoremap <A-7> <Esc>7gt
+inoremap <A-8> <Esc>8gt
+inoremap <A-9> <Esc>9gt
+
 nnoremap <C-Space> :nnoremap <lt>Space> :! <lt>CR><left><left><left><left><left>
 nmap <Esc> :noh<CR>
 cnoremap <C-A> <Home>

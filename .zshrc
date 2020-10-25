@@ -82,7 +82,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     per-directory-history
-   # zsh-vim-mode
+    zsh-vim-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -333,7 +333,8 @@ res () {
   cat /tmp/catch.out 
 }
 
-#. /opt/asdf-vm/asdf.sh
+. /opt/asdf-vm/asdf.sh
+. /opt/asdf-vm/completions/_asdf
 
 
 bindkey -s '^O' 'lfcd
