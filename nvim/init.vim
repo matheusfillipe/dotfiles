@@ -176,17 +176,17 @@ Plug 'preservim/nerdcommenter'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rust-lang/rust.vim'
-Plug 'preservim/tagbar'
 Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jceb/vim-orgmode'
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
+Plug 'preservim/tagbar'
+Plug 'eliba2/vim-node-inspect'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -384,11 +384,11 @@ vmap > >gv
 let g:rustfmt_autosave = 1
 let g:tex_flavor = 'latex'
 let g:dart_format_on_save = 1
-nnoremap <A-z> :TagbarToggle<CR><C-M-l>
+nnoremap <A-z> :TagbarOpenAutoClose<CR>
+nnoremap <A-x> :TagbarToggle<CR>
 nnoremap <A-c> :!ctags -R .<CR>
 nnoremap <A-w> :tabnext <CR>
 nnoremap <A-q> :tabprevious <CR>
-nnoremap ZD :BD<CR>
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
@@ -409,6 +409,19 @@ inoremap <A-7> <Esc>7gt
 inoremap <A-8> <Esc>8gt
 inoremap <A-9> <Esc>9gt
 
+tnoremap <A-1> <C-\><C-n>1gt
+tnoremap <A-2> <C-\><C-n>2gt
+tnoremap <A-3> <C-\><C-n>3gt
+tnoremap <A-4> <C-\><C-n>4gt
+tnoremap <A-5> <C-\><C-n>5gt
+tnoremap <A-6> <C-\><C-n>6gt
+tnoremap <A-7> <C-\><C-n>7gt
+tnoremap <A-8> <C-\><C-n>8gt
+tnoremap <A-9> <C-\><C-n>9gt
+
+
+
+nnoremap ZD :BD<CR>
 nnoremap <C-Space> :nnoremap <lt>Space> :! <lt>CR><left><left><left><left><left>
 nmap <Esc> :noh<CR>
 cnoremap <C-A> <Home>
@@ -593,8 +606,20 @@ command! -bang -nargs=? -complete=dir GFiles
  autocmd VimEnter * noremap <Leader>dp :GdbStartPDB python -m pdb %
  autocmd VimEnter * noremap <Leader>db :GdbStartBashDB bashdb %
 
+
+ " nodejs db
+autocmd FileType javascript noremap <silent><F4> :NodeInspectStart<cr>
+autocmd FileType javascript noremap <silent><F5> :NodeInspectRun<cr>
+autocmd FileType javascript noremap <silent><F6> :NodeInspectConnect("127.0.0.1:9229")<cr>
+autocmd FileType javascript noremap <silent><F8> :NodeInspectStepInto<cr>
+autocmd FileType javascript noremap <silent><F9> :NodeInspectStepOver<cr>
+autocmd FileType javascript noremap <silent><F10> :NodeInspectToggleBreakpoint<cr>
+autocmd FileType javascript noremap <silent><F11> :NodeInspectStop<cr>
+
 " Workarounds for vim-orgmode
 autocmd FileType org nnoremap <C-Space> :OrgCheckBoxToggle<CR>
+
+" Emacs like
 nnoremap <C-S-l> vg_
 nnoremap <C-S-h> v0
 inoremap <C-BS> <Esc>vbc
@@ -615,4 +640,24 @@ nnoremap <C-Right> :vertical resize +5<CR>
 nnoremap <C-Left>  :vertical resize -5<CR>
 nnoremap <C-Up>   :resize +5<CR>
 nnoremap <C-Down> :resize -5<CR>
+
+autocmd FileType c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'
+autocmd FileType sh,ruby,python,perl,org   let b:comment_leader = '#'
+autocmd FileType conf,fstab       let b:comment_leader = '#'
+autocmd FileType tex              let b:comment_leader = '%'
+autocmd FileType mail             let b:comment_leader = '>'
+autocmd FileType vim              let b:comment_leader = '"'
+function! CommentToggle()
+    execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/'
+    execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
+endfunction
+nmap ; :call CommentToggle()<CR>
+
+" Clipboard
+nnoremap dil ^d$
+nnoremap vil ^v$
+nnoremap cil ^c$
+nnoremap gp i<c-r>0<esc>k$Jx
+nnoremap <c-p> a<c-r>0<esc>k$Jx
+inoremap <c-p> <c-r>0<esc>k$Jxa
 

@@ -265,3 +265,48 @@ cnoremap <C-e> <End>
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 cnoremap <M-BS> <C-w>
+
+
+" Workarounds for vim-orgmode
+autocmd FileType org nnoremap <C-Space> :OrgCheckBoxToggle<CR>
+nnoremap <C-S-l> vg_
+nnoremap <C-S-h> v0
+inoremap <C-BS> <Esc>vbc
+inoremap <M-b> <Esc>bi
+inoremap <M-w> <Esc>wi
+inoremap <C-S> <Esc>:w<CR>a
+nnoremap <C-S> :w<CR>
+inoremap <M-BS> <Esc>vbxa
+inoremap <M-d> <Esc>vexi
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+cnoremap <M-BS> <C-w>
+nnoremap <BS> :cd ..<cr>
+nnoremap <M-BS> :cd -<cr>
+nnoremap <C-Right> :vertical resize +5<CR>
+nnoremap <C-Left>  :vertical resize -5<CR>
+nnoremap <C-Up>   :resize +5<CR>
+nnoremap <C-Down> :resize -5<CR>
+
+autocmd FileType c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'
+autocmd FileType sh,ruby,python,perl,org   let b:comment_leader = '#'
+autocmd FileType conf,fstab       let b:comment_leader = '#'
+autocmd FileType tex              let b:comment_leader = '%'
+autocmd FileType mail             let b:comment_leader = '>'
+autocmd FileType vim              let b:comment_leader = '"'
+function! CommentToggle()
+    execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/'
+    execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
+endfunction
+nmap ; :call CommentToggle()<CR>
+
+" Clipboard
+nnoremap dil ^d$
+nnoremap vil ^v$
+nnoremap cil ^c$
+nnoremap gp i<c-r>0<esc>k$Jx
+nnoremap <c-p> a<c-r>0<esc>k$Jx
+inoremap <c-p> <c-r>0<esc>k$Jxa
+

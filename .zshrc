@@ -367,3 +367,4 @@ unset __conda_setup
 }
 export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 export PATH=$PATH:$HOME/.pub-cache/bin
+source /usr/share/nvm/init-nvm.sh
