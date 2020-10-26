@@ -1,3 +1,6 @@
+" You might want to change this to 1
+let g:main_clipboard_buffer=0
+
 autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
 autocmd VimLeave * silent exec "! echo -ne '\e[5 q'" 
 " Don't try to be vi compatible
@@ -657,7 +660,6 @@ nmap ; :call CommentToggle()<CR>
 nnoremap dil ^d$
 nnoremap vil ^v$
 nnoremap cil ^c$
-nnoremap gp i<c-r>0<esc>k$Jx
-nnoremap <c-p> a<c-r>0<esc>k$Jx
-inoremap <c-p> <c-r>0<esc>k$Jxa
-
+execute "nnoremap gp i<c-r>".g:main_clipboard_buffer."<esc>k$Jx"
+execute "nnoremap <c-p> a<c-r>".g:main_clipboard_buffer."<esc>k$Jx"
+execute "inoremap <c-p> <c-r>".g:main_clipboard_buffer."<esc>k$Jxa"
