@@ -184,6 +184,7 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 Plug 'jceb/vim-orgmode'
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
 Plug 'sheerun/vim-polyglot'
@@ -204,7 +205,7 @@ set shortmess+=c
 set mouse=nicr
 set mouse=a
 set pastetoggle=<F3>
-command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit! 
 "let g:powerline_pycmd="py3"
 
 inoremap <c-Left> <C-\><C-O>b
