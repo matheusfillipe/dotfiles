@@ -333,8 +333,11 @@ res () {
   cat /tmp/catch.out 
 }
 
-. /opt/asdf-vm/asdf.sh
-. /opt/asdf-vm/completions/_asdf
+if [ -d /opt/asdf-vm/ ]
+then
+  . /opt/asdf-vm/asdf.sh
+  . /opt/asdf-vm/completions/_asdf
+fi
 
 
 bindkey -s '^O' 'lfcd
@@ -367,4 +370,5 @@ unset __conda_setup
 }
 export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 export PATH=$PATH:$HOME/.pub-cache/bin
-source /usr/share/nvm/init-nvm.sh
+
+[ -d /usr/share/nvm ] && source /usr/share/nvm/init-nvm.sh
