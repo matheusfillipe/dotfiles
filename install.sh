@@ -13,10 +13,17 @@ fi
 
 if command -v apt &> /dev/null 
 then
-  sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat silversearcher-ag powerline zsh
+  sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat silversearcher-ag powerline zsh tar
 mkdir -p ~/.local/bin
 ln -s /usr/bin/batcat ~/.local/bin/bat
 fi
+
+mkdir -p ~/bin
+cd ~/bin
+wget https://github.com/junegunn/fzf/releases/download/0.24.1/fzf-0.24.1-linux_amd64.tar.gz
+tar -xvzf fzf-0.24.1-linux_amd64.tar.gz
+rm fzf-0.24.1-linux_amd64.tar.gz
+cd ~/
 
 pip3 install pdbpp
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
