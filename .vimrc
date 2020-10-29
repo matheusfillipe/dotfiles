@@ -169,7 +169,14 @@ set shortmess+=c
 set mouse=nicr
 set mouse=a
 set pastetoggle=<F3>
-command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+" Temporary workaround for: https://github.com/neovim/neovim/issues/1716
+if has("nvim")
+  command! W w !sudo -n tee % > /dev/null || echo "Press <leader>w to authenticate and try again"
+  map <leader>w :new<cr>:term sudo true<cr>
+else
+  command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+end
+
 "let g:powerline_pycmd="py3"
 
 inoremap <c-Left> <C-\><C-O>b
