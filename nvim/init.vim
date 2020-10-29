@@ -206,11 +206,11 @@ set shortmess+=c
 set mouse=nicr
 set mouse=a
 set pastetoggle=<F3>
-" Temporary workaround for: https://github.com/neovim/neovim/issues/1716
 function! Sudosave()
   nmap ZS :call Sudosave()<CR>
+  " One of these two should work
   execute ':silent w !sudo -n tee % > /dev/null || echo "Press <leader>w to authenticate and try again"'
- " execute "SudaWrite()"       
+ " execute "SudaWrite"       
   execute ":e!"       
 endfunction    
 if has("nvim")
