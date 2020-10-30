@@ -107,7 +107,7 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 set number relativenumber
 
 set nu rnu
-nnoremap S :%s//g<left><left>
+nnoremap s :%s//g<left><left>
 vnoremap s :s//g<left><left>
 vnoremap . :normal .<cr> 
 
