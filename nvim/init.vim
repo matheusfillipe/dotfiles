@@ -668,7 +668,7 @@ function! CommentToggle()
     execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/'
     execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
 endfunction
-nmap ; :call CommentToggle()<CR>
+nmap <M-;> :call CommentToggle()<CR>
 
 " Clipboard
 nnoremap dil ^d$

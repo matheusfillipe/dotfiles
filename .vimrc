@@ -298,7 +298,7 @@ nnoremap <C-Up>   :resize +5<CR>
 nnoremap <C-Down> :resize -5<CR>
 
 autocmd FileType c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'
-autocmd FileType sh,ruby,python,perl,org   let b:comment_leader = '#'
+autocmd FileType sh,ruby,python,perl,org,php   let b:comment_leader = '#'
 autocmd FileType conf,fstab       let b:comment_leader = '#'
 autocmd FileType tex              let b:comment_leader = '%'
 autocmd FileType mail             let b:comment_leader = '>'
@@ -307,7 +307,7 @@ function! CommentToggle()
     execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/'
     execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
 endfunction
-nmap ; :call CommentToggle()<CR>
+nmap \; :call CommentToggle()<CR>
 
 " Clipboard
 nnoremap dil ^d$
