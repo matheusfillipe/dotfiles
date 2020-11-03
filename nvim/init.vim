@@ -149,6 +149,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 set nocompatible
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
 call plug#begin()
+Plug 'tell-k/vim-autopep8'
 Plug 'lambdalisue/suda.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'Yggdroot/indentLine'    
@@ -406,6 +407,8 @@ nnoremap <A-x> :TagbarToggle<CR>
 nnoremap <A-c> :!ctags -R .<CR>
 nnoremap <A-w> :tabnext <CR>
 nnoremap <A-q> :tabprevious <CR>
+tnoremap <A-w> <C-\><C-n>:tabnext <CR>
+tnoremap <A-q> <C-\><C-n>:tabprevious <CR>
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
@@ -483,51 +486,29 @@ set shortmess+=c
 inoremap <silent><expr> <c-space> coc#refresh()
 
 
-"
-" INSERT mode floating window scrolling {{{
-function! s:coc_float_scroll(amount) abort
-  let float = coc#util#get_float()
-  if !float | return '' | endif
-  let buf = nvim_win_get_buf(float)
-  let buf_height = nvim_buf_line_count(buf)
-  let win_height = nvim_win_get_height(float)
-  if buf_height < win_height | return '' | endif
-  let pos = nvim_win_get_cursor(float)
-  try
-    let last_amount = nvim_win_get_var(float, 'coc_float_scroll_last_amount')
-  catch
-    let last_amount = 0
-  endtry
-  if a:amount > 0
-    if pos[0] == 1
-      let pos[0] += a:amount + win_height - 2
-    elseif last_amount > 0
-      let pos[0] += a:amount
-    else
-      let pos[0] += a:amount + win_height - 3
-    endif
-    let pos[0] = pos[0] < buf_height ? pos[0] : buf_height
-  elseif a:amount < 0
-    if pos[0] == buf_height
-      let pos[0] += a:amount - win_height + 2
-    elseif last_amount < 0
-      let pos[0] += a:amount
-    else
-      let pos[0] += a:amount - win_height + 3
-    endif
-    let pos[0] = pos[0] > 1 ? pos[0] : 1
-  endif
-  call nvim_win_set_var(float, 'coc_float_scroll_last_amount', a:amount)
-  call nvim_win_set_cursor(float, pos)
-  return ''
-endfunction
+" Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750
+nnoremap <nowait><expr> <A-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <A-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <A-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <A-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
+" NeoVim-only mapping for visual mode scroll
+" Useful on signatureHelp after jump placeholder of snippet expansion
+if has('nvim')
+  vnoremap <nowait><expr> <A-j> coc#float#has_scroll() ? coc#float#nvim_scroll(1, 1) : "\<C-f>"
+  vnoremap <nowait><expr> <A-k> coc#float#has_scroll() ? coc#float#nvim_scroll(0, 1) : "\<C-b>"
+endif
 let g:coc_snippet_next = '<c-l>'
 let g:coc_snippet_prev = '<c-h>'
-inoremap <silent><expr> <A-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<c-j>"
-inoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
-vnoremap <silent><expr> <A-j> coc#util#has_float() ? <SID>coc_float_scroll(1) : "\<c-j>"
-vnoremap <silent><expr> <A-k> coc#util#has_float() ? <SID>coc_float_scroll(-1) : "\<c-k>"
 
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 nnoremap <leader>E :CocDiagnostics<CR>
 
 set formatoptions=cqrn1
@@ -659,7 +640,7 @@ nnoremap <C-Up>   :resize +5<CR>
 nnoremap <C-Down> :resize -5<CR>
 
 autocmd FileType c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'
-autocmd FileType sh,ruby,python,perl,org   let b:comment_leader = '#'
+autocmd FileType sh,ruby,python,perl,org,php   let b:comment_leader = '#'
 autocmd FileType conf,fstab       let b:comment_leader = '#'
 autocmd FileType tex              let b:comment_leader = '%'
 autocmd FileType mail             let b:comment_leader = '>'
@@ -669,6 +650,8 @@ function! CommentToggle()
     execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
 endfunction
 nmap <M-;> :call CommentToggle()<CR>
+vmap <M-;> :call CommentToggle()<CR>
+xmap <M-;> :call CommentToggle()<CR>
 
 " Clipboard
 nnoremap dil ^d$
