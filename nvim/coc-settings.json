@@ -21,5 +21,6 @@
     "\"",
     "`"
   ],
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
   "python.linting.pylintArgs": ["--generate-members"]
 }

@@ -149,6 +149,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 set nocompatible
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
 call plug#begin()
+Plug 'honza/vim-snippets'
 Plug 'tell-k/vim-autopep8'
 Plug 'lambdalisue/suda.vim'
 Plug 'liuchengxu/space-vim-dark'
@@ -509,6 +510,25 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+
+" Snippets
+
+" Use <A-j> for both expand and jump (make expand higher priority.)
+imap <A-l> <Plug>(coc-snippets-expand-jump)
+imap <M-L> <Plug>(coc-snippets-expand)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
+
+
 nnoremap <leader>E :CocDiagnostics<CR>
 
 set formatoptions=cqrn1
