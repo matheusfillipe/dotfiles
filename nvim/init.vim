@@ -553,22 +553,23 @@ inoremap <silent><expr> <Tab>
       \ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
-nnoremap <M-C-R> :source $MYVIMRC<CR>
 
 syntax on
 " Neovim-qt
 if exists('g:GuiLoaded')
   set pumblend=5
   colorscheme onedark
+  nnoremap <M-C-R> :source $MYVIMRC<CR> :source ~/.config/nvim/ginit.vim<CR>
 else
   colorscheme space-vim-dark
+  nnoremap <M-C-R> :source $MYVIMRC<CR>
 endif
 hi Normal     ctermbg=NONE
 "hi Comment guifg=#5C6370 ctermfg=59
 "hi Normal     ctermbg=NONE guibg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
 "hi SignColumn ctermbg=NONE guibg=NONE
-nnoremap <A-s> :Ag 
+nnoremap <A-s> :Ag<CR>
 
 autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
 
@@ -672,6 +673,16 @@ endfunction
 nmap <M-;> :call CommentToggle()<CR>
 vmap <M-;> :call CommentToggle()<CR>
 xmap <M-;> :call CommentToggle()<CR>
+
+function! ColonToggle()
+    execute ':silent! s/\([^ ]\) *$/\1;/'   
+    execute ':silent! s/\( *\); \?; \?$/\1/'
+endfunction
+nmap <leader>; :call ColonToggle()<CR>
+xmap <leader>; :call ColonToggle()<CR>
+vmap <leader>; :call ColonToggle()<CR>
+
+inoremap ;; <C-o>A;
 
 " Clipboard
 nnoremap dil ^d$
