@@ -1,4 +1,23 @@
 {
+  "initializationOptions": {
+    "markupKindPreferred": null,
+    "jediSettings": {
+      "autoImportModules": []
+    },
+    "completion": {
+      "disableSnippets": false
+    },
+    "diagnostics": {
+      "enable": true,
+      "didOpen": true,
+      "didChange": true,
+      "didSave": true
+    },
+    "workspace": {
+      "extraPaths": []
+    }
+  },
+
   "solargraph.commandPath" :  "/home/matheus/.gem/ruby/2.7.0/bin/solargraph",
   "signature.preferShownAbove": false,
   "signature.target": "float",
@@ -21,6 +40,7 @@
     "\"",
     "`"
   ],
+
   "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
   "python.linting.pylintArgs": ["--generate-members"]
 }

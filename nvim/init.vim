@@ -178,7 +178,6 @@ Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'preservim/nerdcommenter'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rust-lang/rust.vim'
@@ -231,6 +230,7 @@ inoremap <C-L> <C-\><C-O>w
 inoremap <C-J> <C-\><C-O>j
 inoremap <C-K> <C-\><C-O>k
 noremap  ZS :w
+noremap  ZA :qa<CR>
 inoremap <C-Z> :w
 
 " Spell Check
@@ -559,7 +559,7 @@ syntax on
 if exists('g:GuiLoaded')
   set pumblend=5
   colorscheme onedark
-  nnoremap <M-C-R> :source $MYVIMRC<CR> :source ~/.config/nvim/ginit.vim<CR>
+  nnoremap <M-C-R> :source $MYVIMRC <bar> source ~/.config/nvim/ginit.vim <cr>
 else
   colorscheme space-vim-dark
   nnoremap <M-C-R> :source $MYVIMRC<CR>
@@ -659,6 +659,14 @@ nnoremap <C-Right> :vertical resize +5<CR>
 nnoremap <C-Left>  :vertical resize -5<CR>
 nnoremap <C-Up>   :resize +5<CR>
 nnoremap <C-Down> :resize -5<CR>
+tnoremap <C-Right> <C-\><C-n>:vertical resize +5<CR>
+tnoremap <C-Left>  <C-\><C-n>:vertical resize -5<CR>
+tnoremap <C-Up>    <C-\><C-n>:resize +5<CR>
+tnoremap <C-Down>  <C-\><C-n>:resize -5<CR>
+
+
+
+
 
 autocmd FileType c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'
 autocmd FileType sh,ruby,python,perl,org,php   let b:comment_leader = '#'
@@ -691,3 +699,4 @@ nnoremap cil ^c$
 execute "nnoremap gp i<c-r>".g:main_clipboard_buffer."<esc>k$Jx"
 execute "nnoremap <c-p> a<c-r>".g:main_clipboard_buffer."<esc>k$Jx"
 execute "inoremap <c-p> <c-r>".g:main_clipboard_buffer."<esc>k$Jxa"
+

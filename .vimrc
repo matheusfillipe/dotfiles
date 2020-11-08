@@ -150,6 +150,7 @@ Plug 'stanangeloff/php.vim'
 Plug 'lervag/vimtex'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
+Plug 'gu-fan/clickable.vim'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -187,6 +188,7 @@ inoremap <C-L> <C-\><C-O>w
 inoremap <C-J> <C-\><C-O>j
 inoremap <C-K> <C-\><C-O>k
 noremap  ZS :w
+noremap  ZA :qa<CR>
 inoremap <C-Z> :w
 
 " Spell Check
@@ -316,4 +318,5 @@ nnoremap cil ^c$
 nnoremap gp i<c-r>0<esc>k$Jx
 nnoremap <c-p> a<c-r>0<esc>k$Jx
 inoremap <c-p> <c-r>0<esc>k$Jxa
+nmap gx :!xdg-open <c-r><c-a><cr>
 
