@@ -419,6 +419,13 @@ nnoremap <A-6> 6gt
 nnoremap <A-7> 7gt
 nnoremap <A-8> 8gt
 nnoremap <A-9> 9gt
+if !exists('g:lasttab')
+  let g:lasttab = 1
+endif
+nmap <C-Tab> :exe "tabn ".g:lasttab<CR>
+imap <C-Tab> :exe "tabn ".g:lasttab<CR>
+tmap <C-Tab> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 
 inoremap <A-1> <Esc>1gt
 inoremap <A-2> <Esc>2gt
