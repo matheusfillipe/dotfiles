@@ -394,9 +394,14 @@ nnoremap tc :tabclose<CR>
 nnoremap <S-Tab> :tabp<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeGitStatusWithFlags = 1
+let g:NERDTreeChDirMode = 2
+let g:NERDTreeSortOrder = ['\/$', '*', '[[-timestamp]]']
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 set encoding=utf8
 set inccommand=split
+
+" Startify
+let g:startify_files_number = 40
 
 vmap < <gv
 vmap > >gv
@@ -670,9 +675,6 @@ tnoremap <C-Right> <C-\><C-n>:vertical resize +5<CR>
 tnoremap <C-Left>  <C-\><C-n>:vertical resize -5<CR>
 tnoremap <C-Up>    <C-\><C-n>:resize +5<CR>
 tnoremap <C-Down>  <C-\><C-n>:resize -5<CR>
-
-
-
 
 
 autocmd FileType c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'

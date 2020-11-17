@@ -21,7 +21,7 @@
   "solargraph.commandPath" :  "/home/matheus/.gem/ruby/2.7.0/bin/solargraph",
   "signature.preferShownAbove": false,
   "signature.target": "float",
-  "codeLens.enable": true,
+  //"codeLens.enable": true,
 
   "coc.preferences.formatOnSaveFiletypes": [
     "svg",    // coc-svg support svg format
