@@ -707,3 +707,4 @@ nnoremap <c-p> i<CR><Esc>PkJxJx
 inoremap <c-p> <C-\><C-n>pi
 nnoremap gP i<CR><Esc>PkJxJx
 nnoremap gp a<CR><Esc>PkJxJx
+command! -nargs=0 CopyPath :!ls %:p | xclip

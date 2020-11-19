@@ -373,14 +373,27 @@ export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 export PATH=$PATH:$HOME/.pub-cache/bin
 
 
-nvm() {
-  echo "🚨 NVM not loaded! Loading now..."
-  unset -f nvm
-  [ -d /usr/share/nvm ] && source /usr/share/nvm/init-nvm.sh; nvm $@ || echo "You don't have nvm installed on /usr/share/nvm"
-}
+if ! type "nvm" > /dev/null; then
+  nvm() {
+    echo "🚨 NVM not loaded! Loading now..."
+    unset -f nvm
+    [ -d /usr/share/nvm ] && source /usr/share/nvm/init-nvm.sh; nvm $@ || echo "You don't have nvm installed on /usr/share/nvm"
+  }
+fi
+
+if ! type "npm" > /dev/null; then
+  npm() {
+    echo "🚨 NVM not loaded! Loading now..."
+    unset -f npm
+    source /usr/share/nvm/init-nvm.sh
+    [ -d /usr/share/nvm ] && source /usr/share/nvm/init-nvm.sh; npm $@ || echo "You don't have nvm installed on /usr/share/nvm"
+  }
+fi
+
 autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done
 compinit -C
+
 #zprof # bottom of .zshrc
