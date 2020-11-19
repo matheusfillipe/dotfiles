@@ -1,6 +1,3 @@
-" You might want to change this to 1
-let g:main_clipboard_buffer=0
-
 autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
 autocmd VimLeave * silent exec "! echo -ne '\e[5 q'" 
 " Don't try to be vi compatible
@@ -428,8 +425,8 @@ if !exists('g:lasttab')
   let g:lasttab = 1
 endif
 nmap <C-Tab> :exe "tabn ".g:lasttab<CR>
-imap <C-Tab> :exe "tabn ".g:lasttab<CR>
-tmap <C-Tab> :exe "tabn ".g:lasttab<CR>
+imap <C-Tab> <C-\><C-n>:exe "tabn ".g:lasttab<CR>
+tmap <C-Tab> <C-\><C-n>:exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 inoremap <A-1> <Esc>1gt
@@ -511,8 +508,6 @@ if has('nvim')
   vnoremap <nowait><expr> <A-j> coc#float#has_scroll() ? coc#float#nvim_scroll(1, 1) : "\<C-f>"
   vnoremap <nowait><expr> <A-k> coc#float#has_scroll() ? coc#float#nvim_scroll(0, 1) : "\<C-b>"
 endif
-let g:coc_snippet_next = '<c-l>'
-let g:coc_snippet_prev = '<c-h>'
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -537,9 +532,11 @@ imap <M-L> <Plug>(coc-snippets-expand)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
 
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
+" let g:coc_snippet_next = '<Tab>'
+" let g:coc_snippet_prev = '<S-Tab>'
 
+let g:coc_snippet_next = '<c-l>'
+let g:coc_snippet_prev = '<c-h>'
 
 nnoremap <leader>E :CocDiagnostics<CR>
 
@@ -705,7 +702,8 @@ inoremap ;; <C-o>A;
 nnoremap dil ^d$
 nnoremap vil ^v$
 nnoremap cil ^c$
-execute "nnoremap gp i<c-r>".g:main_clipboard_buffer."<esc>k$Jx"
-execute "nnoremap <c-p> a<c-r>".g:main_clipboard_buffer."<esc>k$Jx"
-execute "inoremap <c-p> <c-r>".g:main_clipboard_buffer."<esc>k$Jxa"
 
+nnoremap <c-p> i<CR><Esc>PkJxJx
+inoremap <c-p> <C-\><C-n>pi
+nnoremap gP i<CR><Esc>PkJxJx
+nnoremap gp a<CR><Esc>PkJxJx

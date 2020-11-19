@@ -1,5 +1,6 @@
+#zmodload zsh/zprof 
+
 # If you come from bash you might have to change your $PATH.
-# u
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/home/matheus/.cargo/bin:$PATH
 
@@ -371,4 +372,15 @@ unset __conda_setup
 export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 export PATH=$PATH:$HOME/.pub-cache/bin
 
-[ -d /usr/share/nvm ] && source /usr/share/nvm/init-nvm.sh
+
+nvm() {
+  echo "🚨 NVM not loaded! Loading now..."
+  unset -f nvm
+  [ -d /usr/share/nvm ] && source /usr/share/nvm/init-nvm.sh; nvm $@ || echo "You don't have nvm installed on /usr/share/nvm"
+}
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
+#zprof # bottom of .zshrc

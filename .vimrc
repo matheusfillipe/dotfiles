@@ -315,8 +315,9 @@ nmap \; :call CommentToggle()<CR>
 nnoremap dil ^d$
 nnoremap vil ^v$
 nnoremap cil ^c$
-nnoremap gp i<c-r>0<esc>k$Jx
-nnoremap <c-p> a<c-r>0<esc>k$Jx
-inoremap <c-p> <c-r>0<esc>k$Jxa
 nmap gx :!xdg-open <c-r><c-a><cr>
 
+nnoremap <c-p> i<CR><Esc>PkJxJx
+inoremap <c-p> <CR><Esc>pi
+nnoremap gP i<CR><Esc>PkJxJx
+nnoremap gp a<CR><Esc>PkJxJx
