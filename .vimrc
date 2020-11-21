@@ -317,7 +317,7 @@ nnoremap vil ^v$
 nnoremap cil ^c$
 nmap gx :!xdg-open <c-r><c-a><cr>
 
-nnoremap <c-p> i<CR><Esc>PkJxJx
-inoremap <c-p> <CR><Esc>pi
-nnoremap gP i<CR><Esc>PkJxJx
-nnoremap gp a<CR><Esc>PkJxJx
+" nnoremap <c-p> i<CR><Esc>PkJxJx
+" inoremap <c-p> <CR><Esc>pi
+" nnoremap gP i<CR><Esc>PkJxJx
+" nnoremap gp a<CR><Esc>PkJxJx
