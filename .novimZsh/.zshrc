@@ -364,5 +364,12 @@ autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done
+if [[ ! -d ~/.zsh-autopair ]]; then
+  git clone https://github.com/hlissner/zsh-autopair ~/.zsh-autopair
+fi
+
+source ~/.zsh-autopair/autopair.zsh
+autopair-init
+
 compinit -C
 #zprof # bottom of .zshrc
