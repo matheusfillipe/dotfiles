@@ -176,7 +176,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rust-lang/rust.vim'
 Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
@@ -188,8 +188,9 @@ Plug 'jceb/vim-orgmode'
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
-Plug 'preservim/tagbar'
+Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 Plug 'eliba2/vim-node-inspect'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -218,6 +219,20 @@ else
   command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 end
 "let g:powerline_pycmd="py3"
+
+" vim=visual-multi
+let g:VM_default_mappings = 0
+let g:VM_mouse_mappings = 1
+let g:VM_maps = {}
+let g:VM_maps["Undo"] = 'u'
+let g:VM_maps["Redo"] = '<C-r>'
+let g:VM_maps['Find Under']                  = '<C-n>'
+let g:VM_maps['Find Subword Under']          = '<C-n>'
+let g:VM_maps["Select All"]                  = '\\A' 
+let g:VM_maps["Add Cursor Down"]             = '<M-Down>'
+let g:VM_maps["Add Cursor Up"]               = '<M-Up>'
+let g:VM_maps["Mouse Cursor"]                = '<M-LeftMouse>'
+let g:VM_maps["Switch Mode"]                 = '<Tab>'
 
 inoremap <c-Left> <C-\><C-O>b
 inoremap <c-Right> <C-\><C-O>w
@@ -549,6 +564,8 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 let g:tagbar_type_dart = { 'ctagsbin': '~/.pub-cache/bin/dart_ctags' }
 
+
+
 " Autocomplete
 "
 " use <tab> for trigger completion and navigate to the next complete item
@@ -664,17 +681,17 @@ cnoremap <C-j> <Down>
 cnoremap <M-BS> <C-w>
 nnoremap <BS> :cd ..<cr>
 nnoremap <M-BS> :cd -<cr>
-nnoremap <C-Right> :vertical resize +5<CR>
-nnoremap <C-Left>  :vertical resize -5<CR>
-nnoremap <C-Up>   :resize +5<CR>
-nnoremap <C-Down> :resize -5<CR>
-tnoremap <C-Right> <C-\><C-n>:vertical resize +5<CR>
-tnoremap <C-Left>  <C-\><C-n>:vertical resize -5<CR>
-tnoremap <C-Up>    <C-\><C-n>:resize +5<CR>
-tnoremap <C-Down>  <C-\><C-n>:resize -5<CR>
+autocmd BufEnter * nnoremap <C-Right> :vertical resize +5<CR>
+autocmd BufEnter * nnoremap <C-Left>  :vertical resize -5<CR>
+autocmd BufEnter * nnoremap <C-Up>   :resize +5<CR>
+autocmd BufEnter * nnoremap <C-Down> :resize -5<CR>
+autocmd BufEnter * tnoremap <C-Right> <C-\><C-n>:vertical resize +5<CR>
+autocmd BufEnter * tnoremap <C-Left>  <C-\><C-n>:vertical resize -5<CR>
+autocmd BufEnter * tnoremap <C-Up>    <C-\><C-n>:resize +5<CR>
+autocmd BufEnter * tnoremap <C-Down>  <C-\><C-n>:resize -5<CR>
 
 
-autocmd FileType c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'
+autocmd FileType arduino,c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'
 autocmd FileType sh,ruby,python,perl,org,php   let b:comment_leader = '#'
 autocmd FileType conf,fstab       let b:comment_leader = '#'
 autocmd FileType tex              let b:comment_leader = '%'
@@ -708,3 +725,15 @@ inoremap <c-p> <C-\><C-n>pi
 nnoremap gP i<CR><Esc>PkJxJx
 nnoremap gp a<CR><Esc>PkJxJx
 command! -nargs=0 CopyPath :!ls %:p | xclip
+command! -nargs=0 CX :silent ! chmod +x %
+
+function! Scratch(cmd)
+    execute "'<,'>y"
+    split
+    noswapfile hide enew
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    file scratch
+    execute "p"
+    " execute a:cmd
+endfunction

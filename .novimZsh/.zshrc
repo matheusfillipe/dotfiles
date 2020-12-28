@@ -286,7 +286,7 @@ alias findf="find . -type f -name "
 alias lw="awk '{print \$NF}'"
 alias fw="awk '{print \$1}'"
 alias arec="parec -d 0 | lame -r -V0 - "
-alias gitclone='git clone $(xclip -o | lw)'
+alias gitclone='git clone $(xclip -o | lw) --depth=1'
 
 function gw {
   awk -v wc="$1" '{print $wc}'
@@ -368,8 +368,26 @@ if [[ ! -d ~/.zsh-autopair ]]; then
   git clone https://github.com/hlissner/zsh-autopair ~/.zsh-autopair
 fi
 
+# >>> conda initialize >>>
+function condainit(){
+#
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda/etc/profile.d/conda.sh" ]; then
+# . "/opt/anaconda/etc/profile.d/conda.sh"  # commented out by conda initialize
+    else
+# export PATH="/opt/anaconda/bin:$PATH"  # commented out by conda initialize
+    fi
+fi
+unset __conda_setup
+}
 source ~/.zsh-autopair/autopair.zsh
 autopair-init
 
 compinit -C
 #zprof # bottom of .zshrc
+#
+#
