@@ -191,10 +191,25 @@ Plug 'joshdick/onedark.vim'
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 Plug 'eliba2/vim-node-inspect'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug '907th/vim-auto-save'
+Plug 'mcchrish/nnn.vim'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
+
+" Autosave
+let g:auto_save = 1 
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
+
+" insert mode on terminal
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
+
+" shorts
+" Save on Ctrl-S
+nmap <c-s> :w<CR>
+imap <c-s> <Esc>:w<CR>a
 
 set guioptions+=a
 set clipboard=unnamedplus
@@ -474,7 +489,8 @@ cnoremap <C-L> <C-Right>
 cnoremap <C-H> <C-Left>
 cnoremap <C-f> q:
 autocmd BufEnter * silent! lcd %:p:h
-let g:tagbar_sort=0
+
+
 set cedit=
 nmap <silent> <leader>i :call CocActionAsync('doHover') <cr>
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -557,14 +573,17 @@ nnoremap <leader>E :CocDiagnostics<CR>
 
 set formatoptions=cqrn1
 nnoremap <leader>F :set formatoptions=cqrn1<CR>
+nnoremap <leader>T :set ft=
 
 " Flutter
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
+
+" Tagbar
 let g:tagbar_type_dart = { 'ctagsbin': '~/.pub-cache/bin/dart_ctags' }
-
-
+let g:tagbar_sort=0
+let g:tagbar_ignore_anonymous = 1
 
 " Autocomplete
 "
@@ -714,6 +733,7 @@ xmap <leader>; :call ColonToggle()<CR>
 vmap <leader>; :call ColonToggle()<CR>
 
 inoremap ;; <C-o>A;
+autocmd FileType python inoremap <silent>:: <C-o>A:
 
 " Clipboard
 nnoremap dil ^d$
