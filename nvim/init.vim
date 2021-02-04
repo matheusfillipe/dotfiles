@@ -182,8 +182,7 @@ Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'jceb/vim-orgmode'
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
 Plug 'sheerun/vim-polyglot'
@@ -193,6 +192,7 @@ Plug 'eliba2/vim-node-inspect'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug '907th/vim-auto-save'
 Plug 'mcchrish/nnn.vim'
+Plug 'metakirby5/codi.vim'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
