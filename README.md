@@ -10,12 +10,6 @@ Please backup your files! This will overwrite them.
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/install.sh)"
 ```
 
-Don't do this!
-
-```
-cd ~; git clone https://github.com/matheusfillipe/dotfiles.git dotfiles --depth 1; cp -rf dotfiles/* ~/; cp -rf dotfiles/.* ~/; rm -rf dotfiles/; rm -rf .git
-```
-
 ## Update 
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/update.sh)"
