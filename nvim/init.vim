@@ -183,7 +183,7 @@ Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
 Plug 'jceb/vim-orgmode'
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
 Plug 'sheerun/vim-polyglot'
@@ -322,7 +322,7 @@ nnoremap <leader>s :set syntax=
 nnoremap <A-f> :FloatermNew lf<CR>
 nnoremap <A-S-h> :FloatermHide<CR>
 tnoremap <A-S-h> <C-\><C-N>:FloatermHide<CR>
-nnoremap <A-d> :FloatermNew --wintype='normal' --position='bottom' --height=0.25 
+nnoremap <A-d> :FloatermNew --wintype=split --position=belowright --height=0.25 
 vnoremap <A-s> :'<,'>FloatermSend<CR>
 
 let g:floaterm_keymap_new    = '<A-t>'
