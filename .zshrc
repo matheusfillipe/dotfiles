@@ -309,6 +309,7 @@ export SDKMAN_DIR="/home/matheus/.sdkman"
 
 
 alias pacman="sudo pacman"
+alias apt="sudo apt"
 alias finds="grep -rn '.' -e "
 alias findd="find . -type d -name "
 alias findf="find . -type f -name "
