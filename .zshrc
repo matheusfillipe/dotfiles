@@ -256,6 +256,10 @@ alias la='ls -A'
 alias l='ls -CF'
 alias cx='chmod +x'
 alias hotreload="ag -l | entr -r "
+alias moshclean="who | grep -v 'via mosh' | grep -oP '(?<=mosh \[)(\d+)(?=\])' | xargs kill"
+alias sus="systemctl --user"
+alias s="sudo systemctl"
+
 export EDITOR='vim'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
