@@ -253,6 +253,8 @@ bindkey '^r' history-incremental-search-backward
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias sus="systemctl --user"
+alias s="sudo systemctl"
 export EDITOR='vim'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

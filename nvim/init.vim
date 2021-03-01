@@ -249,6 +249,7 @@ let g:VM_maps["Add Cursor Down"]             = '<M-Down>'
 let g:VM_maps["Add Cursor Up"]               = '<M-Up>'
 let g:VM_maps["Mouse Cursor"]                = '<M-LeftMouse>'
 let g:VM_maps["Switch Mode"]                 = '<Tab>'
+let g:VM_custom_remaps = {'<c-p>': '[', '<c-s>': 'q'}
 
 inoremap <c-Left> <C-\><C-O>b
 inoremap <c-Right> <C-\><C-O>w

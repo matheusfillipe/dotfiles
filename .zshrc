@@ -378,7 +378,7 @@ export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 export PATH=$PATH:$HOME/.pub-cache/bin
 
 
-if [[ ! -e /usr/share/nvm ]]
+if [[ -e /usr/share/nvm ]]
 then
   if ! type "nvm" > /dev/null; then
     nvm() {
