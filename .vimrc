@@ -155,6 +155,9 @@ call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
+"
+
+let g:pear_tree_repeatable_expand=0
 
 colorscheme space-vim-dark
 hi Comment guifg=#5C6370 ctermfg=59
@@ -321,3 +324,6 @@ nmap gx :!xdg-open <c-r><c-a><cr>
 " inoremap <c-p> <CR><Esc>pi
 " nnoremap gP i<CR><Esc>PkJxJx
 " nnoremap gp a<CR><Esc>PkJxJx
+
+
+
