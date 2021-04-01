@@ -343,6 +343,7 @@ nnoremap <C-M-l> <C-w>l
 
 "nnoremap <Tab> :bn<CR>
 noremap ZW :bd<CR>
+nnoremap <space>n :call vm#commands#ctrln(1)<CR>
 
 nnoremap <leader>pt :set dictionary+=/usr/share/dict/pt_BR.dic<CR>
 nnoremap <leader>en :set dictionary+=/usr/share/dict/american-english <CR>
@@ -761,4 +762,3 @@ function! Scratch(cmd)
 endfunction
 
 let g:pear_tree_repeatable_expand=0
-
