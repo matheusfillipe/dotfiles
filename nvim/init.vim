@@ -1,3 +1,16 @@
+" function! SendClipBoard()
+"   execute("silent redir! > /tmp/mattf_lcopy_nvim")
+"   execute("silent echo @0")
+"   execute("silent redir END")
+"   execute("silent !lcopy /tmp/mattf_lcopy_nvim")
+" endfunction
+" 
+" augroup custom_clipboard
+"   au!
+"   au TextYankPost * :call SendClipBoard()
+" augroup END
+set clipboard=unnamedplus
+
 autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
 autocmd VimLeave * silent exec "! echo -ne '\e[5 q'" 
 " Don't try to be vi compatible
@@ -213,7 +226,6 @@ nmap <c-s> :w<CR>
 imap <c-s> <Esc>:w<CR>a
 
 set guioptions+=a
-set clipboard=unnamedplus
 set complete+=kspell
 set completeopt=menuone,longest
 set shortmess+=c
@@ -693,7 +705,7 @@ inoremap <C-BS> <Esc>vbc
 inoremap <M-b> <Esc>bi
 inoremap <M-w> <Esc>wi
 inoremap <C-S> <Esc>:w<CR>a
-nnoremap <C-S> :w<CR>
+nnoremap <C-S> :W<CR>
 inoremap <M-BS> <Esc>vbxa
 inoremap <M-d> <Esc>vexi
 cnoremap <C-a> <Home>
