@@ -47,6 +47,7 @@ mkdir -p ~/.cache/zsh/
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/matheusfillipe/My-Terminal-Setup/master/update.sh)"
 echo "Allowing mosh"
 sudo ufw allow 60000:61000/udp
+npm -g install diagnostic-languageserver
 chsh -s $(which zsh)
 zsh
 
