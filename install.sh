@@ -9,6 +9,7 @@ then
   cp ~/.config/vifm/vifmrc vifm/
   cp ~/.novimZsh/ .
   cp ~/.novimZsh/.zshrc .novimZsh/
+  cp ~/.pylintrc .pylintrc
   git add .; git commit -m "$2"; git push origin master;
   exit 0
 fi
@@ -16,8 +17,8 @@ fi
 if command -v apt &> /dev/null 
 then
   sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat silversearcher-ag powerline zsh tar
-mkdir -p ~/.local/bin
-ln -s /usr/bin/batcat ~/.local/bin/bat
+  mkdir -p ~/.local/bin
+  ln -s /usr/bin/batcat ~/.local/bin/bat
 fi
 
 mkdir -p ~/bin
@@ -27,7 +28,7 @@ tar -xvzf fzf-0.24.1-linux_amd64.tar.gz
 rm fzf-0.24.1-linux_amd64.tar.gz
 cd ~/
 
-pip3 install pdbpp
+pip3 install pdbpp numpy pylint docformatter
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

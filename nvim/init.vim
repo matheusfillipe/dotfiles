@@ -207,6 +207,7 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug '907th/vim-auto-save'
 Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
+Plug 'godlygeek/tabular'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
