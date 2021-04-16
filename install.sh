@@ -7,7 +7,7 @@ then
   cp ~/.config/nvim/init.vim nvim/
   cp ~/.config/nvim/coc-settings.json nvim/
   cp ~/.config/vifm/vifmrc vifm/
-  cp ~/.novimZsh/ .
+  cp -r ~/.novimZsh/ .
   cp ~/.novimZsh/.zshrc .novimZsh/
   cp ~/.pylintrc .pylintrc
   git add .; git commit -m "$2"; git push origin master;
