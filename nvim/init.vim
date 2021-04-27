@@ -208,10 +208,16 @@ Plug '907th/vim-auto-save'
 Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
+"
+
+" pydocstring
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
+nmap <silent> <C-_> <Plug>(pydocstring)
 
 " Autosave
 let g:auto_save = 1 

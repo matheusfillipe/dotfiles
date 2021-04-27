@@ -55,12 +55,20 @@
     }
   },
   "diagnostic-languageserver.filetypes": {
-    "python": "pylint"
+    "python": "pylint",
+    "vim": "vint",
+    "email": "languagetool",
+    "markdown": [ "write-good", "markdownlint" ],
+    "sh": "shellcheck",
+    "elixir": ["mix_credo", "mix_credo_compile"],
+    "eelixir": ["mix_credo", "mix_credo_compile"],
+    "php": ["phpstan", "psalm"]
   },
   "diagnostic-languageserver.linters": {
     "pylint": {
       "sourceName": "pylint",
       "command": "pylint",
+      "debounce": 100,
       "args": [
         "--output-format",
         "text",
@@ -93,7 +101,13 @@
     }
   },
   "diagnostic-languageserver.formatFiletypes": {
-    "python": ["black", "isort", "docformatter"]
+    "python": ["black", "isort", "docformatter"],
+    "dart": "dartfmt",
+    "elixir": "mix_format",
+    "eelixir": "mix_format",
+    "lua": "lua-format",
+    "sh": "shfmt",
+    "blade": "blade-formatter"
   },
   "diagnostic-languageserver.formatters": {
     "black": {
