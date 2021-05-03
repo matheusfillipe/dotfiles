@@ -16,3 +16,4 @@ nvim +"CocInstall coc-jedi" +qall +silent
 nvim +"CocInstall coc-snippets" +qall +silent
 nvim --headless -u init.vim +UpdateRemotePlugins +qa
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+pip install -U jedi-language-server flake8
