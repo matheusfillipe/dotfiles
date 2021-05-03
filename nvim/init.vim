@@ -214,7 +214,16 @@ call plug#end()
 "    PlugInstall
 "endif
 "
-
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-tsserver',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-jedi',
+  \ 'coc-json',
+  \ 'coc-phpls',
+  \ 'coc-perl',
+\ ]
 " pydocstring
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
 nmap <silent> <C-_> <Plug>(pydocstring)
@@ -280,6 +289,7 @@ inoremap <C-K> <C-\><C-O>k
 noremap  ZS :w
 noremap  ZA :qa<CR>
 inoremap <C-Z> :w
+
 
 " Spell Check
 let g:myLang=0
@@ -781,3 +791,4 @@ function! Scratch(cmd)
 endfunction
 
 let g:pear_tree_repeatable_expand=0
+
