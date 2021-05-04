@@ -353,6 +353,7 @@ nnoremap <A-f> :FloatermNew lf<CR>
 nnoremap <A-S-h> :FloatermHide<CR>
 tnoremap <A-S-h> <C-\><C-N>:FloatermHide<CR>
 nnoremap <A-d> :FloatermNew --wintype=split --position=belowright --height=0.25 
+nnoremap <A-e> :FloatermNew --wintype=vsplit --position=belowright --width=0.4 
 vnoremap <A-s> :'<,'>FloatermSend<CR>
 
 let g:floaterm_keymap_new    = '<A-t>'
