@@ -5,6 +5,7 @@ then
   cp ~/.zshrc .
   cp ~/.tmux.conf .
   cp ~/.config/nvim/init.vim nvim/
+  cp ~/.config/nvim/ginit.vim nvim/
   cp ~/.config/nvim/coc-settings.json nvim/
   cp ~/.config/vifm/vifmrc vifm/
   cp -r ~/.novimZsh/ .

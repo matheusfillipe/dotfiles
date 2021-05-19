@@ -61,8 +61,8 @@ set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
 " Move up/down editor lines
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
 " shebang bash
 let @b='ggO#!/bin/bash'
@@ -190,7 +190,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dart-lang/dart-vim-plugin'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim'
 Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
@@ -231,6 +231,13 @@ nmap <silent> <C-_> <Plug>(pydocstring)
 " Autosave
 let g:auto_save = 1 
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
+let g:auto_save_presave_hook = 'call AbortIfNotLang()'
+let g:not_autosave = ["rust"]
+function! AbortIfNotLang()
+  if index(g:not_autosave, &filetype) >= 0
+    let g:auto_save_abort = 1
+  endif
+endfunction
 
 " insert mode on terminal
 autocmd BufWinEnter,WinEnter term://* startinsert
@@ -251,6 +258,8 @@ set mouse=a
 set pastetoggle=<F3>
 function! Sudosave()
   nmap ZS :call Sudosave()<CR>
+  inoremap <C-S> <Esc>:call Sudosave()<CR>a
+  nnoremap <C-S> :call Sudosave()<CR>
   " One of these two should work
   execute ':silent w !sudo -n tee % > /dev/null || echo "Press <leader>w to authenticate and try again"'
  " execute "SudaWrite"       
@@ -325,6 +334,35 @@ let g:camelcasemotion_key = '<leader>'
 " sunmap ge
 let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
+
+
+" Font shortcuts
+if has('nvim')
+  let s:fontsize = 14
+  function! AdjustFontSize(amount)
+    let s:fontsize = s:fontsize+a:amount
+    :execute "GuiFont SauceCodePro\ Nerd\ Font:h" . s:fontsize
+    call rpcnotify(0, 'Gui', 'WindowMaximized', 1)
+  endfunction
+
+  noremap <C-ScrollWheelUp> :call AdjustFontSize(1)<CR>
+  noremap <C-ScrollWheelDown> :call AdjustFontSize(-1)<CR>
+  inoremap <C-ScrollWheelUp> <Esc>:call AdjustFontSize(1)<CR>a
+  inoremap <C-ScrollWheelDown> <Esc>:call AdjustFontSize(-1)<CR>a
+
+  noremap <M-=> :call AdjustFontSize(1)<CR>
+  noremap <M--> :call AdjustFontSize(-1)<CR>
+  inoremap <M-=> :call AdjustFontSize(1)<CR>
+  inoremap <M--> :call AdjustFontSize(-1)<CR>
+
+  noremap  <C-=> :call AdjustFontSize(1)<CR>
+  noremap  <C--> :call AdjustFontSize(-1)<CR>
+  inoremap <C-=> :call AdjustFontSize(1)<CR>
+  inoremap <C--> :call AdjustFontSize(-1)<CR>
+else
+  set  guifont=SauceCodePro\ Nerd\ Font:h14
+endif
+
 set  guifont=SauceCodePro\ Nerd\ Font:h14
 set background=light
 highlight Normal ctermbg=none
@@ -649,8 +687,6 @@ hi Normal     ctermbg=NONE
 "hi SignColumn ctermbg=NONE guibg=NONE
 nnoremap <A-s> :Ag<CR>
 
-autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
-
 " Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -723,7 +759,7 @@ inoremap <C-BS> <Esc>vbc
 inoremap <M-b> <Esc>bi
 inoremap <M-w> <Esc>wi
 inoremap <C-S> <Esc>:w<CR>a
-nnoremap <C-S> :W<CR>
+nnoremap <C-S> :w<CR>
 inoremap <M-BS> <Esc>vbxa
 inoremap <M-d> <Esc>vexi
 cnoremap <C-a> <Home>
@@ -766,7 +802,6 @@ xmap <leader>; :call ColonToggle()<CR>
 vmap <leader>; :call ColonToggle()<CR>
 
 inoremap ;; <C-o>A;
-autocmd FileType python inoremap <silent>:: <C-o>A:
 
 " Clipboard
 nnoremap dil ^d$
@@ -792,4 +827,3 @@ function! Scratch(cmd)
 endfunction
 
 let g:pear_tree_repeatable_expand=0
-
