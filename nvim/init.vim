@@ -11,6 +11,11 @@
 " augroup END
 set clipboard=unnamedplus
 
+let $ZDOTDIR = $HOME
+if $NOVIMZSH
+  let $ZDOTDIR = $HOME."/.novimZsh"
+endif
+
 autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
 autocmd VimLeave * silent exec "! echo -ne '\e[5 q'" 
 " Don't try to be vi compatible
@@ -107,6 +112,19 @@ function! OnUIEnter(event) abort
     nnoremap <space> :set lines=28 columns=110 <CR>
     nnoremap <leader-e> :setlocal spell spelllang=en_us <CR>
     nnoremap <leader-p> :setlocal spell spelllang=pt_br <CR>
+    set guifont=SauceCodePro\ Nerd\ Font:h16
+    let s:fontsize = 16
+    function! AdjustFontSizeF(amount)
+      let s:fontsize = s:fontsize+a:amount
+      execute "set guifont=SauceCodePro\\ Nerd\\ Font:h" . s:fontsize
+      call rpcnotify(0, 'Gui', 'WindowMaximized', 1)
+    endfunction
+
+    noremap  <C-=> :call AdjustFontSizeF(1)<CR>
+    noremap  <C--> :call AdjustFontSizeF(-1)<CR>
+    inoremap <C-=> <C-o>:call AdjustFontSizeF(1)<CR>
+    inoremap <C--> <C-o>:call AdjustFontSizeF(-1)<CR>
+
 endif
 endfunction
 autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
@@ -352,18 +370,16 @@ if has('nvim')
 
   noremap <M-=> :call AdjustFontSize(1)<CR>
   noremap <M--> :call AdjustFontSize(-1)<CR>
-  inoremap <M-=> :call AdjustFontSize(1)<CR>
-  inoremap <M--> :call AdjustFontSize(-1)<CR>
+  inoremap <M-=> <C-o>:call AdjustFontSize(1)<CR>
+  inoremap <M--> <C-o>:call AdjustFontSize(-1)<CR>
 
   noremap  <C-=> :call AdjustFontSize(1)<CR>
   noremap  <C--> :call AdjustFontSize(-1)<CR>
-  inoremap <C-=> :call AdjustFontSize(1)<CR>
-  inoremap <C--> :call AdjustFontSize(-1)<CR>
-else
-  set  guifont=SauceCodePro\ Nerd\ Font:h14
+  inoremap <C-=> <C-o>:call AdjustFontSize(1)<CR>
+  inoremap <C--> <C-o>:call AdjustFontSize(-1)<CR>
 endif
 
-set  guifont=SauceCodePro\ Nerd\ Font:h14
+set guifont=SauceCodePro\ Nerd\ Font:h14
 set background=light
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none

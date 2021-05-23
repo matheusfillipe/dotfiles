@@ -1,6 +1,9 @@
 #zmodload zsh/zprof 
 # If you come from bash you might have to change your $PATH.
 # u
+
+export NOVIMZSH=1
+
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/home/matheus/.cargo/bin:$PATH
 
@@ -391,5 +394,3 @@ autopair-init
 
 compinit -C
 #zprof # bottom of .zshrc
-#
-#

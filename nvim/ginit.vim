@@ -42,5 +42,5 @@ augroup dirchange
     autocmd DirChanged * let &titlestring=v:event['cwd']
 augroup END
 
-
+let $ZDOTDIR = $HOME
 autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
