@@ -339,11 +339,6 @@ res () {
   cat /tmp/catch.out 
 }
 
-if [ -d /opt/asdf-vm/ ]
-then
-  . /opt/asdf-vm/asdf.sh
-  . /opt/asdf-vm/completions/_asdf
-fi
 
 
 bindkey -s '^O' 'lfcd

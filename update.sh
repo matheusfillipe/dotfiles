@@ -3,6 +3,7 @@ curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/.vimrc -o 
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/.zshrc -o ~/.zshrc
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/.tmux.conf -o ~/.tmux.conf
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/nvim/init.vim -o ~/.config/nvim/init.vim
+curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/nvim/ginit.vim -o ~/.config/nvim/ginit.vim
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/nvim/coc-settings.json -o ~/.config/nvim/coc-settings.json
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/vifm/vifmrc -o ~/.config/vifm/vifmrc
 

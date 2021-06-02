@@ -238,6 +238,7 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-css',
   \ 'coc-jedi',
+  \ 'coc-diagnostic',
   \ 'coc-json',
   \ 'coc-phpls',
   \ 'coc-perl',

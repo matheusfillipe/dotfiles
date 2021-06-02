@@ -344,11 +344,9 @@ res () {
   cat /tmp/catch.out 
 }
 
-. /opt/asdf-vm/asdf.sh
 
 
 
-source /home/matheus/.config/broot/launcher/bash/br
 bindkey '^[^N' vi-cmd-mode
 
 export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
