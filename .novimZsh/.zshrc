@@ -76,7 +76,7 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
 
-export PER_DIRECTORY_HISTORY_TOGGLE='^ '
+export PER_DIRECTORY_HISTORY_TOGGLE='^\'
 plugins=(
     archlinux
     git
@@ -312,7 +312,7 @@ export socks_proxy=''
 
 PATH=/home/matheus/programs/simFlow/simFlow-3.1:${PATH};export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 8F1FFBF3-4166-531F-536F-118E03C20EE2 588C0655-079F-B357-8FA5-5CEF1F102B8D
 
-export ANDROID_HOME="/home/matheus/BACKUP/programs/android-sdk-linux/"
+export ANDROID_HOME="/home/matheus/Programs/android-sdk"
 export NVPACK_ROOT="/media/matheus/Elements SE/CodeWorksforAndroid"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/matheus/.sdkman"
@@ -392,3 +392,10 @@ autopair-init
 
 compinit -C
 #zprof # bottom of .zshrc
+#
+export QT_QPA_PLATFORMTHEME='gnome'
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_QPA_PLATFORM_PLUGIN_PATH=
+export PATH=/home/matheus/.gem/ruby/3.0.0/bin:$PATH
+export PATH=/home/matheus/.local/bin:$PATH
+[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"

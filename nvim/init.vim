@@ -176,6 +176,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 "TERM_FANCY_CURSOR  = 'true'
 set nocompatible
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
+
+let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
 call plug#begin()
 Plug 'honza/vim-snippets'
 Plug 'tell-k/vim-autopep8'
@@ -184,7 +186,7 @@ Plug 'liuchengxu/space-vim-dark'
 Plug 'Yggdroot/indentLine'    
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
-Plug 'maxbrunsfeld/vim-emacs-bindings'
+" Plug 'maxbrunsfeld/vim-emacs-bindings'
 Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -227,11 +229,33 @@ Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'chrisbra/Colorizer'
+Plug 'SidOfc/mkdx'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
 "
+let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
+                        \ 'enter': { 'shift': 1 },
+                        \ 'links': { 'external': { 'enable': 1 } },
+                        \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+                        \ 'fold': { 'enable': 1 },
+                        \ 'map': { 'prefix': '<space>' }}
+
+" :h mkdx-setting-toc-details-child-summary
+" let g:mkdx#settings = { 'toc': { 'details': { 'child_summary': 'show {{count}} items' } } }
+" 
+nnoremap <buffer><silent> <space>~ i~~~<Enter>~~~ko
+nnoremap <buffer><silent> <space>` i```<Enter>```ko
+
+function! MarkdownOpen()
+  execute ":!okular ".expand('%:p')." &"
+endfunction
+command! Mdopen :call MarkdownOpen()
+nnoremap <space><space> :Mdopen<CR>
+
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-tsserver',
@@ -357,7 +381,7 @@ let g:airline_powerline_fonts = 1
 
 " Font shortcuts
 if has('nvim')
-  let s:fontsize = 14
+  let s:fontsize = 15
   function! AdjustFontSize(amount)
     let s:fontsize = s:fontsize+a:amount
     :execute "GuiFont SauceCodePro\ Nerd\ Font:h" . s:fontsize
@@ -380,7 +404,7 @@ if has('nvim')
   inoremap <C--> <C-o>:call AdjustFontSize(-1)<CR>
 endif
 
-set guifont=SauceCodePro\ Nerd\ Font:h14
+set guifont=SauceCodePro\ Nerd\ Font:h15
 set background=light
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
@@ -407,6 +431,8 @@ nnoremap <leader>s :set syntax=
 nnoremap <A-f> :FloatermNew lf<CR>
 nnoremap <A-S-h> :FloatermHide<CR>
 tnoremap <A-S-h> <C-\><C-N>:FloatermHide<CR>
+nnoremap <A-m> :FloatermHide<CR>
+tnoremap <A-m> <C-\><C-N>:FloatermHide<CR>
 nnoremap <A-d> :FloatermNew --wintype=split --position=belowright --height=0.25 
 nnoremap <A-e> :FloatermNew --wintype=vsplit --position=belowright --width=0.4 
 vnoremap <A-s> :'<,'>FloatermSend<CR>
@@ -516,7 +542,7 @@ set encoding=utf8
 set inccommand=split
 
 " Startify
-let g:startify_files_number = 40
+let g:startify_files_number = 1000
 
 vmap < <gv
 vmap > >gv
@@ -703,6 +729,7 @@ hi Normal     ctermbg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
 "hi SignColumn ctermbg=NONE guibg=NONE
 nnoremap <A-s> :Ag<CR>
+nnoremap <A-S-s> :Rg<CR>
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -778,6 +805,8 @@ inoremap <M-w> <Esc>wi
 inoremap <C-S> <Esc>:w<CR>a
 nnoremap <C-S> :w<CR>
 inoremap <M-BS> <Esc>vbxa
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
 inoremap <M-d> <Esc>vexi
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
@@ -825,7 +854,7 @@ nnoremap dil ^d$
 nnoremap vil ^v$
 nnoremap cil ^c$
 
-nnoremap <c-p> i<CR><Esc>PkJxJx
+nnoremap <c-p> a<c-r>0<esc>k$Jxi
 inoremap <c-p> <C-\><C-n>pi
 nnoremap gP i<CR><Esc>PkJxJx
 nnoremap gp a<CR><Esc>PkJxJx
@@ -844,3 +873,4 @@ function! Scratch(cmd)
 endfunction
 
 let g:pear_tree_repeatable_expand=0
+

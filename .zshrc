@@ -12,7 +12,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="ys"
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="yes"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -73,7 +73,7 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
 
-export PER_DIRECTORY_HISTORY_TOGGLE='^ '
+export PER_DIRECTORY_HISTORY_TOGGLE='^\'
 
 plugins=(
     archlinux
@@ -254,6 +254,7 @@ bindkey '^r' history-incremental-search-backward
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+[[ -e "/usr/bin/lsd" ]] && alias l='lsd'
 alias cx='chmod +x'
 alias hotreload="ag -l | entr -r "
 alias moshclean="who | grep -v 'via mosh' | grep -oP '(?<=mosh \[)(\d+)(?=\])' | xargs kill"
@@ -288,7 +289,7 @@ fi
 
 remove=/opt/anaconda/bin
 PATH=${PATH//$remove/}
-export PATH="$PATH:/home/matheus/programs/flutter/bin"
+export PATH="$PATH:/home/matheus/Programs/flutter/bin"
 export PATH=/home/matheus/mxe/usr/bin:$PATH
 export PATH=$PATH:/opt/anaconda/bin
 export PATH=$PATH:~/.emacs.d/bin
@@ -297,9 +298,9 @@ export https_proxy=''
 export ftp_proxy=''
 export socks_proxy=''
 
-PATH=/home/matheus/programs/simFlow/simFlow-3.1:${PATH};export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 8F1FFBF3-4166-531F-536F-118E03C20EE2 588C0655-079F-B357-8FA5-5CEF1F102B8D
+PATH=/home/matheus/Programs/simFlow/simFlow-3.1:${PATH};export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 8F1FFBF3-4166-531F-536F-118E03C20EE2 588C0655-079F-B357-8FA5-5CEF1F102B8D
 
-export ANDROID_HOME="/home/matheus/BACKUP/programs/android-sdk-linux/"
+export ANDROID_HOME="/home/matheus/Programs/android-sdk"
 export NVPACK_ROOT="/media/matheus/Elements SE/CodeWorksforAndroid"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/matheus/.sdkman"
@@ -412,3 +413,13 @@ PERL5LIB="/home/matheus/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5L
 PERL_LOCAL_LIB_ROOT="/home/matheus/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/matheus/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/matheus/perl5"; export PERL_MM_OPT;
+
+export PATH=/home/matheus/.gem/ruby/3.0.0/bin:$PATH
+export PATH=/home/matheus/.local/bin:$PATH
+
+export QT_QPA_PLATFORMTHEME='gnome'
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_QPA_PLATFORM_PLUGIN_PATH=
+export PATH=/home/matheus/.gem/ruby/3.0.0/bin:$PATH
+export PATH=/home/matheus/.local/bin:$PATH
+[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"

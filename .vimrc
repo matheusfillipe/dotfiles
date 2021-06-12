@@ -126,6 +126,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
         endif
 "TERM_FANCY_CURSOR  = 'true'
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
+let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
 call plug#begin()
 Plug 'liuchengxu/space-vim-dark'
 Plug 'Yggdroot/indentLine'    
@@ -151,12 +152,32 @@ Plug 'lervag/vimtex'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 Plug 'gu-fan/clickable.vim'
+Plug 'SidOfc/mkdx'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
 "
 
+let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
+                        \ 'enter': { 'shift': 1 },
+                        \ 'links': { 'external': { 'enable': 1 } },
+                        \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+                        \ 'fold': { 'enable': 1 },
+                        \ 'map': { 'prefix': '<space>' }}
+
+" :h mkdx-setting-toc-details-child-summary
+" let g:mkdx#settings = { 'toc': { 'details': { 'child_summary': 'show {{count}} items' } } }
+" 
+nnoremap <buffer><silent><unique> <space>~ i~~~<Enter>~~~ko
+nnoremap <buffer><silent><unique> <space>` i```<Enter>```ko
+
+
+function! MarkdownOpen()
+  execute ":!okular ".expand('%:p')." &"
+endfunction
+command! Mdopen :call MarkdownOpen()
+nnoremap <space><space> :Mdopen<CR>
 let g:pear_tree_repeatable_expand=0
 
 colorscheme space-vim-dark
