@@ -17,7 +17,7 @@ fi
 
 if command -v apt &> /dev/null 
 then
-  sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat silversearcher-ag powerline zsh tar
+  sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat silversearcher-ag powerline zsh tar ripgrep fzf
   mkdir -p ~/.local/bin
   ln -s /usr/bin/batcat ~/.local/bin/bat
 fi
