@@ -37,10 +37,16 @@ xmap <C-;> :call ColonToggle()<CR>
 vmap <C-;> :call ColonToggle()<CR>
 
 set title
-augroup dirchange
-    autocmd!
-    autocmd DirChanged * let &titlestring=v:event['cwd']
-augroup END
+set titlestring=%{expand(\"%:p\")}
 
 let $ZDOTDIR = $HOME
 autocmd User CocOpenFloat call setwinvar(g:coc_last_float_win, "&winblend", 20)
+
+" Enable Mouse
+set mouse=a
+
+" Right Click Context Menu (Copy-Cut-Paste)
+nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
+inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
+vnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
+:GuiWindowOpacity 0.9

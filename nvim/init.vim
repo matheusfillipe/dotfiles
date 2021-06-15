@@ -18,8 +18,6 @@ endif
 
 autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
 autocmd VimLeave * silent exec "! echo -ne '\e[5 q'" 
-" Don't try to be vi compatible
-set nocompatible
 
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
@@ -177,7 +175,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 set nocompatible
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
 
-let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
+" let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
 call plug#begin()
 Plug 'honza/vim-snippets'
 Plug 'tell-k/vim-autopep8'
@@ -229,14 +227,36 @@ Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
-Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'chrisbra/Colorizer'
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'SidOfc/mkdx'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
 "
+
+function! MyCustomHighlights()
+  hi semshiLocal           ctermfg=209 guifg=#ff875f
+  hi semshiGlobal          ctermfg=214 guifg=#5f5ff0 cterm=bold gui=bold
+  hi semshiImported        ctermfg=214 guifg=#5f5ff0
+  hi semshiParameter       ctermfg=75  guifg=#cccccc
+  hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
+  hi semshiFree            ctermfg=218 guifg=#ffafd7
+  hi semshiBuiltin         ctermfg=207 guifg=#ff5fff
+  hi semshiAttribute       ctermfg=49  guifg=#00ffaf
+  hi semshiSelf            ctermfg=249 guifg=#b2b2b2
+  hi semshiUnresolved      ctermfg=226 guifg=#ff5f00 cterm=underline gui=underline
+  hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
+
+  hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+  hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+  sign define semshiError text=E> texthl=semshiErrorSign
+endfunction
+autocmd FileType python call MyCustomHighlights()
+autocmd FileType python Semshi disable
+
 let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
                         \ 'enter': { 'shift': 1 },
                         \ 'links': { 'external': { 'enable': 1 } },
@@ -718,10 +738,10 @@ syntax on
 if exists('g:GuiLoaded')
   set pumblend=5
   colorscheme onedark
-  nnoremap <M-C-R> :source $MYVIMRC <bar> source ~/.config/nvim/ginit.vim <cr>
+  nnoremap <M-C-R> :source $MYVIMRC <bar> source ~/.config/nvim/ginit.vim <cr>:e<cr>
 else
   colorscheme space-vim-dark
-  nnoremap <M-C-R> :source $MYVIMRC<CR>
+  nnoremap <M-C-R> :source $MYVIMRC<CR>:e<CR>
 endif
 hi Normal     ctermbg=NONE
 "hi Comment guifg=#5C6370 ctermfg=59
@@ -854,7 +874,7 @@ nnoremap dil ^d$
 nnoremap vil ^v$
 nnoremap cil ^c$
 
-nnoremap <c-p> a<c-r>0<esc>k$Jxi
+nnoremap <c-p> a<c-r>1<esc>k$Jxi
 inoremap <c-p> <C-\><C-n>pi
 nnoremap gP i<CR><Esc>PkJxJx
 nnoremap gp a<CR><Esc>PkJxJx
@@ -873,4 +893,24 @@ function! Scratch(cmd)
 endfunction
 
 let g:pear_tree_repeatable_expand=0
+
+"Turn on backup option
+set backup
+
+"Where to store backups
+let g:backupdir="~/.vim/backup//"
+set backupdir=~/.vim/backup//
+
+"Make backup before overwriting the current buffer
+set writebackup
+
+"Overwrite the original backup file
+set backupcopy=no
+
+"Meaningful backup name, ex: filename@2015-04-05.14:59
+au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
+
+if !isdirectory(g:backupdir)
+  execute "silent !mkdir ".g:backupdir." -p"
+endif
 
