@@ -228,7 +228,6 @@ Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'chrisbra/Colorizer'
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'SidOfc/mkdx'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
