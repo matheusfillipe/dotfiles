@@ -256,6 +256,7 @@ bindkey '^r' history-incremental-search-backward
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+[[ -e "/usr/bin/lsd" ]] && alias l='lsd'
 alias sus="systemctl --user"
 alias s="sudo systemctl"
 export EDITOR='vim'

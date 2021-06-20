@@ -228,7 +228,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'chrisbra/Colorizer'
-Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'SidOfc/mkdx'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
@@ -401,7 +401,7 @@ let g:airline_powerline_fonts = 1
 
 " Font shortcuts
 if has('nvim')
-  let s:fontsize = 15
+  let s:fontsize = 16
   function! AdjustFontSize(amount)
     let s:fontsize = s:fontsize+a:amount
     :execute "GuiFont SauceCodePro\ Nerd\ Font:h" . s:fontsize
@@ -424,7 +424,7 @@ if has('nvim')
   inoremap <C--> <C-o>:call AdjustFontSize(-1)<CR>
 endif
 
-set guifont=SauceCodePro\ Nerd\ Font:h15
+set guifont=SauceCodePro\ Nerd\ Font:h16
 set background=light
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none

@@ -423,3 +423,5 @@ export QT_QPA_PLATFORM_PLUGIN_PATH=
 export PATH=/home/matheus/.gem/ruby/3.0.0/bin:$PATH
 export PATH=/home/matheus/.local/bin:$PATH
 [ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
