@@ -13,7 +13,7 @@ nvim +PlugInstall +qall +silent
 nvim +"CocInstall coc-solargraph" +qall +silent
 nvim +"CocInstall coc-tsserver" +qall +silent
 nvim +"CocInstall coc-json" +qall +silent
-nvim +"CocInstall coc-python" +qall +silent
+#nvim +"CocInstall coc-python" +qall +silent
 nvim +"CocInstall coc-jedi" +qall +silent
 nvim +"CocInstall coc-snippets" +qall +silent
 nvim --headless -u init.vim +UpdateRemotePlugins +qa
