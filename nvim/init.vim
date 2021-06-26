@@ -229,7 +229,7 @@ Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'chrisbra/Colorizer'
 Plug 'SidOfc/mkdx'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
