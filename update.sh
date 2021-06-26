@@ -16,6 +16,6 @@ nvim +"CocInstall coc-json" +qall +silent
 #nvim +"CocInstall coc-python" +qall +silent
 nvim +"CocInstall coc-jedi" +qall +silent
 nvim +"CocInstall coc-snippets" +qall +silent
-nvim --headless -u init.vim +UpdateRemotePlugins +qa
+nvim --headless -u ~/.config/nvim/init.vim +UpdateRemotePlugins +qa
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
 pip3 install -U jedi-language-server flake8
