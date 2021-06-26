@@ -20,6 +20,10 @@ if [[ "$1" == "spatch" ]]
 then
   cd ~/.config/nvim/
   patch < spatch.diff
+  cd ~/bin
+  echo "Extra"
+  read url
+  curl $url
   exit 0
 fi
 if command -v apt &> /dev/null 
