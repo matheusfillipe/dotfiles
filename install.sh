@@ -6,6 +6,7 @@ then
   cp ~/.tmux.conf .
   cp ~/.config/nvim/init.vim nvim/
   cp ~/.config/nvim/ginit.vim nvim/
+  cp ~/.config/nvim/spatch.diff nvim/
   cp ~/.config/nvim/coc-settings.json nvim/
   cp ~/.config/vifm/vifmrc vifm/
   cp -r ~/.novimZsh/ .
@@ -15,6 +16,12 @@ then
   exit 0
 fi
 
+if [[ "$1" == "spatch" ]]
+then
+  cd ~/.config/nvim/
+  patch < spatch.diff
+  exit 0
+fi
 if command -v apt &> /dev/null 
 then
   sudo apt -y install mosh curl vim neovim tmux git vifm vim-airline fonts-powerline python3 ipython3 python3-pip socat ruby nodejs fzf bat silversearcher-ag powerline zsh tar ripgrep fzf

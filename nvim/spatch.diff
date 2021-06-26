@@ -1,0 +1,29 @@
+--- init.vim	2021-06-20 01:23:32.126440838 -0300
++++ serv_init.vim	2021-06-25 22:50:40.012328436 -0300
+@@ -1,15 +1,14 @@
+-" function! SendClipBoard()
+-"   execute("silent redir! > /tmp/mattf_lcopy_nvim")
+-"   execute("silent echo @0")
+-"   execute("silent redir END")
+-"   execute("silent !lcopy /tmp/mattf_lcopy_nvim")
+-" endfunction
+-" 
+-" augroup custom_clipboard
+-"   au!
+-"   au TextYankPost * :call SendClipBoard()
+-" augroup END
+-set clipboard=unnamedplus
++function! SendClipBoard()
++  execute("silent redir! > /tmp/mattf_lcopy_nvim")
++  execute("silent echo @0")
++  execute("silent redir END")
++  execute("silent !lcopy /tmp/mattf_lcopy_nvim")
++endfunction
++
++augroup custom_clipboard
++  au!
++  au TextYankPost * :call SendClipBoard()
++augroup END
+ 
+ let $ZDOTDIR = $HOME
+ if $NOVIMZSH

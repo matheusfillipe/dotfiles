@@ -5,10 +5,10 @@
 export NOVIMZSH=1
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/home/matheus/.cargo/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/matheus/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -302,8 +302,8 @@ alias gitclone='git clone $(xclip -o | lw)'
 
 remove=/opt/anaconda/bin:
 PATH=${PATH//$remove/}
-export PATH="$PATH:/home/matheus/programs/flutter/bin"
-export PATH=/home/matheus/mxe/usr/bin:$PATH
+export PATH="$PATH:$HOME/programs/flutter/bin"
+export PATH=$HOME/mxe/usr/bin:$PATH
 export PATH=$PATH:/opt/anaconda/bin
 export PATH=$PATH:~/.emacs.d/bin
 export http_proxy=''
@@ -311,13 +311,13 @@ export https_proxy=''
 export ftp_proxy=''
 export socks_proxy=''
 
-PATH=/home/matheus/programs/simFlow/simFlow-3.1:${PATH};export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 8F1FFBF3-4166-531F-536F-118E03C20EE2 588C0655-079F-B357-8FA5-5CEF1F102B8D
+PATH=$HOME/programs/simFlow/simFlow-3.1:${PATH};export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 8F1FFBF3-4166-531F-536F-118E03C20EE2 588C0655-079F-B357-8FA5-5CEF1F102B8D
 
-export ANDROID_HOME="/home/matheus/Programs/android-sdk"
+export ANDROID_HOME="$HOME/Programs/android-sdk"
 export NVPACK_ROOT="/media/matheus/Elements SE/CodeWorksforAndroid"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/matheus/.sdkman"
-[[ -s "/home/matheus/.sdkman/bin/sdkman-init.sh" ]] && source "/home/matheus/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 [ -z "$DISPLAY" ] && export DISPLAY=:0 
 
 
@@ -397,6 +397,8 @@ compinit -C
 export QT_QPA_PLATFORMTHEME='gnome'
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_QPA_PLATFORM_PLUGIN_PATH=
-export PATH=/home/matheus/.gem/ruby/3.0.0/bin:$PATH
-export PATH=/home/matheus/.local/bin:$PATH
-[ $SHLVL -eq 1 ] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+export PATH=$HOME/.gem/ruby/3.0.0/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+[[ $SHLVL -eq 1 && -e $HOME/perl5/lib/perl5 ]] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
