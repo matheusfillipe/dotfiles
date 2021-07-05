@@ -64,8 +64,8 @@ set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
 " Move up/down editor lines
-" nnoremap j gj
-" nnoremap k gk
+nnoremap j gj
+nnoremap k gk
 
 " shebang bash
 let @b='ggO#!/bin/bash'
@@ -230,11 +230,23 @@ Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'chrisbra/Colorizer'
 Plug 'SidOfc/mkdx'
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
+if has('nvim-0.5')
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+endif
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
 "
+if has('nvim-0.5')
+  " Find files using Telescope command-line sugar.
+  nnoremap <leader>ff <cmd>Telescope find_files<cr>
+  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <leader>fb <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+endif
 
 function! MyCustomHighlights()
   hi semshiLocal           ctermfg=209 guifg=#ff875f
@@ -912,4 +924,3 @@ au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
 if !isdirectory(g:backupdir)
   execute "silent !mkdir ".g:backupdir." -p"
 endif
-

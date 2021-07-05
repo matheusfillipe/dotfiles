@@ -77,7 +77,9 @@ export PER_DIRECTORY_HISTORY_TOGGLE='^\'
 
 plugins=(
     archlinux
+    ubuntu
     git
+    rust
     history-substring-search
     colored-man-pages
     zsh-autosuggestions
@@ -254,7 +256,7 @@ bindkey '^r' history-incremental-search-backward
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-[[ -e "/usr/bin/lsd" ]] && alias l='lsd'
+[[ -e "/usr/bin/lsd" || -e ".cargo/bin/lsd" ]] && alias l='lsd'
 alias cx='chmod +x'
 alias hotreload="ag -l | entr -r "
 alias moshclean="who | grep -v 'via mosh' | grep -oP '(?<=mosh \[)(\d+)(?=\])' | xargs kill"
@@ -423,5 +425,3 @@ export QT_QPA_PLATFORM_PLUGIN_PATH=
 export PATH=$HOME/.gem/ruby/3.0.0/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 [[ $SHLVL -eq 1 && -e $HOME/perl5/lib/perl5 ]] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
-
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
