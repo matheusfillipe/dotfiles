@@ -392,7 +392,7 @@ nmap <silent> <F7> :call ToggleSpell()<CR>
 imap <silent> <F7> <Esc>:call ToggleSpell()<CR>a
 
 nnoremap <C-a> :bn<CR>
-"nnoremap <C-Tab> :bn<CR>
+" nnoremap <C-Tab> :bn<CR>
 nnoremap <C-S-Tab> :bp<CR>
 
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
