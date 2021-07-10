@@ -64,8 +64,8 @@ set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
 " Move up/down editor lines
-nnoremap j gj
-nnoremap k gk
+" nnoremap j gj
+" nnoremap k gk
 
 " shebang bash
 let @b='ggO#!/bin/bash'
@@ -155,6 +155,7 @@ set number relativenumber
 
 set nu rnu
 nnoremap s :%s//g<left><left>
+nnoremap <Tab> %
 vnoremap s :s//g<left><left>
 vnoremap . :normal .<cr> 
 
@@ -412,7 +413,7 @@ let g:airline_powerline_fonts = 1
 
 " Font shortcuts
 if has('nvim')
-  let s:fontsize = 16
+  let s:fontsize = 17
   function! AdjustFontSize(amount)
     let s:fontsize = s:fontsize+a:amount
     :execute "GuiFont SauceCodePro\ Nerd\ Font:h" . s:fontsize
@@ -435,7 +436,7 @@ if has('nvim')
   inoremap <C--> <C-o>:call AdjustFontSize(-1)<CR>
 endif
 
-set guifont=SauceCodePro\ Nerd\ Font:h16
+set guifont=SauceCodePro\ Nerd\ Font:h17
 set background=light
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
@@ -924,3 +925,6 @@ au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
 if !isdirectory(g:backupdir)
   execute "silent !mkdir ".g:backupdir." -p"
 endif
+
+nnoremap <C-l> v$
+nnoremap <C-h> v0
