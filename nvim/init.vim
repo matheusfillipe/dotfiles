@@ -10,6 +10,7 @@
 "   au TextYankPost * :call SendClipBoard()
 " augroup END
 set clipboard=unnamedplus
+set timeoutlen=500
 
 let $ZDOTDIR = $HOME
 if $NOVIMZSH
@@ -230,23 +231,76 @@ Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'chrisbra/Colorizer'
 Plug 'SidOfc/mkdx'
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python' }
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+Plug 'MattesGroeger/vim-bookmarks'
 if has('nvim-0.5')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'tom-anders/telescope-vim-bookmarks.nvim'
+  Plug 'folke/which-key.nvim'
 endif
+Plug 'luochen1990/rainbow'
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
 "endif
 "
+
+nmap <leader>m <Plug>BookmarkToggle
+nmap <space>m <Plug>BookmarkToggle
+nmap <space>Bi <Plug>BookmarkAnnotate
+nmap <space>Ba <Plug>BookmarkShowAll
+nmap <space>Bj <Plug>BookmarkNext
+nmap <space>Bk <Plug>BookmarkPrev
+nmap <space>Bc <Plug>BookmarkClear
+nmap <space>Bx <Plug>BookmarkClearAll
+nmap <space>Bk <Plug>BookmarkMoveUp
+nmap <space>Bj <Plug>BookmarkMoveDown
+nmap <space>Bg <Plug>BookmarkMoveToLine
+ 
+
 if has('nvim-0.5')
   " Find files using Telescope command-line sugar.
   nnoremap <leader>ff <cmd>Telescope find_files<cr>
+  nnoremap <space><space> <cmd>Telescope find_files<cr>
   nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-  nnoremap <leader>fb <cmd>Telescope buffers<cr>
+  nnoremap <space>b <cmd>Telescope buffers<cr>
   nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  lua require('telescope').load_extension('vim_bookmarks')
+
+  " Pick from all bookmarks
+  nmap <space><CR> :Telescope vim_bookmarks all<cr>
+  " Only pick from bookmarks in current file
+  nmap <space>M :Telescope vim_bookmarks current_file<cr>
+
+lua << EOF
+  local actions = require('telescope.actions')
+  -- Global remapping
+  ------------------------------
+  require('telescope').setup{
+    defaults = {
+      mappings = {
+        i = {
+          ["<C-k>"] = actions.move_selection_previous,
+          ["<C-j>"] = actions.move_selection_next,
+          ["<esc>"] = actions.close,
+        },
+      },
+      path_display = {
+        'shorten',
+        'absolute',
+      },
+    }
+  }
+EOF
+lua << EOF
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
 endif
 
 function! MyCustomHighlights()
@@ -281,12 +335,16 @@ let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
 " 
 nnoremap <buffer><silent> <space>~ i~~~<Enter>~~~ko
 nnoremap <buffer><silent> <space>` i```<Enter>```ko
+nnoremap <buffer><silent> <leader>~ i~~~<Enter>~~~ko
+nnoremap <buffer><silent> <leader>` i```<Enter>```ko
 
 function! MarkdownOpen()
   execute ":!okular ".expand('%:p')." &"
 endfunction
 command! Mdopen :call MarkdownOpen()
-nnoremap <space><space> :Mdopen<CR>
+nnoremap <leader><leader>o :Mdopen<CR>
+
+map  <space>f <Plug>(easymotion-s)
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
@@ -785,6 +843,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 "
 nnoremap <A-g> :GFiles<CR>
 nnoremap <A-f> :Files<CR>
+nnoremap <space><space> :Files<CR>
 autocmd VimEnter * nmap <A-b> :Buffers<CR>
 nmap <A-h> :History
 nmap <M-:> :Commands<CR>
@@ -926,5 +985,9 @@ if !isdirectory(g:backupdir)
   execute "silent !mkdir ".g:backupdir." -p"
 endif
 
-nnoremap <C-l> v$
+nnoremap <C-l> v$h
 nnoremap <C-h> v0
+
+
+let g:rainbow_active = 1 
+autocmd bufenter * RainbowToggleOn

@@ -85,7 +85,7 @@
       ],
       "securities": {
         "W": "info",
-        "E": "warning",
+        "E": "info",
         "F": "info",
         "C": "info",
         "N": "hint"

@@ -296,6 +296,9 @@ alias lw="awk '{print \$NF}'"
 alias fw="awk '{print \$1}'"
 alias arec="parec -d 0 | lame -r -V0 - "
 alias gitclone='git clone $(xclip -o | lw) --depth=1'
+alias mg='emacs --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+alias mgc='emacs -nw --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+
 
 function gw {
   awk -v wc="$1" '{print $wc}'

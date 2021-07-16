@@ -264,6 +264,8 @@ alias hotreload="ag -l | entr -r "
 alias moshclean="who | grep -v 'via mosh' | grep -oP '(?<=mosh \[)(\d+)(?=\])' | xargs kill"
 alias sus="systemctl --user"
 alias s="sudo systemctl"
+alias mg='emacs --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+alias mgc='emacs -nw --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
 
 export EDITOR='vim'
 # Add an "alert" alias for long running commands.  Use like so:
