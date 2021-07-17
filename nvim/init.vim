@@ -239,6 +239,8 @@ if has('nvim-0.5')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'tom-anders/telescope-vim-bookmarks.nvim'
   Plug 'folke/which-key.nvim'
+  Plug 'xiyaowong/telescope-emoji.nvim'
+  Plug 'nvim-telescope/telescope-project.nvim'
 endif
 Plug 'luochen1990/rainbow'
 call plug#end()
@@ -262,14 +264,64 @@ nmap <space>Bg <Plug>BookmarkMoveToLine
 
 if has('nvim-0.5')
   " Find files using Telescope command-line sugar.
-  nnoremap <leader>ff <cmd>Telescope find_files<cr>
+  nnoremap <space>ff <cmd>Telescope find_files<cr>
+  nnoremap <space>fr <cmd>Telescope oldfiles<cr>
   nnoremap <space><space> <cmd>Telescope find_files<cr>
-  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <space>fg <cmd>Telescope live_grep<cr>
   nnoremap <space>b <cmd>Telescope buffers<cr>
-  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-  lua require('telescope').load_extension('vim_bookmarks')
+  nnoremap <space>fh <cmd>Telescope help_tags<cr>
+  nnoremap <space>: <cmd>Telescope command_history<cr>
+  nnoremap <space>h/ <cmd>Telescope search_history<cr>
+  nnoremap <space>/ <cmd>Telescope current_buffer_fuzzy_find<cr>
+  nnoremap <space>= <cmd>Telescope spell_suggest<cr>
+  nnoremap <space>hK <cmd>Telescope keymaps<cr>
+  nnoremap <space>q <cmd>Telescope quickfix<cr>
+  nnoremap <space>t <cmd>Telescope filetypes<cr>
+  nnoremap <space>lm <cmd>Telescope list_marks<cr>
+  nnoremap <space>lr <cmd>Telescope lsp_references<cr>
+  nnoremap <space>la <cmd>Telescope lsp_code_actions<cr>
+  nnoremap <space>li <cmd>Telescope lsp_implementations<cr>
+  nnoremap <space>ld <cmd>Telescope lsp_definitions<cr>
+  nnoremap <space>gg <cmd>Telescope git_commits<cr>
+  nnoremap <space>gb <cmd>Telescope git_branches<cr>
+  nnoremap <space>gs <cmd>Telescope git_status<cr>
+  nnoremap <space>gS <cmd>Telescope git_stash<cr>
+
+  
+  " Projects
+  lua require'telescope'.load_extension('project')
+lua << EOF
+  require('telescope').setup {
+  extensions = {
+    project = {
+      base_dirs = {
+        {path = '~/Projects', max_depth = 4},
+        {path = '~/projects', max_depth = 4},
+        {path = '~/Programs', max_depth = 4},
+        {path = '~/programs', max_depth = 4},
+      }
+  }
+}
+}
+EOF
+  nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
+
+  " Emojis
+  lua require("telescope").load_extension("emoji")
+  nnoremap <space>ie <cmd>Telescope emoji search<cr>
+lua << EOF
+  require("telescope-emoji").setup({
+    action = function(emoji)
+      -- argument emoji is a table.
+      -- {name="", value="", cagegory="", description=""}
+      vim.fn.setreg("*", emoji.value)
+      print([[Press p or "*p to paste this emoji]] .. emoji.value)
+    end,
+})
+EOF
 
   " Pick from all bookmarks
+  lua require('telescope').load_extension('vim_bookmarks')
   nmap <space><CR> :Telescope vim_bookmarks all<cr>
   " Only pick from bookmarks in current file
   nmap <space>M :Telescope vim_bookmarks current_file<cr>
@@ -284,7 +336,9 @@ lua << EOF
         i = {
           ["<C-k>"] = actions.move_selection_previous,
           ["<C-j>"] = actions.move_selection_next,
+          ["<CR>"] = actions.select_default,
           ["<esc>"] = actions.close,
+          ["<C-M-n>"] = (function() vim.cmd [[stopinsert]] end),
         },
       },
       path_display = {
@@ -302,6 +356,10 @@ lua << EOF
   }
 EOF
 endif
+
+" Disable pear-tree on telescope
+let g:pear_tree_ft_disabled = ["TelescopePrompt"]
+imap <expr> <CR> !pumvisible() ? "\<Plug>(PearTreeExpand)" : "\<CR>"
 
 function! MyCustomHighlights()
   hi semshiLocal           ctermfg=209 guifg=#ff875f
@@ -344,7 +402,7 @@ endfunction
 command! Mdopen :call MarkdownOpen()
 nnoremap <leader><leader>o :Mdopen<CR>
 
-map  <space>f <Plug>(easymotion-s)
+map  <leader>f <Plug>(easymotion-s)
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
@@ -360,6 +418,12 @@ let g:coc_global_extensions = [
 " pydocstring
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
 nmap <silent> <C-_> <Plug>(pydocstring)
+
+
+" Doom emacs like things
+nnoremap <C-/> gc<space>
+nnoremap <space>hk :verbose map! 
+
 
 " Autosave
 let g:auto_save = 1 
@@ -991,3 +1055,4 @@ nnoremap <C-h> v0
 
 let g:rainbow_active = 1 
 autocmd bufenter * RainbowToggleOn
+nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
