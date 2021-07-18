@@ -177,12 +177,17 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 set nocompatible
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
 
+" vscode neovim forced me to do this
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
 " let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
 call plug#begin()
 Plug 'honza/vim-snippets'
 Plug 'tell-k/vim-autopep8'
 Plug 'lambdalisue/suda.vim'
-Plug 'liuchengxu/space-vim-dark'
+Plug 'liuchengxu/space-vim-dark', Cond(!exists('g:vscode'))
 Plug 'Yggdroot/indentLine'    
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
@@ -196,31 +201,32 @@ Plug 'fidian/hexmode'
 " Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'bkad/CamelCaseMotion'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'voldikss/vim-floaterm'
+Plug 'vim-airline/vim-airline', Cond(!exists('g:vscode'))
+Plug 'vim-airline/vim-airline-themes', Cond(!exists('g:vscode'))
+Plug 'voldikss/vim-floaterm', Cond(!exists('g:vscode'))
 Plug 'reedes/vim-wordy'
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion', Cond(!exists('g:vscode'))
+Plug 'asvetliakov/vim-easymotion', Cond(exists('g:vscode'), { 'as': 'vsc-easymotion' })
 Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-repeat'
-Plug 'stanangeloff/php.vim'
-Plug 'preservim/nerdtree'
+Plug 'stanangeloff/php.vim', Cond(!exists('g:vscode'))
+Plug 'preservim/nerdtree', Cond(!exists('g:vscode'))
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'dart-lang/dart-vim-plugin'
+Plug 'dart-lang/dart-vim-plugin', Cond(!exists('g:vscode'))
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'rust-lang/rust.vim'
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', Cond(!exists('g:vscode'))
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }
-Plug 'jceb/vim-orgmode'
+Plug 'neoclide/coc.nvim', Cond(!exists('g:vscode'), {'branch': 'release'})
+Plug 'junegunn/fzf.vim', Cond(!exists('g:vscode'))
+Plug 'junegunn/fzf', Cond(!exists('g:vscode') , { 'do': { -> fzf#install() } })
+Plug 'jceb/vim-orgmode', Cond(!exists('g:vscode'))
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
-Plug 'sheerun/vim-polyglot'
-Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot', Cond(!exists('g:vscode'))
+Plug 'joshdick/onedark.vim', Cond(!exists('g:vscode'))
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 Plug 'eliba2/vim-node-inspect'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -229,10 +235,10 @@ Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
-Plug 'chrisbra/Colorizer'
-Plug 'SidOfc/mkdx'
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
-Plug 'MattesGroeger/vim-bookmarks'
+Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
+Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
+Plug 'numirias/semshi', Cond(!exists('g:vscode'), { 'do': ':UpdateRemotePlugins' })
+Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
 if has('nvim-0.5')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
@@ -241,8 +247,9 @@ if has('nvim-0.5')
   Plug 'folke/which-key.nvim'
   Plug 'xiyaowong/telescope-emoji.nvim'
   Plug 'nvim-telescope/telescope-project.nvim'
+  Plug 'fannheyward/telescope-coc.nvim'
 endif
-Plug 'luochen1990/rainbow'
+Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -266,6 +273,7 @@ if has('nvim-0.5')
   " Find files using Telescope command-line sugar.
   nnoremap <space>ff <cmd>Telescope find_files<cr>
   nnoremap <space>fr <cmd>Telescope oldfiles<cr>
+  nnoremap <space><C-r> <cmd>Telescope registers<cr>
   nnoremap <space><space> <cmd>Telescope find_files<cr>
   nnoremap <space>fg <cmd>Telescope live_grep<cr>
   nnoremap <space>b <cmd>Telescope buffers<cr>
@@ -286,6 +294,12 @@ if has('nvim-0.5')
   nnoremap <space>gb <cmd>Telescope git_branches<cr>
   nnoremap <space>gs <cmd>Telescope git_status<cr>
   nnoremap <space>gS <cmd>Telescope git_stash<cr>
+
+  nnoremap <space>d <cmd>Telescope coc definitions<cr>
+  nnoremap <space>D <cmd>Telescope coc declarations<cr>
+  nnoremap <space>r <cmd>Telescope coc references<cr>
+  nnoremap <space>aa <cmd>Telescope coc code_actions<cr>
+  nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
 
   
   " Projects
@@ -402,7 +416,7 @@ endfunction
 command! Mdopen :call MarkdownOpen()
 nnoremap <leader><leader>o :Mdopen<CR>
 
-map  <leader>f <Plug>(easymotion-s)
+nnoremap  <leader>f <Plug>(easymotion-s)<cr>
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
@@ -751,6 +765,7 @@ tnoremap <A-9> <C-\><C-n>9gt
 
 nnoremap ZD :BD<CR>
 nnoremap <C-Space> :nnoremap <lt>Space> :! <lt>CR><left><left><left><left><left>
+nnoremap <F4> :nnoremap <lt>F5> :! <lt>CR><left><left><left><left><left>
 nmap <Esc> :noh<CR>
 cnoremap <C-A> <Home>
 cnoremap <C-L> <C-Right>
@@ -766,8 +781,8 @@ nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>d <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>r <Plug>(coc-rename)
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>F  <Plug>(coc-format-selected)
+nmap <leader>F  <Plug>(coc-format-selected)
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 
@@ -895,7 +910,7 @@ nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>ss  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -1056,3 +1071,4 @@ nnoremap <C-h> v0
 let g:rainbow_active = 1 
 autocmd bufenter * RainbowToggleOn
 nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
+
