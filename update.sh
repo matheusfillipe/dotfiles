@@ -18,4 +18,4 @@ nvim +"CocInstall coc-jedi" +qall +silent
 nvim +"CocInstall coc-snippets" +qall +silent
 nvim --headless -u ~/.config/nvim/init.vim +UpdateRemotePlugins +qa
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-pip3 install -U jedi-language-server flake8
+pip3 install -U jedi-language-server flake8 neovim
