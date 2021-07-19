@@ -239,7 +239,8 @@ Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
 Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
 Plug 'numirias/semshi', Cond(!exists('g:vscode'), { 'do': ':UpdateRemotePlugins' })
 Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
-if has('nvim-0.5')
+if has('nvim-0.5') && !exists('g:vscode')
+  " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
@@ -248,6 +249,7 @@ if has('nvim-0.5')
   Plug 'xiyaowong/telescope-emoji.nvim'
   Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'fannheyward/telescope-coc.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
 call plug#end()
@@ -356,7 +358,6 @@ lua << EOF
         },
       },
       path_display = {
-        'shorten',
         'absolute',
       },
     }
@@ -369,12 +370,28 @@ lua << EOF
     -- refer to the configuration section below
   }
 EOF
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = {}, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {},  -- list of language that will be disabled
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
 endif
 
 " Disable pear-tree on telescope
 let g:pear_tree_ft_disabled = ["TelescopePrompt"]
 imap <expr> <CR> !pumvisible() ? "\<Plug>(PearTreeExpand)" : "\<CR>"
 
+" I really shouldn't have semshi with treesitter so semshi shall be removed sometime
 function! MyCustomHighlights()
   hi semshiLocal           ctermfg=209 guifg=#ff875f
   hi semshiGlobal          ctermfg=214 guifg=#5f5ff0 cterm=bold gui=bold
@@ -416,7 +433,7 @@ endfunction
 command! Mdopen :call MarkdownOpen()
 nnoremap <leader><leader>o :Mdopen<CR>
 
-nnoremap  <leader>f <Plug>(easymotion-s)<cr>
+nnoremap  <leader>f <Plug>(easymotion-s)
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
