@@ -184,7 +184,7 @@ function! Cond(cond, ...)
 endfunction
 " let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
 call plug#begin()
-Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets', Cond(!exists('g:vscode'))
 Plug 'tell-k/vim-autopep8'
 Plug 'lambdalisue/suda.vim'
 Plug 'liuchengxu/space-vim-dark', Cond(!exists('g:vscode'))
@@ -192,7 +192,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
 " Plug 'maxbrunsfeld/vim-emacs-bindings'
-Plug 'tmsvg/pear-tree'
+Plug 'tmsvg/pear-tree', Cond(!exists('g:vscode'))
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
@@ -211,7 +211,7 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-repeat'
 Plug 'stanangeloff/php.vim', Cond(!exists('g:vscode'))
 Plug 'preservim/nerdtree', Cond(!exists('g:vscode'))
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', Cond(!exists('g:vscode'))
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dart-lang/dart-vim-plugin', Cond(!exists('g:vscode'))
@@ -229,7 +229,7 @@ Plug 'sheerun/vim-polyglot', Cond(!exists('g:vscode'))
 Plug 'joshdick/onedark.vim', Cond(!exists('g:vscode'))
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 Plug 'eliba2/vim-node-inspect'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'mg979/vim-visual-multi', Cond(!exists('g:vscode'), {'branch': 'master'})
 Plug '907th/vim-auto-save'
 Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
@@ -781,7 +781,6 @@ tnoremap <A-9> <C-\><C-n>9gt
 
 
 nnoremap ZD :BD<CR>
-nnoremap <C-Space> :nnoremap <lt>Space> :! <lt>CR><left><left><left><left><left>
 nnoremap <F4> :nnoremap <lt>F5> :! <lt>CR><left><left><left><left><left>
 nmap <Esc> :noh<CR>
 cnoremap <C-A> <Home>
@@ -939,6 +938,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 "
 nnoremap <A-g> :GFiles<CR>
 nnoremap <A-f> :Files<CR>
+nnoremap <A-r> :Rg<CR>
 nnoremap <space><space> :Files<CR>
 autocmd VimEnter * nmap <A-b> :Buffers<CR>
 nmap <A-h> :History
@@ -1086,6 +1086,15 @@ nnoremap <C-h> v0
 
 
 let g:rainbow_active = 1 
-autocmd bufenter * RainbowToggleOn
+if !exists('g:vscode')
+  autocmd bufenter * RainbowToggleOn
+endif
 nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
+if exists('g:vscode')
+  command! Nu call VSCodeNotify('extension.toggle')
+  autocmd InsertEnter * Nu
+  autocmd InsertLeave * Nu
+  nnoremap <silent> <space> :call VSCodeNotify('whichkey.show')<CR>
+  xnoremap <silent> <space> :call VSCodeNotify('whichkey.show')<CR>
+endif
