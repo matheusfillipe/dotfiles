@@ -239,6 +239,8 @@ Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
 Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
 Plug 'numirias/semshi', Cond(!exists('g:vscode'), { 'do': ':UpdateRemotePlugins' })
 Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
+Plug 'dstein64/vim-startuptime', Cond(!exists('g:vscode'))
+Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
@@ -251,7 +253,6 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'fannheyward/telescope-coc.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
-Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
 "    PlugInstall
@@ -271,7 +272,9 @@ nmap <space>Bj <Plug>BookmarkMoveDown
 nmap <space>Bg <Plug>BookmarkMoveToLine
  
 
-if has('nvim-0.5')
+nnoremap <space>fy :let @+ = expand("%:p")<cr>
+
+if has('nvim-0.5') && !exists("g:vscode")
   " Find files using Telescope command-line sugar.
   nnoremap <space>ff <cmd>Telescope find_files<cr>
   nnoremap <space>fr <cmd>Telescope oldfiles<cr>
@@ -287,7 +290,7 @@ if has('nvim-0.5')
   nnoremap <space>hK <cmd>Telescope keymaps<cr>
   nnoremap <space>q <cmd>Telescope quickfix<cr>
   nnoremap <space>t <cmd>Telescope filetypes<cr>
-  nnoremap <space>lm <cmd>Telescope list_marks<cr>
+  nnoremap <space>lm <cmd>Telescope marks<cr>
   nnoremap <space>lr <cmd>Telescope lsp_references<cr>
   nnoremap <space>la <cmd>Telescope lsp_code_actions<cr>
   nnoremap <space>li <cmd>Telescope lsp_implementations<cr>
@@ -391,7 +394,13 @@ endif
 let g:pear_tree_ft_disabled = ["TelescopePrompt"]
 imap <expr> <CR> !pumvisible() ? "\<Plug>(PearTreeExpand)" : "\<CR>"
 
-" I really shouldn't have semshi with treesitter so semshi shall be removed sometime
+let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
+                        \ 'enter': { 'shift': 1 },
+                        \ 'links': { 'external': { 'enable': 1 } },
+                        \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+                        \ 'fold': { 'enable': 1 },
+                        \ 'map': { 'prefix': '<space>' }}
+
 function! MyCustomHighlights()
   hi semshiLocal           ctermfg=209 guifg=#ff875f
   hi semshiGlobal          ctermfg=214 guifg=#5f5ff0 cterm=bold gui=bold
@@ -410,15 +419,7 @@ function! MyCustomHighlights()
   sign define semshiError text=E> texthl=semshiErrorSign
 endfunction
 autocmd FileType python call MyCustomHighlights()
-autocmd FileType python Semshi disable
-
-let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
-                        \ 'enter': { 'shift': 1 },
-                        \ 'links': { 'external': { 'enable': 1 } },
-                        \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
-                        \ 'fold': { 'enable': 1 },
-                        \ 'map': { 'prefix': '<space>' }}
-
+autocmd FileType python Semshi enable
 " :h mkdx-setting-toc-details-child-summary
 " let g:mkdx#settings = { 'toc': { 'details': { 'child_summary': 'show {{count}} items' } } }
 " 
@@ -711,6 +712,7 @@ set path=.,,**
 
  	
 nnoremap <A-\> :NERDTreeToggle<CR>
+nnoremap <leader><A-\> :NERDTreeToggle %<CR>
 nnoremap tt :tabnew<CR>
 nnoremap td :tab split<CR>
 nnoremap tn :tabn<CR>
@@ -735,8 +737,8 @@ let g:rustfmt_autosave = 1
 let g:tex_flavor = 'latex'
 let g:dart_format_on_save = 1
 nnoremap <A-z> :TagbarOpenAutoClose<CR>
-nnoremap <A-x> :TagbarToggle<CR>
-nnoremap <A-c> :!ctags -R .<CR>
+nnoremap <A-c> :TagbarToggle<CR>
+nnoremap <A-C> :!ctags -R .<CR>
 nnoremap <A-w> :tabnext <CR>
 nnoremap <A-q> :tabprevious <CR>
 tnoremap <A-w> <C-\><C-n>:tabnext <CR>
@@ -791,8 +793,10 @@ autocmd BufEnter * silent! lcd %:p:h
 
 
 set cedit=
-nmap <silent> <leader>i :call CocActionAsync('doHover') <cr>
-autocmd CursorHold * silent call CocActionAsync('highlight')
+if !exists('g:vscode')
+  nmap <silent> <leader>i :call CocActionAsync('doHover') <cr>
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+endif
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>d <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
@@ -905,7 +909,9 @@ if exists('g:GuiLoaded')
   colorscheme onedark
   nnoremap <M-C-R> :source $MYVIMRC <bar> source ~/.config/nvim/ginit.vim <cr>:e<cr>
 else
-  colorscheme space-vim-dark
+  if !exists('g:vscode')
+    colorscheme space-vim-dark
+  endif
   nnoremap <M-C-R> :source $MYVIMRC<CR>:e<CR>
 endif
 hi Normal     ctermbg=NONE
@@ -943,6 +949,7 @@ nnoremap <space><space> :Files<CR>
 autocmd VimEnter * nmap <A-b> :Buffers<CR>
 nmap <A-h> :History
 nmap <M-:> :Commands<CR>
+nnoremap <silent><nowait> <M-x>  :Commands<cr>
 let g:fzf_tags_command = "ctags -R"
 let g:fzf_preview_window = 'right:60%'
 let g:fzf_layout = { 'window': 'botright new' }
@@ -991,7 +998,7 @@ inoremap <M-b> <Esc>bi
 inoremap <M-w> <Esc>wi
 inoremap <C-S> <Esc>:w<CR>a
 nnoremap <C-S> :w<CR>
-inoremap <M-BS> <Esc>vbxa
+inoremap <M-BS> <C-w>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <M-d> <Esc>vexi
@@ -1085,10 +1092,6 @@ nnoremap <C-l> v$h
 nnoremap <C-h> v0
 
 
-let g:rainbow_active = 1 
-if !exists('g:vscode')
-  autocmd bufenter * RainbowToggleOn
-endif
 nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
 if exists('g:vscode')
@@ -1097,4 +1100,9 @@ if exists('g:vscode')
   autocmd InsertLeave * Nu
   nnoremap <silent> <space> :call VSCodeNotify('whichkey.show')<CR>
   xnoremap <silent> <space> :call VSCodeNotify('whichkey.show')<CR>
+endif
+
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+if !exists('g:vscode')
+  autocmd bufenter * RainbowToggleOn
 endif
