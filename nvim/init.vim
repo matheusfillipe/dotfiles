@@ -418,8 +418,8 @@ function! MyCustomHighlights()
   hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
   sign define semshiError text=E> texthl=semshiErrorSign
 endfunction
-autocmd FileType python call MyCustomHighlights()
-autocmd FileType python Semshi enable
+" autocmd FileType python call MyCustomHighlights()
+" autocmd FileType python Semshi enable
 " :h mkdx-setting-toc-details-child-summary
 " let g:mkdx#settings = { 'toc': { 'details': { 'child_summary': 'show {{count}} items' } } }
 " 
@@ -950,6 +950,10 @@ autocmd VimEnter * nmap <A-b> :Buffers<CR>
 nmap <A-h> :History
 nmap <M-:> :Commands<CR>
 nnoremap <silent><nowait> <M-x>  :Commands<cr>
+inoremap <silent><nowait> <M-x>  :Commands<cr>
+xnoremap <silent><nowait> <M-x>  :Commands<cr>
+vnoremap <silent><nowait> <M-x>  :Commands<cr>
+
 let g:fzf_tags_command = "ctags -R"
 let g:fzf_preview_window = 'right:60%'
 let g:fzf_layout = { 'window': 'botright new' }
@@ -1090,7 +1094,7 @@ endif
 
 nnoremap <C-l> v$h
 nnoremap <C-h> v0
-
+inoremap <C-CR> <cr><C-w>
 
 nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
@@ -1106,3 +1110,5 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 if !exists('g:vscode')
   autocmd bufenter * RainbowToggleOn
 endif
+
+nnoremap <space>fp :e $MYVIMRC<cr>

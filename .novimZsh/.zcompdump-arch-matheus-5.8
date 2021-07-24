@@ -1,8 +1,7 @@
-#files: 991	version: 5.8
+#files: 996	version: 5.8
 
 _comps=(
 '-' '_precommand'
-'-*-' '_bootctl'
 '.' '_source'
 '5g' '_go'
 '5l' '_go'
@@ -244,6 +243,7 @@ _comps=(
 'cplay' '_cplay'
 'cppcheck' '_cppcheck'
 'cpupower' '_cpupower'
+'cpu-x' '_cpu-x'
 'createdb' '_pgsql_utils'
 'createuser' '_pgsql_utils'
 'crontab' '_crontab'
@@ -393,6 +393,7 @@ _comps=(
 'findmnt' '_findmnt'
 'finger' '_finger'
 'firefox' '_mozilla'
+'firejail' '_firejail'
 '-first-' '_first'
 'fixdlsrps' '_psutils'
 'fixfmps' '_psutils'
@@ -405,6 +406,7 @@ _comps=(
 'fixwpps' '_psutils'
 'fixwwps' '_psutils'
 'flac' '_flac'
+'flameshot' '_flameshot'
 'flatpak' '_flatpak'
 'fleetctl' '_fleetctl'
 'flex' '_flex'
@@ -1026,6 +1028,7 @@ _comps=(
 'parec' '_pulseaudio'
 'parecord' '_pulseaudio'
 'paru' '_paru'
+'pass' '_pass'
 'passwd' '_users'
 'paste' '_paste'
 'pasuspender' '_pulseaudio'
@@ -1308,7 +1311,6 @@ _comps=(
 'sha512t256' '_cksum'
 'shasum' '_shasum'
 'shellcheck' '_shellcheck'
-'shell-script' '_bootctl'
 'shift' '_arrays'
 'show' '_mh'
 'showchar' '_psutils'
@@ -1897,35 +1899,36 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
-autoload -Uz _rust _afew _alacritty _android _arch-audit \
-            _archinstallscripts _archlinux-java _artisan _asdf _atach \
-            _aur _auracle _bat _bitcoin-cli _bluetoothctl \
-            _bootctl _borg _bower _bundle _busctl \
-            _caffeinate _cap _cargo _cask _ccache \
-            _cf _cheat _choc _chromium _cmake \
-            _cmus _coffee _composer _conan _concourse \
-            _console _coredumpctl _cppcheck _curl _dad \
-            _debuild _deno _devtools _dget _dhcpcd \
-            _diana _docker _docker-compose _docker-machine _docpad \
-            _downgrade _drush _ecdsautil _emulator _envdir \
-            _exa _exportfs _fab _fail2ban-client _fd \
-            _ffind _flatpak _fleetctl _flutter _force \
-            _fwupdmgr _gas _gh _ghc _gist \
-            _git-flow _git-journal _git-pulls _git-revise _git-wtf \
-            _glances _golang _google _googler _gpgconf \
-            _gtk-launch _hg _hledger _homestead _hostnamectl \
-            _httpie _ibus _include-what-you-use _inxi _jmeter \
-            _jmeter-plugins _john _jonas _journalctl _jrnl \
-            _jupyter _kak _kdeconnect _kernel-install _khal \
-            _kitchen _kitty _knife _language_codes _libinput \
-            _lilypond _localectl _loginctl _lsd _luarocks \
-            _luarocks-admin _lunchy _machinectl _mako _makoctl \
-            _mc _meson _middleman _mina _mix \
-            _mkinitcpio _mpv _msfconsole _msfvenom _mssh \
-            _mussh _mvn _nano _nanoc _netctl \
-            _networkctl _nftables _nim _nimble _ninja \
-            _nnn _node _nvm _openssl _optirun \
-            _opustools _pacman _paru _patool _perf \
+autoload -Uz _rust _flameshot _afew _alacritty _android \
+            _arch-audit _archinstallscripts _archlinux-java _artisan _asdf \
+            _atach _aur _auracle _bat _bitcoin-cli \
+            _bluetoothctl _bootctl _borg _bower _bundle \
+            _busctl _caffeinate _cap _cargo _cask \
+            _ccache _cf _cheat _choc _chromium \
+            _cmake _cmus _coffee _composer _conan \
+            _concourse _console _coredumpctl _cppcheck _cpu-x \
+            _curl _dad _debuild _deno _devtools \
+            _dget _dhcpcd _diana _docker _docker-compose \
+            _docker-machine _docpad _downgrade _drush _ecdsautil \
+            _emulator _envdir _exa _exportfs _fab \
+            _fail2ban-client _fd _ffind _firejail _flameshot \
+            _flatpak _fleetctl _flutter _force _fwupdmgr \
+            _gas _gh _ghc _gist _git-flow \
+            _git-journal _git-pulls _git-revise _git-wtf _glances \
+            _golang _google _googler _gpgconf _gtk-launch \
+            _hg _hledger _homestead _hostnamectl _httpie \
+            _ibus _include-what-you-use _inxi _jmeter _jmeter-plugins \
+            _john _jonas _journalctl _jrnl _jupyter \
+            _kak _kdeconnect _kernel-install _khal _kitchen \
+            _kitty _knife _language_codes _libinput _lilypond \
+            _localectl _loginctl _lsd _luarocks _luarocks-admin \
+            _lunchy _machinectl _mako _makoctl _mc \
+            _meson _middleman _mina _mix _mkinitcpio \
+            _mpv _msfconsole _msfvenom _mssh _mussh \
+            _mvn _nano _nanoc _netctl _networkctl \
+            _nftables _nim _nimble _ninja _nnn \
+            _node _nvm _openssl _optirun _opustools \
+            _pacman _paru _pass _patool _perf \
             _periscope _pew _pgsql_utils _phing _pixz \
             _pkcon _pkgfile _pkgstats _play _playerctl \
             _pm2 _ponymix _port _powerpill _protoc \
@@ -2100,5 +2103,5 @@ autoload -Uz +X _call_program
 typeset -gUa _comp_assocs
 _comp_assocs=( '' )
 
-#omz revision: 36f444ed7325720ec05f182781ec7d6c9a4d675c
+#omz revision: dac3314c76e799cddbbe5cf63870d31861626059
 #omz fpath: /home/matheus/.oh-my-zsh/custom/plugins/zsh-vim-mode /home/matheus/.oh-my-zsh/plugins/per-directory-history /home/matheus/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/matheus/.oh-my-zsh/custom/plugins/zsh-autosuggestions /home/matheus/.oh-my-zsh/plugins/colored-man-pages /home/matheus/.oh-my-zsh/plugins/history-substring-search /home/matheus/.oh-my-zsh/plugins/zsh-interactive-cd /home/matheus/.oh-my-zsh/plugins/rust /home/matheus/.oh-my-zsh/plugins/git /home/matheus/.oh-my-zsh/plugins/ubuntu /home/matheus/.oh-my-zsh/plugins/archlinux /home/matheus/.oh-my-zsh/functions /home/matheus/.oh-my-zsh/completions /usr/local/share/zsh/site-functions /usr/share/zsh/site-functions /usr/share/zsh/functions/Calendar /usr/share/zsh/functions/Chpwd /usr/share/zsh/functions/Completion /usr/share/zsh/functions/Completion/Base /usr/share/zsh/functions/Completion/Linux /usr/share/zsh/functions/Completion/Unix /usr/share/zsh/functions/Completion/X /usr/share/zsh/functions/Completion/Zsh /usr/share/zsh/functions/Exceptions /usr/share/zsh/functions/Math /usr/share/zsh/functions/MIME /usr/share/zsh/functions/Misc /usr/share/zsh/functions/Newuser /usr/share/zsh/functions/Prompts /usr/share/zsh/functions/TCP /usr/share/zsh/functions/VCS_Info /usr/share/zsh/functions/VCS_Info/Backends /usr/share/zsh/functions/Zftp /usr/share/zsh/functions/Zle
