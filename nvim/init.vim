@@ -290,7 +290,7 @@ if has('nvim-0.5') && !exists("g:vscode")
   nnoremap <space>hK <cmd>Telescope keymaps<cr>
   nnoremap <space>q <cmd>Telescope quickfix<cr>
   nnoremap <space>t <cmd>Telescope filetypes<cr>
-  nnoremap <space>lm <cmd>Telescope marks<cr>
+  nnoremap <space>M <cmd>Telescope marks<cr>
   nnoremap <space>lr <cmd>Telescope lsp_references<cr>
   nnoremap <space>la <cmd>Telescope lsp_code_actions<cr>
   nnoremap <space>li <cmd>Telescope lsp_implementations<cr>
@@ -343,7 +343,7 @@ EOF
   lua require('telescope').load_extension('vim_bookmarks')
   nmap <space><CR> :Telescope vim_bookmarks all<cr>
   " Only pick from bookmarks in current file
-  nmap <space>M :Telescope vim_bookmarks current_file<cr>
+  nmap <space>Bm :Telescope vim_bookmarks current_file<cr>
 
 lua << EOF
   local actions = require('telescope.actions')
@@ -1112,3 +1112,4 @@ if !exists('g:vscode')
 endif
 
 nnoremap <space>fp :e $MYVIMRC<cr>
+cnoremap <C-y> <c-r>*
