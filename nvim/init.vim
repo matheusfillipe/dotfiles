@@ -23,16 +23,12 @@ autocmd VimLeave * silent exec "! echo -ne '\e[5 q'"
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-" TODO: Load plugins here (pathogen or vundle)
-
 " Turn on syntax highlighting
 syntax on
 
 " For plugins to load correctly
 filetype plugin indent on
-
-" TODO: Pick a leader key
-" let mapleader = ","
+filetype plugin on
 
 " Security
 set modelines=0
@@ -50,8 +46,8 @@ set visualbell
 set encoding=utf-8
 
 " Whitespace
-set wrap
-set textwidth=79
+set nowrap
+" set textwidth=79
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -234,9 +230,11 @@ Plug '907th/vim-auto-save'
 Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+Plug 'jreybert/vimagit'
 Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
-Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
+" Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
 Plug 'numirias/semshi', Cond(!exists('g:vscode'), { 'do': ':UpdateRemotePlugins' })
 Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
 Plug 'dstein64/vim-startuptime', Cond(!exists('g:vscode'))
@@ -271,6 +269,8 @@ nmap <space>Bk <Plug>BookmarkMoveUp
 nmap <space>Bj <Plug>BookmarkMoveDown
 nmap <space>Bg <Plug>BookmarkMoveToLine
  
+" Magit
+nmap <space>gg :MagitOnly<cr>
 
 nnoremap <space>fy :let @+ = expand("%:p")<cr>
 
@@ -295,7 +295,7 @@ if has('nvim-0.5') && !exists("g:vscode")
   nnoremap <space>la <cmd>Telescope lsp_code_actions<cr>
   nnoremap <space>li <cmd>Telescope lsp_implementations<cr>
   nnoremap <space>ld <cmd>Telescope lsp_definitions<cr>
-  nnoremap <space>gg <cmd>Telescope git_commits<cr>
+  nnoremap <space>gc <cmd>Telescope git_commits<cr>
   nnoremap <space>gb <cmd>Telescope git_branches<cr>
   nnoremap <space>gs <cmd>Telescope git_status<cr>
   nnoremap <space>gS <cmd>Telescope git_stash<cr>
@@ -432,7 +432,7 @@ function! MarkdownOpen()
   execute ":!okular ".expand('%:p')." &"
 endfunction
 command! Mdopen :call MarkdownOpen()
-nnoremap <leader><leader>o :Mdopen<CR>
+nnoremap <leader>o :Mdopen<CR>
 
 nnoremap  <leader>f <Plug>(easymotion-s)
 
@@ -818,8 +818,8 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
-
+" set cmdheight=2
+ 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
@@ -1045,7 +1045,6 @@ nmap <leader>; :call ColonToggle()<CR>
 xmap <leader>; :call ColonToggle()<CR>
 vmap <leader>; :call ColonToggle()<CR>
 
-inoremap ;; <C-o>A;
 
 " Clipboard
 nnoremap dil ^d$
@@ -1095,6 +1094,7 @@ endif
 nnoremap <C-l> v$h
 nnoremap <C-h> v0
 inoremap <C-CR> <cr><C-w>
+inoremap <leader><CR> <cr><C-w>
 
 nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
@@ -1113,3 +1113,7 @@ endif
 
 nnoremap <space>fp :e $MYVIMRC<cr>
 cnoremap <C-y> <c-r>*
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#show_buffers = 0
