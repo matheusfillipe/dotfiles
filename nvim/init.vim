@@ -11,6 +11,8 @@
 " augroup END
 set clipboard=unnamedplus
 set timeoutlen=500
+set viminfo='1000,f1
+set splitbelow
 
 let $ZDOTDIR = $HOME
 if $NOVIMZSH
@@ -231,11 +233,11 @@ Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'jkramer/vim-checkbox'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'jreybert/vimagit'
 Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
 " Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
-Plug 'numirias/semshi', Cond(!exists('g:vscode'), { 'do': ':UpdateRemotePlugins' })
 Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
 Plug 'dstein64/vim-startuptime', Cond(!exists('g:vscode'))
 Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
@@ -250,6 +252,7 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'fannheyward/telescope-coc.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'phaazon/hop.nvim'
 endif
 call plug#end()
 "if empty(glob("~/.vim/plugins"))
@@ -269,12 +272,23 @@ nmap <space>Bk <Plug>BookmarkMoveUp
 nmap <space>Bj <Plug>BookmarkMoveDown
 nmap <space>Bg <Plug>BookmarkMoveToLine
  
+nnoremap  <leader>f <Plug>(easymotion-s)
+
 " Magit
 nmap <space>gg :MagitOnly<cr>
 
 nnoremap <space>fy :let @+ = expand("%:p")<cr>
 
 if has('nvim-0.5') && !exists("g:vscode")
+
+  " Hop plugin
+  lua << EOF
+  require'hop'.setup()
+EOF
+  nnoremap  <leader><leader>w :HopWord<cr>
+  nnoremap  <leader>f :HopChar1<cr>
+  nnoremap  <leader>/ :HopPattern<cr>
+
   " Find files using Telescope command-line sugar.
   nnoremap <space>ff <cmd>Telescope find_files<cr>
   nnoremap <space>fr <cmd>Telescope oldfiles<cr>
@@ -387,6 +401,8 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+
 EOF
 endif
 
@@ -401,25 +417,6 @@ let g:mkdx#settings     = { 'highlight': { 'enable': 1 },
                         \ 'fold': { 'enable': 1 },
                         \ 'map': { 'prefix': '<space>' }}
 
-function! MyCustomHighlights()
-  hi semshiLocal           ctermfg=209 guifg=#ff875f
-  hi semshiGlobal          ctermfg=214 guifg=#5f5ff0 cterm=bold gui=bold
-  hi semshiImported        ctermfg=214 guifg=#5f5ff0
-  hi semshiParameter       ctermfg=75  guifg=#cccccc
-  hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
-  hi semshiFree            ctermfg=218 guifg=#ffafd7
-  hi semshiBuiltin         ctermfg=207 guifg=#ff5fff
-  hi semshiAttribute       ctermfg=49  guifg=#00ffaf
-  hi semshiSelf            ctermfg=249 guifg=#b2b2b2
-  hi semshiUnresolved      ctermfg=226 guifg=#ff5f00 cterm=underline gui=underline
-  hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
-
-  hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-  hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
-  sign define semshiError text=E> texthl=semshiErrorSign
-endfunction
-" autocmd FileType python call MyCustomHighlights()
-" autocmd FileType python Semshi enable
 " :h mkdx-setting-toc-details-child-summary
 " let g:mkdx#settings = { 'toc': { 'details': { 'child_summary': 'show {{count}} items' } } }
 " 
@@ -434,7 +431,6 @@ endfunction
 command! Mdopen :call MarkdownOpen()
 nnoremap <leader>o :Mdopen<CR>
 
-nnoremap  <leader>f <Plug>(easymotion-s)
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
@@ -642,9 +638,9 @@ nnoremap <C-M-l> <C-w>l
 noremap ZW :bd<CR>
 nnoremap <space>n :call vm#commands#ctrln(1)<CR>
 
-nnoremap <leader>pt :set dictionary+=/usr/share/dict/pt_BR.dic<CR>
-nnoremap <leader>en :set dictionary+=/usr/share/dict/american-english <CR>
-nnoremap <leader>c :set dictionary=<CR>
+" nnoremap <leader>lp :set dictionary+=/usr/share/dict/pt_BR.dic<CR>
+" nnoremap <leader>len :set dictionary+=/usr/share/dict/american-english <CR>
+" nnoremap <leader>c :set dictionary=<CR>
 
 function! Spell_correct(n)
 "  let n = nr2char(getchar())
@@ -743,6 +739,10 @@ nnoremap <A-w> :tabnext <CR>
 nnoremap <A-q> :tabprevious <CR>
 tnoremap <A-w> <C-\><C-n>:tabnext <CR>
 tnoremap <A-q> <C-\><C-n>:tabprevious <CR>
+nnoremap <A-]> :tabnext <CR>
+nnoremap <A-[> :tabprevious <CR>
+tnoremap <A-]> <C-\><C-n>:tabnext <CR>
+tnoremap <A-[> <C-\><C-n>:tabprevious <CR>
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
@@ -1117,3 +1117,6 @@ cnoremap <C-y> <c-r>*
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#show_buffers = 0
+
+
+nnoremap <leader>cc i- [ ] 

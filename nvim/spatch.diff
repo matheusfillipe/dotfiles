@@ -1,6 +1,6 @@
---- init.vim	2021-06-20 01:23:32.126440838 -0300
-+++ serv_init.vim	2021-06-25 22:50:40.012328436 -0300
-@@ -1,15 +1,14 @@
+--- init.vim	2021-07-28 15:25:56.418701811 -0300
++++ serv_init.vim	2021-07-28 15:25:50.408882062 -0300
+@@ -1,15 +1,15 @@
 -" function! SendClipBoard()
 -"   execute("silent redir! > /tmp/mattf_lcopy_nvim")
 -"   execute("silent echo @0")
@@ -24,6 +24,7 @@
 +  au!
 +  au TextYankPost * :call SendClipBoard()
 +augroup END
- 
- let $ZDOTDIR = $HOME
- if $NOVIMZSH
++" set clipboard=unnamedplus
+ set timeoutlen=500
+ set viminfo='1000,f1
+ set splitbelow
