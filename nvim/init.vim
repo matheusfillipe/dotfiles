@@ -48,7 +48,8 @@ set visualbell
 set encoding=utf-8
 
 " Whitespace
-set nowrap
+" set nowrap
+set wrap
 " set textwidth=79
 set tabstop=2
 set shiftwidth=2
@@ -241,6 +242,7 @@ Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
 Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
 Plug 'dstein64/vim-startuptime', Cond(!exists('g:vscode'))
 Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
+Plug 'farfanoide/vim-kivy', Cond(!exists('g:vscode'))
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
@@ -296,12 +298,12 @@ EOF
   nnoremap <space><space> <cmd>Telescope find_files<cr>
   nnoremap <space>fg <cmd>Telescope live_grep<cr>
   nnoremap <space>b <cmd>Telescope buffers<cr>
-  nnoremap <space>fh <cmd>Telescope help_tags<cr>
   nnoremap <space>: <cmd>Telescope command_history<cr>
   nnoremap <space>h/ <cmd>Telescope search_history<cr>
   nnoremap <space>/ <cmd>Telescope current_buffer_fuzzy_find<cr>
   nnoremap <space>= <cmd>Telescope spell_suggest<cr>
   nnoremap <space>hK <cmd>Telescope keymaps<cr>
+  nnoremap <space>hh <cmd>Telescope help_tags<cr>
   nnoremap <space>q <cmd>Telescope quickfix<cr>
   nnoremap <space>t <cmd>Telescope filetypes<cr>
   nnoremap <space>M <cmd>Telescope marks<cr>
@@ -322,21 +324,24 @@ EOF
 
   
   " Projects
-  lua require'telescope'.load_extension('project')
 lua << EOF
   require('telescope').setup {
   extensions = {
     project = {
       base_dirs = {
         {path = '~/Projects', max_depth = 4},
-        {path = '~/projects', max_depth = 4},
+        -- {path = '~/projects', max_depth = 4},
         {path = '~/Programs', max_depth = 4},
-        {path = '~/programs', max_depth = 4},
-      }
+        -- {path = '~/programs', max_depth = 4},
+        {path = '~/Jobs',     max_depth = 4},
+      },
+      hidden_files = true
   }
 }
 }
 EOF
+  lua require'telescope'.load_extension('project')
+
   nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
   " Emojis
@@ -947,6 +952,8 @@ nnoremap <A-f> :Files<CR>
 nnoremap <A-r> :Rg<CR>
 nnoremap <space><space> :Files<CR>
 autocmd VimEnter * nmap <A-b> :Buffers<CR>
+autocmd VimEnter * nmap <A-S-b> :Buffers<CR>
+autocmd VimEnter * nmap <A-B> :Buffers<CR>
 nmap <A-h> :History
 nmap <M-:> :Commands<CR>
 nnoremap <silent><nowait> <M-x>  :Commands<cr>
@@ -1094,8 +1101,6 @@ endif
 nnoremap <C-l> v$h
 nnoremap <C-h> v0
 inoremap <C-CR> <cr><C-w>
-inoremap <leader><CR> <cr><C-w>
-
 nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
 if exists('g:vscode')
@@ -1118,5 +1123,41 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#show_buffers = 0
 
-
 nnoremap <leader>cc i- [ ] 
+map <space>[ :b#<cr>
+map <space><BS> :b#<cr>
+map <M-C-N> :bn<cr>
+map <M-C-P> :bp<cr>
+
+" Nice tips
+nnoremap n nzzzv
+nnoremap N Nzzzv
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+vnoremap <leader>j :m '>+1<cr>gv=gv
+vnoremap <leader>k :m '<-2<cr>gv=gv
+inoremap <M-j> <esc>:m '>+1<cr>==
+nnoremap <leader>j :m .+1<cr>==
+nnoremap <leader>k :m .-2<cr>==
+nnoremap cn *``cgn
+nnoremap cN *``cgN
+nnoremap <silent> [<space>  :<c-u>put!=repeat([''],v:count)<bar>']+1<cr>
+nnoremap <silent> ]<space>  :<c-u>put =repeat([''],v:count)<bar>'[-1<cr>
+
+" Undo breakpoints
+inoremap , ,<c-g>u
+inoremap ; ;<c-g>u
+inoremap : :<c-g>u
+inoremap ( (<c-g>u
+inoremap { {<c-g>u
+inoremap <M-k> <esc>:m '<-2<cr>==
+inoremap [ [<c-g>u
+inoremap ) )<c-g>u
+inoremap } }<c-g>u
+inoremap ] ]<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+
+let g:python3_host_prog = "/usr/bin/python3"
