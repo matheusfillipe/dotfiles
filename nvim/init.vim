@@ -325,16 +325,34 @@ EOF
   
   " Projects
 lua << EOF
+  project_dirs = {"~/Projects", "~/Programs", "~/projects", "~/programs", "~/Jobs"}
+
+  function exists(file)
+     local ok, err, code = os.rename(file, file)
+     if not ok then
+        if code == 13 then
+           return true
+        end
+     end
+     return ok
+  end
+
+  function is_dir(path)
+    path = path:gsub( "~", os.getenv ("HOME"))
+    return exists(path.."/")
+  end
+
+  dirs = {}
+  for _,v in pairs(project_dirs) do
+    if is_dir(v) then
+      table.insert(dirs, v)
+    end
+  end
+
   require('telescope').setup {
   extensions = {
     project = {
-      base_dirs = {
-        {path = '~/Projects', max_depth = 4},
-        -- {path = '~/projects', max_depth = 4},
-        {path = '~/Programs', max_depth = 4},
-        -- {path = '~/programs', max_depth = 4},
-        {path = '~/Jobs',     max_depth = 4},
-      },
+      base_dirs = dirs,
       hidden_files = true
   }
 }
