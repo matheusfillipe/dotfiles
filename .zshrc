@@ -264,7 +264,7 @@ alias hotreload="ag -l | entr -r "
 alias moshclean="who | grep -v 'via mosh' | grep -oP '(?<=mosh \[)(\d+)(?=\])' | xargs kill"
 alias sus="systemctl --user"
 alias s="sudo systemctl"
-alias mg='emacs --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+alias mg='emacsclient --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
 alias mgc='emacs -nw --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
 
 export EDITOR='vim'
@@ -304,13 +304,10 @@ export https_proxy=''
 export ftp_proxy=''
 export socks_proxy=''
 
-PATH=$HOME/Programs/simFlow/simFlow-3.1:${PATH};export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 8F1FFBF3-4166-531F-536F-118E03C20EE2 588C0655-079F-B357-8FA5-5CEF1F102B8D
-
-export ANDROID_HOME="$HOME/Programs/android-sdk"
 export NVPACK_ROOT="/media/matheus/Elements SE/CodeWorksforAndroid"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+#export SDKMAN_DIR="$HOME/.sdkman"
+# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 [ -z "$DISPLAY" ] && export DISPLAY=:0 
 
 

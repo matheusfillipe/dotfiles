@@ -11,7 +11,7 @@
 " augroup END
 set clipboard=unnamedplus
 set timeoutlen=500
-set viminfo='1000,f1
+:set viminfo='1000,f1
 set splitbelow
 
 let $ZDOTDIR = $HOME
@@ -222,7 +222,8 @@ Plug 'chr4/nginx.vim'
 Plug 'neoclide/coc.nvim', Cond(!exists('g:vscode'), {'branch': 'release'})
 Plug 'junegunn/fzf.vim', Cond(!exists('g:vscode'))
 Plug 'junegunn/fzf', Cond(!exists('g:vscode') , { 'do': { -> fzf#install() } })
-Plug 'jceb/vim-orgmode', Cond(!exists('g:vscode'))
+Plug 'antoinemadec/coc-fzf', Cond(!exists('g:vscode'))
+" Plug 'jceb/vim-orgmode', Cond(!exists('g:vscode'))
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
 Plug 'sheerun/vim-polyglot', Cond(!exists('g:vscode'))
 Plug 'joshdick/onedark.vim', Cond(!exists('g:vscode'))
@@ -248,22 +249,24 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  Plug 'tom-anders/telescope-vim-bookmarks.nvim'
+ " Plug 'tom-anders/telescope-vim-bookmarks.nvim'
+  Plug 'matheusfillipe/telescope-vim-bookmarks.nvim'
   Plug 'folke/which-key.nvim'
   Plug 'xiyaowong/telescope-emoji.nvim'
   Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'fannheyward/telescope-coc.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'phaazon/hop.nvim'
+  Plug 'ThePrimeagen/refactoring.nvim'
 endif
 call plug#end()
-"if empty(glob("~/.vim/plugins"))
-"    PlugInstall
-"endif
-"
+if empty(glob("~/.config/nvim/plugged"))
+    PlugInstall
+endif
 
-nmap <leader>m <Plug>BookmarkToggle
-nmap <space>m <Plug>BookmarkToggle
+
+let g:bookmark_no_default_key_mappings = 1
+nmap <space>Bm <Plug>BookmarkToggle
 nmap <space>Bi <Plug>BookmarkAnnotate
 nmap <space>Ba <Plug>BookmarkShowAll
 nmap <space>Bj <Plug>BookmarkNext
@@ -306,7 +309,7 @@ EOF
   nnoremap <space>hh <cmd>Telescope help_tags<cr>
   nnoremap <space>q <cmd>Telescope quickfix<cr>
   nnoremap <space>t <cmd>Telescope filetypes<cr>
-  nnoremap <space>M <cmd>Telescope marks<cr>
+  nnoremap <space>m <cmd>Telescope marks<cr>
   nnoremap <space>lr <cmd>Telescope lsp_references<cr>
   nnoremap <space>la <cmd>Telescope lsp_code_actions<cr>
   nnoremap <space>li <cmd>Telescope lsp_implementations<cr>
@@ -457,6 +460,7 @@ nnoremap <leader>o :Mdopen<CR>
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
+  \ 'coc-lua',
   \ 'coc-tsserver',
   \ 'coc-html',
   \ 'coc-css',
@@ -472,7 +476,10 @@ nmap <silent> <C-_> <Plug>(pydocstring)
 
 
 " Doom emacs like things
-nnoremap <C-/> gc<space>
+nnoremap <c-_> gc<space>  
+vnoremap <c-_> gc<space>gv
+nnoremap <c-s-/> gc<space>  
+vnoremap <c-s-/> gc<space>gv
 nnoremap <space>hk :verbose map! 
 
 
@@ -660,6 +667,24 @@ nnoremap <C-M-l> <C-w>l
 "nnoremap <Tab> :bn<CR>
 noremap ZW :bd<CR>
 nnoremap <space>n :call vm#commands#ctrln(1)<CR>
+
+" Window Movements
+nnoremap <space>wh <C-w>h
+nnoremap <space>wj <C-w>j
+nnoremap <space>wk <C-w>k
+nnoremap <space>wl <C-w>l
+nnoremap <space>wH <C-w>H
+nnoremap <space>wJ <C-w>J
+nnoremap <space>wK <C-w>K
+nnoremap <space>wL <C-w>L
+nnoremap <space>w= <C-w>=
+nnoremap <space>w0 <C-w>0
+nnoremap <space>ws <C-w>s
+nnoremap <space>wv <C-w>v
+nnoremap <space>wq <C-w>q
+nnoremap <space>wm <C-w>o
+nnoremap <space>wx <C-w>x
+nnoremap <space>wd :bd
 
 " nnoremap <leader>lp :set dictionary+=/usr/share/dict/pt_BR.dic<CR>
 " nnoremap <leader>len :set dictionary+=/usr/share/dict/american-english <CR>
@@ -885,6 +910,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Use <A-j> for both expand and jump (make expand higher priority.)
 imap <A-l> <Plug>(coc-snippets-expand-jump)
 imap <M-L> <Plug>(coc-snippets-expand)
+nnoremap <space>is :CocList snippets<cr>
 
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
@@ -1024,6 +1050,7 @@ nnoremap <C-S-l> vg_
 nnoremap <C-S-h> v0
 inoremap <C-BS> <Esc>vbc
 inoremap <M-b> <Esc>bi
+inoremap <M-f> <Esc>wa
 inoremap <M-w> <Esc>wi
 inoremap <C-S> <Esc>:w<CR>a
 nnoremap <C-S> :w<CR>
@@ -1154,7 +1181,6 @@ vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 vnoremap <leader>j :m '>+1<cr>gv=gv
 vnoremap <leader>k :m '<-2<cr>gv=gv
-inoremap <M-j> <esc>:m '>+1<cr>==
 nnoremap <leader>j :m .+1<cr>==
 nnoremap <leader>k :m .-2<cr>==
 nnoremap cn *``cgn
@@ -1168,7 +1194,6 @@ inoremap ; ;<c-g>u
 inoremap : :<c-g>u
 inoremap ( (<c-g>u
 inoremap { {<c-g>u
-inoremap <M-k> <esc>:m '<-2<cr>==
 inoremap [ [<c-g>u
 inoremap ) )<c-g>u
 inoremap } }<c-g>u
@@ -1176,6 +1201,47 @@ inoremap ] ]<c-g>u
 inoremap . .<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
+inoremap <CR> <CR><c-g>u
 
 
 let g:python3_host_prog = "/usr/bin/python3"
+
+lua << EOF
+local refactor = require("refactoring")
+refactor.setup()
+
+-- telescope refactoring helper
+local function refactor(prompt_bufnr)
+    local content = require("telescope.actions.state").get_selected_entry(
+        prompt_bufnr
+    )
+    require("telescope.actions").close(prompt_bufnr)
+    require("refactoring").refactor(content.value)
+end
+-- NOTE: M is a global object
+-- for the sake of simplicity in this example
+-- you can extract this function and the helper above
+-- and then require the file and call the extracted function
+-- in the mappings below
+M = {}
+M.refactors = function()
+    require("telescope.pickers").new({}, {
+        prompt_title = "refactors",
+        finder = require("telescope.finders").new_table({
+            results = require("refactoring").get_refactors(),
+        }),
+        sorter = require("telescope.config").values.generic_sorter({}),
+        attach_mappings = function(_, map)
+            map("i", "<CR>", refactor)
+            map("n", "<CR>", refactor)
+            return true
+        end
+    }):find()
+end
+
+vim.api.nvim_set_keymap("v", "<Leader>re", [[ <Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<Leader>rf", [[ <Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<Leader>rr", [[ <Cmd>lua M.refactors()<CR>]], {noremap = true, silent = true, expr = false})
+EOF
+
+
