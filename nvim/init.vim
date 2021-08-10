@@ -908,8 +908,10 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Snippets
 
 " Use <A-j> for both expand and jump (make expand higher priority.)
+imap <M-CR> <Plug>(coc-snippets-expand)
 imap <A-l> <Plug>(coc-snippets-expand-jump)
 imap <M-L> <Plug>(coc-snippets-expand)
+
 nnoremap <space>is :CocList snippets<cr>
 
 " Use <leader>x for convert visual selected code to snippet
