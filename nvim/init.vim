@@ -11,8 +11,9 @@
 " augroup END
 set clipboard=unnamedplus
 set timeoutlen=500
-:set viminfo='1000,f1
+set viminfo='1000,f1
 set splitbelow
+" set termguicolors
 
 let $ZDOTDIR = $HOME
 if $NOVIMZSH
@@ -236,7 +237,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'jkramer/vim-checkbox'
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 Plug 'jreybert/vimagit'
 Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
 " Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
@@ -249,14 +250,14 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
- " Plug 'tom-anders/telescope-vim-bookmarks.nvim'
-  Plug 'matheusfillipe/telescope-vim-bookmarks.nvim'
+  Plug 'tom-anders/telescope-vim-bookmarks.nvim'
   Plug 'folke/which-key.nvim'
   Plug 'xiyaowong/telescope-emoji.nvim'
   Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'fannheyward/telescope-coc.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'phaazon/hop.nvim'
+  Plug 'AckslD/nvim-neoclip.lua'
   Plug 'ThePrimeagen/refactoring.nvim'
 endif
 call plug#end()
@@ -264,6 +265,8 @@ if empty(glob("~/.config/nvim/plugged"))
     PlugInstall
 endif
 
+let g:pydocstring_doq_path = "/home/matheus/.local/bin/doq"
+let g:vim_markdown_folding_disabled = 1
 
 let g:bookmark_no_default_key_mappings = 1
 nmap <space>Bm <Plug>BookmarkToggle
@@ -310,10 +313,10 @@ EOF
   nnoremap <space>q <cmd>Telescope quickfix<cr>
   nnoremap <space>t <cmd>Telescope filetypes<cr>
   nnoremap <space>m <cmd>Telescope marks<cr>
-  nnoremap <space>lr <cmd>Telescope lsp_references<cr>
-  nnoremap <space>la <cmd>Telescope lsp_code_actions<cr>
-  nnoremap <space>li <cmd>Telescope lsp_implementations<cr>
-  nnoremap <space>ld <cmd>Telescope lsp_definitions<cr>
+  nnoremap <space>cr <cmd>Telescope lsp_references<cr>
+  nnoremap <space>ca <cmd>Telescope lsp_code_actions<cr>
+  nnoremap <space>ci <cmd>Telescope lsp_implementations<cr>
+  nnoremap <space>cd <cmd>Telescope lsp_definitions<cr>
   nnoremap <space>gc <cmd>Telescope git_commits<cr>
   nnoremap <space>gb <cmd>Telescope git_branches<cr>
   nnoremap <space>gs <cmd>Telescope git_status<cr>
@@ -385,7 +388,12 @@ EOF
   " Only pick from bookmarks in current file
   nmap <space>Bm :Telescope vim_bookmarks current_file<cr>
 
+  " clipboard
+  lua require('telescope').load_extension('neoclip')
+  nmap <leader>C :Telescope neoclip<cr>
+
 lua << EOF
+
   local actions = require('telescope.actions')
   -- Global remapping
   ------------------------------
@@ -472,8 +480,7 @@ let g:coc_global_extensions = [
 \ ]
 " pydocstring
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
-nmap <silent> <C-_> <Plug>(pydocstring)
-
+nmap <silent> <space>cs <Plug>(pydocstring)
 
 " Doom emacs like things
 nnoremap <c-_> gc<space>  
@@ -757,11 +764,11 @@ set path=.,,**
  	
 nnoremap <A-\> :NERDTreeToggle<CR>
 nnoremap <leader><A-\> :NERDTreeToggle %<CR>
-nnoremap tt :tabnew<CR>
-nnoremap td :tab split<CR>
-nnoremap tn :tabn<CR>
-nnoremap tp :tabp<CR>
-nnoremap tc :tabclose<CR>
+nnoremap tt :tab split<CR>
+" nnoremap td :tab split<CR>
+" nnoremap tn :tabn<CR>
+" nnoremap tp :tabp<CR>
+" nnoremap tc :tabclose<CR>
 " nnoremap <Tab> :tabn<CR>
 nnoremap <S-Tab> :tabp<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -979,7 +986,7 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>cc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
@@ -989,7 +996,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " FZF
 "
@@ -1003,9 +1010,7 @@ autocmd VimEnter * nmap <A-B> :Buffers<CR>
 nmap <A-h> :History
 nmap <M-:> :Commands<CR>
 nnoremap <silent><nowait> <M-x>  :Commands<cr>
-inoremap <silent><nowait> <M-x>  :Commands<cr>
-xnoremap <silent><nowait> <M-x>  :Commands<cr>
-vnoremap <silent><nowait> <M-x>  :Commands<cr>
+inoremap <silent><nowait> <M-x>  <esc>:Commands<cr>i
 
 let g:fzf_tags_command = "ctags -R"
 let g:fzf_preview_window = 'right:60%'
@@ -1046,6 +1051,7 @@ autocmd FileType javascript noremap <silent><F11> :NodeInspectStop<cr>
 
 " Workarounds for vim-orgmode
 autocmd FileType org nnoremap <C-Space> :OrgCheckBoxToggle<CR>
+autocmd FileType markdown nnoremap <C-c><C-c> :call checkbox#ToggleCB()<CR>
 
 " Emacs like
 nnoremap <C-S-l> vg_
@@ -1189,6 +1195,7 @@ nnoremap cn *``cgn
 nnoremap cN *``cgN
 nnoremap <silent> [<space>  :<c-u>put!=repeat([''],v:count)<bar>']+1<cr>
 nnoremap <silent> ]<space>  :<c-u>put =repeat([''],v:count)<bar>'[-1<cr>
+nnoremap <space>fc :execute "%bd\|e#"<CR> :Startify<CR>
 
 " Undo breakpoints
 inoremap , ,<c-g>u

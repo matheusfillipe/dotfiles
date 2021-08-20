@@ -264,8 +264,8 @@ alias hotreload="ag -l | entr -r "
 alias moshclean="who | grep -v 'via mosh' | grep -oP '(?<=mosh \[)(\d+)(?=\])' | xargs kill"
 alias sus="systemctl --user"
 alias s="sudo systemctl"
-alias mg='emacsclient --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
-alias mgc='emacs -nw --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+alias mg='emacsclient -c --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+alias mgc='emacsclient -c -nw --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
 
 export EDITOR='vim'
 # Add an "alert" alias for long running commands.  Use like so:
@@ -322,6 +322,7 @@ alias fw="awk '{print \$1}'"
 alias arec="parec -d 0 | lame -r -V0 - "
 alias gitclone='git clone --depth 1 $(xclip -o | lw)'
 alias ema="emacs -nw"
+alias cdf='cd "$(dirname $(fzf))"'
 
 function gw {
   awk -v wc="$1" '{print $wc}'
@@ -420,7 +421,6 @@ PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 export PATH=$HOME/.gem/ruby/3.0.0/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
-export QT_QPA_PLATFORMTHEME='gnome'
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_QPA_PLATFORM_PLUGIN_PATH=
 export PATH=$HOME/.gem/ruby/3.0.0/bin:$PATH
