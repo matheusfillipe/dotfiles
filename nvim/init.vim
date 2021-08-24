@@ -765,6 +765,14 @@ set path=.,,**
 nnoremap <A-\> :NERDTreeToggle<CR>
 nnoremap <leader><A-\> :NERDTreeToggle %<CR>
 nnoremap tt :tab split<CR>
+nnoremap { :tabmove -1<CR>
+nnoremap } :tabmove +1<CR>
+nnoremap <M-Q> :tabfirst<CR>
+nnoremap <M-W> :tablast<CR>
+inoremap <M-Q> <Esc>:tabfirst<CR>
+inoremap <M-W> <Esc>:tablast<CR>
+tnoremap <M-Q> <C-\><C-n>:tabfirst<CR>
+tnoremap <M-W> <C-\><C-n>:tablast<CR>
 " nnoremap td :tab split<CR>
 " nnoremap tn :tabn<CR>
 " nnoremap tp :tabp<CR>
@@ -1215,6 +1223,7 @@ inoremap <CR> <CR><c-g>u
 
 let g:python3_host_prog = "/usr/bin/python3"
 
+if has('nvim-0.5') && !exists('g:vscode')
 lua << EOF
 local refactor = require("refactoring")
 refactor.setup()
@@ -1252,5 +1261,5 @@ vim.api.nvim_set_keymap("v", "<Leader>re", [[ <Cmd>lua require('refactoring').re
 vim.api.nvim_set_keymap("v", "<Leader>rf", [[ <Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
 vim.api.nvim_set_keymap("v", "<Leader>rr", [[ <Cmd>lua M.refactors()<CR>]], {noremap = true, silent = true, expr = false})
 EOF
-
+endif
 
