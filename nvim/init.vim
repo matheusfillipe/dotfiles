@@ -156,7 +156,7 @@ set number relativenumber
 
 set nu rnu
 nnoremap s :%s//g<left><left>
-nnoremap <Tab> %
+nnoremap <Tab> <C-i>
 vnoremap s :s//g<left><left>
 vnoremap . :normal .<cr> 
 
@@ -779,6 +779,7 @@ tnoremap <M-W> <C-\><C-n>:tablast<CR>
 " nnoremap tc :tabclose<CR>
 " nnoremap <Tab> :tabn<CR>
 nnoremap <S-Tab> :tabp<CR>
+nnoremap <S-Tab> %
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeChDirMode = 2
@@ -961,10 +962,12 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
+
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
 
