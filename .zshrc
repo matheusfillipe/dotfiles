@@ -5,6 +5,7 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -264,8 +265,8 @@ alias hotreload="ag -l | entr -r "
 alias moshclean="who | grep -v 'via mosh' | grep -oP '(?<=mosh \[)(\d+)(?=\])' | xargs kill"
 alias sus="systemctl --user"
 alias s="sudo systemctl"
-alias mg='emacsclient -c --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
-alias mgc='emacsclient -c -nw --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+alias mg='emacsclient -s main -c --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
+alias mgc='emacsclient -s main -c -nw --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
 
 export EDITOR='vim'
 # Add an "alert" alias for long running commands.  Use like so:
