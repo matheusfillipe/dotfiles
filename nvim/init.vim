@@ -259,6 +259,8 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'phaazon/hop.nvim'
   Plug 'AckslD/nvim-neoclip.lua'
   Plug 'ThePrimeagen/refactoring.nvim'
+  Plug 'gmoe/vim-faust'
+  Plug 'madskjeldgaard/faust-nvim'
 endif
 call plug#end()
 if empty(glob("~/.config/nvim/plugged"))
@@ -280,7 +282,7 @@ nmap <space>Bk <Plug>BookmarkMoveUp
 nmap <space>Bj <Plug>BookmarkMoveDown
 nmap <space>Bg <Plug>BookmarkMoveToLine
  
-nnoremap  <leader>f <Plug>(easymotion-s)
+" nnoremap  <leader>f <Plug>(easymotion-s)
 
 " Magit
 nmap <space>gg :MagitOnly<cr>
@@ -295,6 +297,7 @@ if has('nvim-0.5') && !exists("g:vscode")
 EOF
   nnoremap  <leader><leader>w :HopWord<cr>
   nnoremap  <leader>f :HopChar1<cr>
+  vnoremap  <leader>f :HopChar1<cr>
   nnoremap  <leader>/ :HopPattern<cr>
 
   " Find files using Telescope command-line sugar.
@@ -328,7 +331,10 @@ EOF
   nnoremap <space>aa <cmd>Telescope coc code_actions<cr>
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
 
-  
+ " Faust
+lua << EOF
+require 'faust-nvim'.setup()
+EOF
   " Projects
 lua << EOF
   project_dirs = {"~/Projects", "~/Programs", "~/projects", "~/programs", "~/Jobs"}
