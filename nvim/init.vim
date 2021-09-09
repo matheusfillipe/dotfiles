@@ -261,6 +261,7 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'ThePrimeagen/refactoring.nvim'
   Plug 'gmoe/vim-faust'
   Plug 'madskjeldgaard/faust-nvim'
+  Plug 'romgrk/nvim-treesitter-context'
 endif
 call plug#end()
 if empty(glob("~/.config/nvim/plugged"))
@@ -589,7 +590,8 @@ endfunction
 nmap <silent> <F7> :call ToggleSpell()<CR>
 imap <silent> <F7> <Esc>:call ToggleSpell()<CR>a
 
-nnoremap <C-a> :bn<CR>
+" nnoremap <C-a> :bn<CR>
+nnoremap <C-a> ggVG
 " nnoremap <C-Tab> :bn<CR>
 nnoremap <C-S-Tab> :bp<CR>
 
