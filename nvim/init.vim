@@ -255,7 +255,7 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'xiyaowong/telescope-emoji.nvim'
   Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'fannheyward/telescope-coc.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter'
   Plug 'phaazon/hop.nvim'
   Plug 'AckslD/nvim-neoclip.lua'
   Plug 'ThePrimeagen/refactoring.nvim'
@@ -1192,7 +1192,14 @@ if !exists('g:vscode')
   autocmd bufenter * RainbowToggleOn
 endif
 
-nnoremap <space>fp :e $MYVIMRC<cr>
+" nnoremap <space>fp :e $MYVIMRC<cr>
+
+if has('nvim-0.5') && !exists('g:vscode')
+  nnoremap <space>fp :lua require("telescope.builtin").find_files({prompt_title = "< vimrc >", cwd = "~/.config/nvim/"})<cr>
+else
+  nnoremap <space>fp :e $MYVIMRC<cr>
+end
+
 cnoremap <C-y> <c-r>*
 
 let g:airline#extensions#tabline#enabled = 1
