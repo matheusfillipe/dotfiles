@@ -427,3 +427,6 @@ export QT_QPA_PLATFORM_PLUGIN_PATH=
 export PATH=$HOME/.gem/ruby/3.0.0/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 [[ $SHLVL -eq 1 && -e $HOME/perl5/lib/perl5 ]] && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+
+# opam configuration
+[[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

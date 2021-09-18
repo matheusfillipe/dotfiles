@@ -226,7 +226,7 @@ Plug 'junegunn/fzf', Cond(!exists('g:vscode') , { 'do': { -> fzf#install() } })
 Plug 'antoinemadec/coc-fzf', Cond(!exists('g:vscode'))
 " Plug 'jceb/vim-orgmode', Cond(!exists('g:vscode'))
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
-Plug 'sheerun/vim-polyglot', Cond(!exists('g:vscode'))
+" Plug 'sheerun/vim-polyglot', Cond(!exists('g:vscode'))
 Plug 'joshdick/onedark.vim', Cond(!exists('g:vscode'))
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 Plug 'eliba2/vim-node-inspect'
@@ -443,7 +443,7 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = {
       enable = true,
-      disable = {"python"}
+      -- disable = {"python"}
   }
 }
 
