@@ -111,8 +111,8 @@ function! OnUIEnter(event) abort
     nnoremap <space> :set lines=28 columns=110 <CR>
     nnoremap <leader-e> :setlocal spell spelllang=en_us <CR>
     nnoremap <leader-p> :setlocal spell spelllang=pt_br <CR>
-    set guifont=SauceCodePro\ Nerd\ Font:h16
-    let s:fontsize = 16
+    set guifont=SauceCodePro\ Nerd\ Font:h18
+    let s:fontsize = 18
     function! AdjustFontSizeF(amount)
       let s:fontsize = s:fontsize+a:amount
       execute "set guifont=SauceCodePro\\ Nerd\\ Font:h" . s:fontsize
@@ -704,6 +704,8 @@ nnoremap <space>wq <C-w>q
 nnoremap <space>wm <C-w>o
 nnoremap <space>wx <C-w>x
 nnoremap <space>wd :bd
+nnoremap <C-w><space> <C-w>w
+nnoremap <space>w<space> <C-w>w
 
 " nnoremap <leader>lp :set dictionary+=/usr/share/dict/pt_BR.dic<CR>
 " nnoremap <leader>len :set dictionary+=/usr/share/dict/american-english <CR>
@@ -792,6 +794,7 @@ tnoremap <M-W> <C-\><C-n>:tablast<CR>
 " nnoremap <Tab> :tabn<CR>
 nnoremap <S-Tab> :tabp<CR>
 nnoremap <S-Tab> %
+vnoremap <S-Tab> %
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeChDirMode = 2
@@ -1192,10 +1195,9 @@ if !exists('g:vscode')
   autocmd bufenter * RainbowToggleOn
 endif
 
-" nnoremap <space>fp :e $MYVIMRC<cr>
-
 if has('nvim-0.5') && !exists('g:vscode')
   nnoremap <space>fp :lua require("telescope.builtin").find_files({prompt_title = "< vimrc >", cwd = "~/.config/nvim/"})<cr>
+  nnoremap <space>fG :lua require("telescope.builtin").grep_string()<CR>
 else
   nnoremap <space>fp :e $MYVIMRC<cr>
 end
