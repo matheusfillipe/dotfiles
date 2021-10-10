@@ -96,6 +96,10 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
+function! EscapeForVimRegexp(str)
+  return escape(a:str, '^$.*?/\[]')
+endfunction
+
 function! s:IsFirenvimActive(event) abort
   if !exists('*nvim_get_chan_info')
     return 0
@@ -255,18 +259,23 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'xiyaowong/telescope-emoji.nvim'
   Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'fannheyward/telescope-coc.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'phaazon/hop.nvim'
   Plug 'AckslD/nvim-neoclip.lua'
   Plug 'ThePrimeagen/refactoring.nvim'
   Plug 'gmoe/vim-faust'
   Plug 'madskjeldgaard/faust-nvim'
   Plug 'romgrk/nvim-treesitter-context'
+  Plug 'nvim-lua/plenary.nvim'
 endif
 call plug#end()
 if empty(glob("~/.config/nvim/plugged"))
     PlugInstall
 endif
+
+" clear terminal
+nmap <c-w><c-l> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
+tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
 
 let g:pydocstring_doq_path = "/home/matheus/.local/bin/doq"
 let g:vim_markdown_folding_disabled = 1
@@ -331,6 +340,27 @@ EOF
   nnoremap <space>r <cmd>Telescope coc references<cr>
   nnoremap <space>aa <cmd>Telescope coc code_actions<cr>
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
+
+
+  let b:current_ll_todo_index=0
+  function! GotoTodo(direction)
+    let comment=split(&commentstring, '%s')
+    if len(comment)==1
+         call add(comment, '')
+    endif
+    execute ":lvimgrep /" . EscapeForVimRegexp(comment[0]) . " \\(TODO\\|FIXME\\|BUG\\|HACK\\|DEV\\)/g %"
+    let b:current_ll_todo_index=b:current_ll_todo_index + a:direction
+    if b:current_ll_todo_index<1
+      let b:current_ll_todo_index=len(getloclist(0))
+    elseif b:current_ll_todo_index>len(getloclist(0))
+      let b:current_ll_todo_index=1
+    endif
+    if b:current_ll_todo_index!=1
+      execute ":ll " . b:current_ll_todo_index
+    endif
+  endfunction
+  nnoremap ]t :call GotoTodo(1)<cr>
+  nnoremap [t :call GotoTodo(-1)<cr>
 
  " Faust
 lua << EOF
@@ -1286,4 +1316,3 @@ vim.api.nvim_set_keymap("v", "<Leader>rf", [[ <Cmd>lua require('refactoring').re
 vim.api.nvim_set_keymap("v", "<Leader>rr", [[ <Cmd>lua M.refactors()<CR>]], {noremap = true, silent = true, expr = false})
 EOF
 endif
-
