@@ -625,8 +625,10 @@ nnoremap <C-a> ggVG
 " nnoremap <C-Tab> :bn<CR>
 nnoremap <C-S-Tab> :bp<CR>
 
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+" redef C-j
+imap <C-,> <Plug>IMAP_JumpForward
+imap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+imap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 let g:camelcasemotion_key = '<leader>'
 " map <silent> w <Plug>CamelCaseMotion_w
 " map <silent> b <Plug>CamelCaseMotion_b
@@ -1150,6 +1152,8 @@ function! CommentToggle()
     execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
 endfunction
 nmap <M-;> :call CommentToggle()<CR>
+nmap <C-/> :call CommentToggle()<CR>
+nmap  :call CommentToggle()<CR>
 vmap <M-;> :call CommentToggle()<CR>
 xmap <M-;> :call CommentToggle()<CR>
 
