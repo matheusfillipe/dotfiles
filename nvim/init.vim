@@ -233,7 +233,7 @@ Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
 " Plug 'sheerun/vim-polyglot', Cond(!exists('g:vscode'))
 Plug 'joshdick/onedark.vim', Cond(!exists('g:vscode'))
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
-Plug 'eliba2/vim-node-inspect'
+" Plug 'eliba2/vim-node-inspect'
 Plug 'mg979/vim-visual-multi', Cond(!exists('g:vscode'), {'branch': 'master'})
 Plug '907th/vim-auto-save'
 Plug 'mcchrish/nnn.vim'
@@ -248,7 +248,10 @@ Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
 Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
 Plug 'dstein64/vim-startuptime', Cond(!exists('g:vscode'))
 Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
+" Plug 'p00f/nvim-ts-rainbow', Cond(!exists('g:vscode'))
 Plug 'farfanoide/vim-kivy', Cond(!exists('g:vscode'))
+Plug 'szw/vim-maximizer', Cond(!exists('g:vscode'))
+Plug 'puremourning/vimspector', Cond(!exists('g:vscode'))
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
@@ -267,6 +270,9 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'madskjeldgaard/faust-nvim'
   Plug 'romgrk/nvim-treesitter-context'
   Plug 'nvim-lua/plenary.nvim'
+endif
+if has('nvim-0.6') && !exists('g:vscode')
+  Plug 'github/copilot.vim'
 endif
 call plug#end()
 if empty(glob("~/.config/nvim/plugged"))
@@ -335,32 +341,12 @@ EOF
   nnoremap <space>gs <cmd>Telescope git_status<cr>
   nnoremap <space>gS <cmd>Telescope git_stash<cr>
 
-  nnoremap <space>d <cmd>Telescope coc definitions<cr>
-  nnoremap <space>D <cmd>Telescope coc declarations<cr>
-  nnoremap <space>r <cmd>Telescope coc references<cr>
+  nnoremap <space>cd <cmd>Telescope coc definitions<cr>
+  nnoremap <space>cD <cmd>Telescope coc declarations<cr>
+  nnoremap <space>cr <cmd>Telescope coc references<cr>
   nnoremap <space>aa <cmd>Telescope coc code_actions<cr>
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
 
-
-  let b:current_ll_todo_index=0
-  function! GotoTodo(direction)
-    let comment=split(&commentstring, '%s')
-    if len(comment)==1
-         call add(comment, '')
-    endif
-    execute ":lvimgrep /" . EscapeForVimRegexp(comment[0]) . " \\(TODO\\|FIXME\\|BUG\\|HACK\\|DEV\\)/g %"
-    let b:current_ll_todo_index=b:current_ll_todo_index + a:direction
-    if b:current_ll_todo_index<1
-      let b:current_ll_todo_index=len(getloclist(0))
-    elseif b:current_ll_todo_index>len(getloclist(0))
-      let b:current_ll_todo_index=1
-    endif
-    if b:current_ll_todo_index!=1
-      execute ":ll " . b:current_ll_todo_index
-    endif
-  endfunction
-  nnoremap ]t :call GotoTodo(1)<cr>
-  nnoremap [t :call GotoTodo(-1)<cr>
 
  " Faust
 lua << EOF
@@ -1098,14 +1084,14 @@ command! -bang -nargs=? -complete=dir GFiles
  autocmd VimEnter * noremap <Leader>db :GdbStartBashDB bashdb %
 
 
- " nodejs db
-autocmd FileType javascript noremap <silent><F4> :NodeInspectStart<cr>
-autocmd FileType javascript noremap <silent><F5> :NodeInspectRun<cr>
-autocmd FileType javascript noremap <silent><F6> :NodeInspectConnect("127.0.0.1:9229")<cr>
-autocmd FileType javascript noremap <silent><F8> :NodeInspectStepInto<cr>
-autocmd FileType javascript noremap <silent><F9> :NodeInspectStepOver<cr>
-autocmd FileType javascript noremap <silent><F10> :NodeInspectToggleBreakpoint<cr>
-autocmd FileType javascript noremap <silent><F11> :NodeInspectStop<cr>
+ " " nodejs db
+" autocmd FileType javascript noremap <silent><F4> :NodeInspectStart<cr>
+" autocmd FileType javascript noremap <silent><F5> :NodeInspectRun<cr>
+" autocmd FileType javascript noremap <silent><F6> :NodeInspectConnect("127.0.0.1:9229")<cr>
+" autocmd FileType javascript noremap <silent><F8> :NodeInspectStepInto<cr>
+" autocmd FileType javascript noremap <silent><F9> :NodeInspectStepOver<cr>
+" autocmd FileType javascript noremap <silent><F10> :NodeInspectToggleBreakpoint<cr>
+" autocmd FileType javascript noremap <silent><F11> :NodeInspectStop<cr>
 
 " Workarounds for vim-orgmode
 autocmd FileType org nnoremap <C-Space> :OrgCheckBoxToggle<CR>
@@ -1148,12 +1134,15 @@ autocmd FileType tex              let b:comment_leader = '%'
 autocmd FileType mail             let b:comment_leader = '>'
 autocmd FileType vim              let b:comment_leader = '"'
 function! CommentToggle()
-    execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/'
-    execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
+    " execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/'
+    " execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
+    call feedkeys('gcw', 'xt')
 endfunction
 nmap <M-;> :call CommentToggle()<CR>
 nmap <C-/> :call CommentToggle()<CR>
 nmap  :call CommentToggle()<CR>
+vmap <C-/> :call CommentToggle()<CR>
+vmap  :call CommentToggle()<CR>
 vmap <M-;> :call CommentToggle()<CR>
 xmap <M-;> :call CommentToggle()<CR>
 
@@ -1224,9 +1213,13 @@ if exists('g:vscode')
   xnoremap <silent> <space> :call VSCodeNotify('whichkey.show')<CR>
 endif
 
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 if !exists('g:vscode')
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
   autocmd bufenter * RainbowToggleOn
+  augroup rainbow
+ 	au BufEnter *     hi      TSPunctBracket NONE
+ 	au BufEnter *     hi link TSPunctBracket nonexistenthl
+  augroup END
 endif
 
 if has('nvim-0.5') && !exists('g:vscode')
@@ -1320,3 +1313,49 @@ vim.api.nvim_set_keymap("v", "<Leader>rf", [[ <Cmd>lua require('refactoring').re
 vim.api.nvim_set_keymap("v", "<Leader>rr", [[ <Cmd>lua M.refactors()<CR>]], {noremap = true, silent = true, expr = false})
 EOF
 endif
+
+
+" Vimspector
+
+" let g:vimspector_enable_mappings = 'HUMAN'
+nmap <space>dd :call vimspector#Launch()<cr>
+nmap <space>d<space> <Plug>VimspectorToggleConditionalBreakpoint
+nmap <space>db <Plug>VimspectorToggleBreakpoint
+nmap <space>dc <Plug>VimspectorContinue
+nmap <space>dq :call vimspector#Reset()<cr>
+nmap <space>dp <Plug>VimspectorPause
+nmap <space>dk <Plug>VimspectorUpFrame
+nmap <space>dj <Plug>VimspectorDownFrame
+nmap <space>drc <Plug>VimspectorRunToCursor
+nmap <space>dl <Plug>VimspectorStepOver
+nmap <space>dso <Plug>VimspectorStepOver
+nmap <space>dsO <Plug>VimspectorStepOut
+nmap <space>dsi <Plug>VimspectorStepInto
+
+" for normal mode - the word under the cursor
+nmap <space>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <space>di <Plug>VimspectorBalloonEval
+
+
+let b:current_ll_todo_index=0
+function! GotoTodo(direction)
+  let comment=split(&commentstring, '%s')
+  if len(comment)==1
+       call add(comment, '')
+  endif
+  execute ":lvimgrep /" . trim(EscapeForVimRegexp(comment[0])) . " \\(TODO\\|FIXME\\|BUG\\|HACK\\|DEV\\)/g %"
+  let b:current_ll_todo_index=b:current_ll_todo_index + a:direction
+  if b:current_ll_todo_index<1
+    let b:current_ll_todo_index=len(getloclist(0))
+  elseif b:current_ll_todo_index>len(getloclist(0))
+    let b:current_ll_todo_index=1
+  endif
+  if b:current_ll_todo_index!=1
+    execute ":ll " . b:current_ll_todo_index
+  endif
+endfunction
+nnoremap ]t :call GotoTodo(1)<cr>
+nnoremap [t :call GotoTodo(-1)<cr>
+
+nnoremap <C-S-R> :e<cr>
