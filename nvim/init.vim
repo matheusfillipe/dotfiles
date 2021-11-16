@@ -252,6 +252,7 @@ Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
 Plug 'farfanoide/vim-kivy', Cond(!exists('g:vscode'))
 Plug 'szw/vim-maximizer', Cond(!exists('g:vscode'))
 Plug 'puremourning/vimspector', Cond(!exists('g:vscode'))
+Plug 'Jorengarenar/COBOl.vim'
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
@@ -504,6 +505,7 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-phpls',
   \ 'coc-perl',
+  \ 'coc-dictionary',
 \ ]
 " pydocstring
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
@@ -1359,3 +1361,17 @@ nnoremap ]t :call GotoTodo(1)<cr>
 nnoremap [t :call GotoTodo(-1)<cr>
 
 nnoremap <C-S-R> :e<cr>
+
+
+" COBOL
+autocmd FileType cobol set complete+=k~/.config/nvim/cobol.dict
+autocmd FileType cobol set dictionary+=~/.config/nvim/cobol.dict
+
+" DEFAULT F5 RUNNERS RUN FILES
+autocmd FileType cobol nnoremap <F5> :!altty 'cobc -x %; ./%:r'<CR>
+autocmd FileType python nnoremap <F5> :!altty 'python3 %'<CR>
+autocmd FileType c nnoremap <F5> :!altty 'gcc %; ./a.out'<CR>
+autocmd FileType javascript nnoremap <F5> :!altty 'node %'<CR>
+autocmd FileType rust nnoremap <F5> :!altty 'cargo run'<CR>
+autocmd FileType cpp nnoremap <F5> :!altty 'g++ %; ./a.out'<CR>
+
