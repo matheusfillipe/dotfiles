@@ -18,6 +18,8 @@ fi
 
 if [[ "$1" == "spatch" ]]
 then
+  # Remove this for servers
+  sed -i "/$(sed 's/\([\[/({.*+^$?]\)/\\\1/g' <<< "zsh-system-clipboard")/d" ~/.zshrc
   cd ~/.config/nvim/
   patch < spatch.diff
   cd ~/bin
