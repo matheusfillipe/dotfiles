@@ -334,7 +334,7 @@ EOF
   nnoremap <space>t <cmd>Telescope filetypes<cr>
   nnoremap <space>m <cmd>Telescope marks<cr>
   nnoremap <space>cr <cmd>Telescope lsp_references<cr>
-  nnoremap <space>ca <cmd>Telescope lsp_code_actions<cr>
+  nnoremap <space>cA <cmd>Telescope lsp_code_actions<cr>
   nnoremap <space>ci <cmd>Telescope lsp_implementations<cr>
   nnoremap <space>cd <cmd>Telescope lsp_definitions<cr>
   nnoremap <space>gc <cmd>Telescope git_commits<cr>
@@ -345,7 +345,7 @@ EOF
   nnoremap <space>cd <cmd>Telescope coc definitions<cr>
   nnoremap <space>cD <cmd>Telescope coc declarations<cr>
   nnoremap <space>cr <cmd>Telescope coc references<cr>
-  nnoremap <space>aa <cmd>Telescope coc code_actions<cr>
+  nnoremap <space>ca <cmd>Telescope coc code_actions<cr>
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
 
 
@@ -980,10 +980,14 @@ set formatoptions=cqrn1
 nnoremap <leader>F :set formatoptions=cqrn1<CR>
 nnoremap <leader>T :set ft=
 
-" Flutter
+" COC Code Actions
+" xmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>ac  <Plug>(coc-codeaction)
+
 xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>a  <Plug>(coc-codeaction-selected)w
+nmap <leader>ac  <Plug>(coc-codeaction-selected)w
 
 " Tagbar
 let g:tagbar_type_dart = { 'ctagsbin': '~/.pub-cache/bin/dart_ctags' }
@@ -1368,10 +1372,9 @@ autocmd FileType cobol set complete+=k~/.config/nvim/cobol.dict
 autocmd FileType cobol set dictionary+=~/.config/nvim/cobol.dict
 
 " DEFAULT F5 RUNNERS RUN FILES
-autocmd FileType cobol nnoremap <F5> :!altty 'cobc -x %; ./%:r'<CR>
-autocmd FileType python nnoremap <F5> :!altty 'python3 %'<CR>
-autocmd FileType c nnoremap <F5> :!altty 'gcc %; ./a.out'<CR>
-autocmd FileType javascript nnoremap <F5> :!altty 'node %'<CR>
-autocmd FileType rust nnoremap <F5> :!altty 'cargo run'<CR>
-autocmd FileType cpp nnoremap <F5> :!altty 'g++ %; ./a.out'<CR>
-
+autocmd FileType cobol nnoremap <F5> :silent exec "!altty 'cobc -x %; ./%:r'"<CR>
+autocmd FileType python nnoremap <F5> :silent exec "!altty 'python3 %'"<CR>
+autocmd FileType c nnoremap <F5> :silent exec "!altty 'gcc %; ./a.out'"<CR>
+autocmd FileType javascript nnoremap <F5> :silent exec "!altty 'node %'"<CR>
+autocmd FileType rust nnoremap <F5> :silent exec "!altty 'cargo run'"<CR>
+autocmd FileType cpp nnoremap <F5> :silent exec "!altty 'g++ %; ./a.out'"<CR>
