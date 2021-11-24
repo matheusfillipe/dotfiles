@@ -994,6 +994,8 @@ nmap <leader>ac  <Plug>(coc-codeaction-selected)w
 let g:tagbar_type_dart = { 'ctagsbin': '~/.pub-cache/bin/dart_ctags' }
 let g:tagbar_sort=0
 let g:tagbar_ignore_anonymous = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_width = max([30, winwidth(0) / 4])
 
 " Autocomplete
 "
@@ -1054,6 +1056,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <A-g> :GFiles<CR>
 nnoremap <A-f> :Files<CR>
 nnoremap <A-r> :Rg<CR>
+nnoremap <A-v> :BTags<CR>
 nnoremap <space><space> :Files<CR>
 autocmd VimEnter * nmap <A-b> :Buffers<CR>
 autocmd VimEnter * nmap <A-S-b> :Buffers<CR>
@@ -1346,12 +1349,18 @@ xmap <space>di <Plug>VimspectorBalloonEval
 
 
 let b:current_ll_todo_index=0
+autocmd BufWinEnter * :let b:current_ll_todo_index=0
 function! GotoTodo(direction)
   let comment=split(&commentstring, '%s')
   if len(comment)==1
-       call add(comment, '')
+   call add(comment, '')
   endif
-  execute ":lvimgrep /" . trim(EscapeForVimRegexp(comment[0])) . " \\(TODO\\|FIXME\\|BUG\\|HACK\\|DEV\\)/g %"
+  try
+    execute ":lvimgrep /" . trim(EscapeForVimRegexp(comment[0])) . " \\(TODO\\|FIXME\\|BUG\\|HACK\\|DEV\\)/g %"
+  catch
+    echo v:exception
+    return
+  endtry
   let b:current_ll_todo_index=b:current_ll_todo_index + a:direction
   if b:current_ll_todo_index<1
     let b:current_ll_todo_index=len(getloclist(0))

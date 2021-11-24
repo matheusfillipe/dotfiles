@@ -213,7 +213,6 @@ fi
 
 PATH="$HOME/.local/bin${PATH:+:${PATH}}"
 
-source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
 bindkey '^n' expand-or-complete
 bindkey '^p' reverse-menu-complete
 bindkey '^k' up-history
@@ -269,6 +268,7 @@ alias mg='emacsclient -s main -c --eval '"'"'(progn (let ((display-buffer-alist 
 alias mgc='emacsclient -s main -c -nw --eval '"'"'(progn (let ((display-buffer-alist `(("^\\*magit: " display-buffer-same-window) ,display-buffer-alist))) (magit-status)) (delete-other-windows))'"' "
 
 export EDITOR='nvim'
+alias nv='nvim'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
