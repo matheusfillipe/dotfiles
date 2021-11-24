@@ -1373,9 +1373,21 @@ autocmd FileType cobol set complete+=k~/.config/nvim/cobol.dict
 autocmd FileType cobol set dictionary+=~/.config/nvim/cobol.dict
 
 " DEFAULT F5 RUNNERS RUN FILES
-autocmd FileType cobol nnoremap <F5> :silent exec "!altty 'cobc -x %; ./%:r'"<CR>
-autocmd FileType python nnoremap <F5> :silent exec "!altty 'python3 %'"<CR>
-autocmd FileType c nnoremap <F5> :silent exec "!altty 'gcc %; ./a.out'"<CR>
-autocmd FileType javascript nnoremap <F5> :silent exec "!altty 'node %'"<CR>
-autocmd FileType rust nnoremap <F5> :silent exec "!altty 'cargo run'"<CR>
-autocmd FileType cpp nnoremap <F5> :silent exec "!altty 'g++ %; ./a.out'"<CR>
+let runners = {}
+
+let runners['cobol'] = 'cobc -x %; ./%:r'
+let runners['python'] = 'python3 %'
+let runners['c'] = 'gcc %; ./a.out'
+let runners['cpp'] = 'g++ %; ./a.out'
+let runners['javascript'] = 'node %'
+let runners['rust'] = 'cd $(git rev-parse --show-toplevel); cargo run'
+
+let k = keys(runners)
+for i in k
+  echo i . ": " . runners[i]
+  if executable("altty")
+    execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"!altty '" . runners[i] . "'\"<CR>"
+  else
+    execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"FloatermNew --wintype=vsplit --position=belowright --width=0.4 '" . runners[i] . "'\"<CR>"
+  endif
+endfor
