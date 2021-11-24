@@ -1384,10 +1384,11 @@ let runners['rust'] = 'cd $(git rev-parse --show-toplevel); cargo run'
 
 let k = keys(runners)
 for i in k
-  echo i . ": " . runners[i]
   if executable("altty")
     execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"!altty '" . runners[i] . "'\"<CR>"
+    execute "autocmd FileType " . i . " nnoremap <space>r :silent exec \"!altty '" . runners[i] . "'\"<CR>"
   else
-    execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"FloatermNew --wintype=vsplit --position=belowright --width=0.4 '" . runners[i] . "'\"<CR>"
+    execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\"<CR>"
+    execute "autocmd FileType " . i . " nnoremap <space>r :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\"<CR>"
   endif
 endfor
