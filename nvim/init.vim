@@ -706,6 +706,7 @@ nnoremap <C-M-l> <C-w>l
 "nnoremap <Tab> :bn<CR>
 noremap ZW :bd<CR>
 nnoremap <space>n :call vm#commands#ctrln(1)<CR>
+vnoremap <space>n :call vm#commands#ctrln(1)<CR>
 
 " Window Movements
 nnoremap <space>wh <C-w>h
