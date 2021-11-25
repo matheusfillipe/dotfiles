@@ -4,16 +4,24 @@
 "   execute("silent redir END")
 "   execute("silent !lcopy /tmp/mattf_lcopy_nvim")
 " endfunction
-" 
+
 " augroup custom_clipboard
 "   au!
 "   au TextYankPost * :call SendClipBoard()
 " augroup END
+
+" function ClipboardSend(txt)
+"   execute("!echo " . a:txt . " | lcopy")
+" endfunction
+
 set clipboard=unnamedplus
 set timeoutlen=500
 set viminfo='1000,f1
 set splitbelow
 " set termguicolors
+
+nnoremap <space>fy :let @+ = expand("%:p")<cr>
+" nnoremap <space>fy :silent call ClipboardSend(expand("%:p"))<cr>
 
 let $ZDOTDIR = $HOME
 if $NOVIMZSH
@@ -304,7 +312,6 @@ nmap <space>Bg <Plug>BookmarkMoveToLine
 " Magit
 nmap <space>gg :MagitOnly<cr>
 
-nnoremap <space>fy :let @+ = expand("%:p")<cr>
 
 if has('nvim-0.5') && !exists("g:vscode")
 
@@ -883,7 +890,6 @@ tnoremap <A-9> <C-\><C-n>9gt
 
 
 nnoremap ZD :BD<CR>
-nnoremap <F4> :nnoremap <lt>F5> :! <lt>CR><left><left><left><left><left>
 nmap <Esc> :noh<CR>
 cnoremap <C-A> <Home>
 cnoremap <C-L> <C-Right>
@@ -1396,8 +1402,11 @@ for i in k
   if executable("altty")
     execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"!altty '" . runners[i] . "'\"<CR>"
     execute "autocmd FileType " . i . " nnoremap <space>r :silent exec \"!altty '" . runners[i] . "'\"<CR>"
+    execute "autocmd FileType " . i . " nnoremap <F4> :nnoremap <lt>F5> :exec \"!altty '" . runners[i] . "'\" <lt>CR><left><left><left><left><left>"
   else
     execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\"<CR>"
     execute "autocmd FileType " . i . " nnoremap <space>r :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\"<CR>"
+    execute "autocmd FileType " . i . " nnoremap <F4> :nnoremap <lt>F5> :exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\" <lt>CR><left><left><left><left><left>"
   endif
 endfor
+
