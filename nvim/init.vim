@@ -1403,10 +1403,12 @@ for i in k
     execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"!altty '" . runners[i] . "'\"<CR>"
     execute "autocmd FileType " . i . " nnoremap <space>r :silent exec \"!altty '" . runners[i] . "'\"<CR>"
     execute "autocmd FileType " . i . " nnoremap <F4> :nnoremap <lt>F5> :exec \"!altty '" . runners[i] . "'\" <lt>CR><left><left><left><left><left>"
+    execute "autocmd FileType " . i . " nnoremap <space>R :nnoremap <lt>space>r :exec \"!altty '" . runners[i] . "'\" <lt>CR><left><left><left><left><left>"
   else
     execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\"<CR>"
     execute "autocmd FileType " . i . " nnoremap <space>r :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\"<CR>"
     execute "autocmd FileType " . i . " nnoremap <F4> :nnoremap <lt>F5> :exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\" <lt>CR><left><left><left><left><left>"
+    execute "autocmd FileType " . i . " nnoremap <space>R :nnoremap <lt>space>r :exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . runners[i] . "\" <lt>CR><left><left><left><left><left>"
   endif
 endfor
 
