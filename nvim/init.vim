@@ -28,8 +28,12 @@ if $NOVIMZSH
   let $ZDOTDIR = $HOME."/.novimZsh"
 endif
 
-set autoread                                                                                                                                                                                    
-au CursorHold * checktime  
+function! AutoReload()
+  set autoread
+  au CursorHold * checktime  
+endfunction
+command! AutoReload :call AutoReload()
+
 autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
 autocmd VimLeave * silent exec "! echo -ne '\e[5 q'" 
 
@@ -1414,3 +1418,4 @@ for i in k
   endif
 endfor
 
+tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
