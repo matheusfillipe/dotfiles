@@ -317,6 +317,7 @@ nmap <space>Bg <Plug>BookmarkMoveToLine
 
 " Magit
 nmap <space>gg :MagitOnly<cr>
+nmap <space>g<space> :!mg<cr>
 
 
 if has('nvim-0.5') && !exists("g:vscode")
@@ -856,6 +857,10 @@ nnoremap <A-]> :tabnext <CR>
 nnoremap <A-[> :tabprevious <CR>
 tnoremap <A-]> <C-\><C-n>:tabnext <CR>
 tnoremap <A-[> <C-\><C-n>:tabprevious <CR>
+inoremap <A-]> <C-\><C-n>:tabnext <CR>
+inoremap <A-[> <C-\><C-n>:tabprevious <CR>
+inoremap <A-w> <C-\><C-n>:tabnext <CR>
+inoremap <A-q> <C-\><C-n>:tabprevious <CR>
 nnoremap <A-1> 1gt
 nnoremap <A-2> 2gt
 nnoremap <A-3> 3gt
@@ -896,6 +901,9 @@ tnoremap <A-9> <C-\><C-n>9gt
 
 
 nnoremap ZD :BD<CR>
+nnoremap <C-c>k :BD<CR>
+inoremap <C-c>k :BD<CR>
+vnoremap <C-c>k :BD<CR>
 nmap <Esc> :noh<CR>
 cnoremap <C-A> <Home>
 cnoremap <C-L> <C-Right>
@@ -1124,8 +1132,8 @@ nnoremap <C-S-l> vg_
 nnoremap <C-S-h> v0
 inoremap <C-BS> <Esc>vbc
 inoremap <M-b> <Esc>bi
-inoremap <M-f> <Esc>wa
-inoremap <M-w> <Esc>wi
+" inoremap <M-f> <Esc>wa
+" inoremap <M-w> <Esc>wi
 inoremap <C-S> <Esc>:w<CR>a
 nnoremap <C-S> :w<CR>
 inoremap <M-BS> <C-w>
@@ -1148,25 +1156,44 @@ autocmd BufEnter * tnoremap <C-Left>  <C-\><C-n>:vertical resize -5<CR>
 autocmd BufEnter * tnoremap <C-Up>    <C-\><C-n>:resize +5<CR>
 autocmd BufEnter * tnoremap <C-Down>  <C-\><C-n>:resize -5<CR>
 
-
-autocmd FileType arduino,c,cpp,java,scala,go,rust,javascript let b:comment_leader = '//'
-autocmd FileType sh,ruby,python,perl,org,php   let b:comment_leader = '#'
-autocmd FileType conf,fstab       let b:comment_leader = '#'
-autocmd FileType tex              let b:comment_leader = '%'
-autocmd FileType mail             let b:comment_leader = '>'
-autocmd FileType vim              let b:comment_leader = '"'
-function! CommentToggle()
-    " execute ':silent! s/\([^ ]\)/' . escape(b:comment_leader,'\/') . ' \1/'
-    " execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
-    call feedkeys('gcw', 'xt')
+function! CobolCommentToggle(multiline)
+  if a:multiline
+    normal! 
+    let lc = line("'>") - line("'<")
+    call feedkeys(line("'>") . 'G')
+    if getline('.')[6] == '*'
+      call feedkeys('7|' . lc .'kr ')
+    else
+      call feedkeys('7|' . lc .'kr*')
+    endif
+  else
+    if getline('.')[6] == '*'
+      call feedkeys('7|r ')
+    else
+      call feedkeys('7|r*')
+    endif
+  endif
 endfunction
-nmap <M-;> :call CommentToggle()<CR>
-nmap <C-/> :call CommentToggle()<CR>
-nmap  :call CommentToggle()<CR>
-vmap <C-/> :call CommentToggle()<CR>
-vmap  :call CommentToggle()<CR>
-vmap <M-;> :call CommentToggle()<CR>
-xmap <M-;> :call CommentToggle()<CR>
+
+function! CommentToggle(multiline)
+  if (&ft=='cobol')
+    call CobolCommentToggle(a:multiline)
+  else
+    if a:multiline
+      call execute(":'<,'>Commentary")
+    else
+      Commentary
+    endif
+  endif
+endfunction
+
+nmap <M-;>      :call CommentToggle(0)<CR>
+nmap <C-/>      :call CommentToggle(0)<CR>
+nmap     :<C-u>call CommentToggle(0)<CR>
+vmap <C-/> :<C-u>call CommentToggle(1)<CR>
+vmap     :<C-u>call CommentToggle(1)<CR>
+vmap <M-;> :<C-u>call CommentToggle(1)<CR>
+xmap <M-;> :<C-u>call CommentToggle(1)<CR>
 
 function! ColonToggle()
     execute ':silent! s/\([^ ]\) *$/\1;/'   
@@ -1392,6 +1419,7 @@ nnoremap <C-S-R> :e<cr>
 " COBOL
 autocmd FileType cobol set complete+=k~/.config/nvim/cobol.dict
 autocmd FileType cobol set dictionary+=~/.config/nvim/cobol.dict
+
 
 " DEFAULT F5 RUNNERS RUN FILES
 let runners = {}
