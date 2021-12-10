@@ -1447,3 +1447,9 @@ for i in k
 endfor
 
 tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
+
+function! Emacs()
+  call execute(':!emacsclient -s main -c ' . expand("%:p"))
+endfunction
+command! Emacs :call Emacs()
+nmap <C-CR> :Emacs<CR>
