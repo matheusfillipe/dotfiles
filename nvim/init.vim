@@ -45,7 +45,7 @@ syntax on
 
 " For plugins to load correctly
 filetype plugin indent on
-filetype plugin on
+" filetype plugin on
 
 " Security
 set modelines=0
@@ -234,7 +234,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dart-lang/dart-vim-plugin', Cond(!exists('g:vscode'))
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'lervag/vimtex', Cond(!exists('g:vscode'))
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
@@ -537,7 +537,8 @@ nnoremap <space>hk :verbose map!
 let g:auto_save = 1 
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_presave_hook = 'call AbortIfNotLang()'
-let g:not_autosave = ["rust"]
+" let g:not_autosave = ["rust"]
+let g:not_autosave = []
 function! AbortIfNotLang()
   if index(g:not_autosave, &filetype) >= 0
     let g:auto_save_abort = 1
@@ -843,7 +844,7 @@ let g:startify_files_number = 1000
 
 vmap < <gv
 vmap > >gv
-let g:rustfmt_autosave = 1
+" let g:rustfmt_autosave = 1
 let g:tex_flavor = 'latex'
 let g:dart_format_on_save = 1
 nnoremap <A-z> :TagbarOpenAutoClose<CR>
