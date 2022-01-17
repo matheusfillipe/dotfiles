@@ -285,6 +285,7 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'madskjeldgaard/faust-nvim'
   Plug 'romgrk/nvim-treesitter-context'
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'tanvirtin/vgit.nvim'
 endif
 if has('nvim-0.6') && !exists('g:vscode')
   Plug 'github/copilot.vim'
@@ -322,10 +323,16 @@ nmap <space>g<space> :!mg<cr>
 
 if has('nvim-0.5') && !exists("g:vscode")
 
+  " Git lens vgit
+  lua << EOF
+  require('vgit').setup()
+EOF
+
   " Hop plugin
   lua << EOF
   require'hop'.setup()
 EOF
+
   nnoremap  <leader><leader>w :HopWord<cr>
   nnoremap  <leader>f :HopChar1<cr>
   vnoremap  <leader>f :HopChar1<cr>
@@ -367,6 +374,7 @@ EOF
 lua << EOF
 require 'faust-nvim'.setup()
 EOF
+
   " Projects
 lua << EOF
   project_dirs = {"~/Projects", "~/Programs", "~/projects", "~/programs", "~/Jobs"}
@@ -1431,7 +1439,7 @@ let runners['c'] = 'gcc %; ./a.out'
 let runners['cpp'] = 'g++ %; ./a.out'
 let runners['javascript'] = 'node %'
 let runners['rust'] = 'cd $(git rev-parse --show-toplevel); cargo run'
-
+let runners['java'] = 'cd $(git rev-parse --show-toplevel); ./gradlew installArmv7Release'
 let k = keys(runners)
 for i in k
   if executable("altty")
@@ -1454,3 +1462,4 @@ function! Emacs()
 endfunction
 command! Emacs :call Emacs()
 nmap <C-CR> :Emacs<CR>
+

@@ -212,7 +212,6 @@ fi
 
 
 PATH="$HOME/.local/bin${PATH:+:${PATH}}"
-source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
 
 bindkey '^n' expand-or-complete
 bindkey '^p' reverse-menu-complete
