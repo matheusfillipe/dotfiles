@@ -309,9 +309,7 @@ export NVPACK_ROOT="/media/matheus/Elements SE/CodeWorksforAndroid"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 #export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-[ -z "$DISPLAY" ] && export DISPLAY=:0 
-
-
+#
 
 alias pacman="sudo pacman"
 alias apt="sudo apt"
@@ -430,3 +428,7 @@ export PATH=$HOME/.local/bin:$PATH
 
 # opam configuration
 [[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+[ ! -z "$DISPLAY" ] && source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
+export ZSH_SYSTEM_CLIPBOARD_SELECTION='PRIMARY'
+[ -z "$DISPLAY" ] && export DISPLAY=:0 
