@@ -323,6 +323,12 @@ nmap <space>g<space> :!mg<cr>
 
 
 if has('nvim-0.5') && !exists("g:vscode")
+  " treesitter-context
+  lua << EOF
+  require'treesitter-context'.setup{
+    max_lines = 4,
+  }
+EOF
 
   " Git lens vgit
   lua << EOF
@@ -1459,7 +1465,7 @@ endfor
 tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
 
 function! Emacs()
-  call execute(':!emacsclient -s main -c ' . expand("%:p"))
+  execute ':!emacsclient -n -s main -c +' . line('.') . ':' . col('.') . ' ' . expand("%:p") . ' &'
 endfunction
 command! Emacs :call Emacs()
 nmap <C-CR> :Emacs<CR>

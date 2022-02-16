@@ -429,6 +429,13 @@ export PATH=$HOME/.local/bin:$PATH
 # opam configuration
 [[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
+# asdf
+[[ ! -r /opt/asdf-vm/asdf.sh ]] || source /opt/asdf-vm/asdf.sh  > /dev/null 2> /dev/null
+
+# cheat.sh
+fpath=(~/.zsh.d/ $fpath)
+
 [ ! -z "$DISPLAY" ] && source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
 export ZSH_SYSTEM_CLIPBOARD_SELECTION='PRIMARY'
 [ -z "$DISPLAY" ] && export DISPLAY=:0 
+
