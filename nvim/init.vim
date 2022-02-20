@@ -271,7 +271,6 @@ Plug 'dbeniamine/cheat.sh-vim', Cond(!exists('g:vscode'))
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
-  Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'tom-anders/telescope-vim-bookmarks.nvim'
   Plug 'folke/which-key.nvim'
@@ -286,7 +285,8 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'madskjeldgaard/faust-nvim'
   Plug 'romgrk/nvim-treesitter-context'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'tanvirtin/vgit.nvim'
+  " Plug 'tanvirtin/vgit.nvim'
+  Plug 'lewis6991/gitsigns.nvim'
 endif
 if has('nvim-0.6') && !exists('g:vscode')
   Plug 'github/copilot.vim'
@@ -330,10 +330,21 @@ if has('nvim-0.5') && !exists("g:vscode")
   }
 EOF
 
-  " Git lens vgit
+  " Git lens
   lua << EOF
-  require('vgit').setup()
+  -- require('vgit').setup()
+  require('gitsigns').setup{
+    current_line_blame = true,
+    current_line_blame_opts = {
+      virt_text = true,
+      virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+      delay = 300,
+      ignore_whitespace = false,
+    },
+  }
 EOF
+  nnoremap  ]d :Gitsigns next_hunk<cr>
+  nnoremap  [d :Gitsigns prev_hunk<cr>
 
   " Hop plugin
   lua << EOF
