@@ -428,7 +428,6 @@ export PATH=$HOME/.local/bin:$PATH
 # cheat.sh
 fpath=(~/.zsh.d/ $fpath)
 
-[ ! -z "$DISPLAY" ] && source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
 export ZSH_SYSTEM_CLIPBOARD_SELECTION='PRIMARY'
 [ -z "$DISPLAY" ] && export DISPLAY=:0 
 

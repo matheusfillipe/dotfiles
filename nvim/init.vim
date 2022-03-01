@@ -376,8 +376,9 @@ EOF
   nnoremap <space>cA <cmd>Telescope lsp_code_actions<cr>
   nnoremap <space>ci <cmd>Telescope lsp_implementations<cr>
   nnoremap <space>cd <cmd>Telescope lsp_definitions<cr>
-  nnoremap <space>gc <cmd>Telescope git_commits<cr>
+  nnoremap <space>gl <cmd>Telescope git_commits<cr>
   nnoremap <space>gb <cmd>Telescope git_branches<cr>
+  nnoremap <space>gf <cmd>Telescope git_files<cr>
   nnoremap <space>gs <cmd>Telescope git_status<cr>
   nnoremap <space>gS <cmd>Telescope git_stash<cr>
 
@@ -564,7 +565,7 @@ let g:auto_save = 1
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_presave_hook = 'call AbortIfNotLang()'
 " let g:not_autosave = ["rust"]
-let g:not_autosave = []
+let g:not_autosave = ["magit"]
 function! AbortIfNotLang()
   if index(g:not_autosave, &filetype) >= 0
     let g:auto_save_abort = 1
