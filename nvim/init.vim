@@ -20,8 +20,8 @@ set viminfo='1000,f1
 set splitbelow
 " set termguicolors
 
-nnoremap <space>fy :let @+ = expand("%:p")<cr>
-" nnoremap <space>fy :silent call ClipboardSend(expand("%:p"))<cr>
+" nnoremap <space>fy :let @+ = expand("%:p")<cr>
+nnoremap <space>fy :silent call ClipboardSend(expand("%:p"))<cr>
 
 let $ZDOTDIR = $HOME
 if $NOVIMZSH
@@ -186,11 +186,11 @@ let g:solarized_termtrans=1
 " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 " in ~/.vim/colors/ and uncomment:
 " colorscheme solarized
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-        endif
+" if empty(glob('~/.vim/autoload/plug.vim'))
+"   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"         endif
 "TERM_FANCY_CURSOR  = 'true'
 set nocompatible
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
@@ -381,6 +381,7 @@ EOF
   nnoremap <space>gf <cmd>Telescope git_files<cr>
   nnoremap <space>gs <cmd>Telescope git_status<cr>
   nnoremap <space>gS <cmd>Telescope git_stash<cr>
+  nnoremap <space>gpp <cmd>:!git push><cr>
 
   nnoremap <space>cd <cmd>Telescope coc definitions<cr>
   nnoremap <space>cD <cmd>Telescope coc declarations<cr>
@@ -1453,6 +1454,7 @@ autocmd FileType cobol set dictionary+=~/.config/nvim/cobol.dict
 let runners = {}
 
 let runners['cobol'] = 'cobc -x %; ./%:r'
+let runners['bash'] = 'bash %'
 let runners['python'] = 'python3 %'
 let runners['c'] = 'gcc %; ./a.out'
 let runners['cpp'] = 'g++ %; ./a.out'
