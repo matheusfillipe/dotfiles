@@ -1,6 +1,6 @@
---- init.vim	2021-11-25 15:14:13.486535117 -0300
-+++ serv_init.vim	2021-11-25 15:37:43.949548422 -0300
-@@ -1,27 +1,27 @@
+--- init.vim	2022-03-02 19:52:34.160767473 -0300
++++ init.server.vim	2022-03-03 03:12:58.383114985 -0300
+@@ -1,20 +1,20 @@
 -" function! SendClipBoard()
 -"   execute("silent redir! > /tmp/mattf_lcopy_nvim")
 -"   execute("silent echo @0")
@@ -35,12 +35,3 @@
  set timeoutlen=500
  set viminfo='1000,f1
  set splitbelow
- " set termguicolors
- 
--nnoremap <space>fy :let @+ = expand("%:p")<cr>
--" nnoremap <space>fy :silent call ClipboardSend(expand("%:p"))<cr>
-+" nnoremap <space>fy :let @+ = expand("%:p")<cr>
-+nnoremap <space>fy :silent call ClipboardSend(expand("%:p"))<cr>
- 
- let $ZDOTDIR = $HOME
- if $NOVIMZSH

@@ -1,27 +1,27 @@
-" function! SendClipBoard()
-"   execute("silent redir! > /tmp/mattf_lcopy_nvim")
-"   execute("silent echo @0")
-"   execute("silent redir END")
-"   execute("silent !lcopy /tmp/mattf_lcopy_nvim")
-" endfunction
+function! SendClipBoard()
+  execute("silent redir! > /tmp/mattf_lcopy_nvim")
+  execute("silent echo @0")
+  execute("silent redir END")
+  execute("silent !lcopy /tmp/mattf_lcopy_nvim")
+endfunction
 
-" augroup custom_clipboard
-"   au!
-"   au TextYankPost * :call SendClipBoard()
-" augroup END
+augroup custom_clipboard
+  au!
+  au TextYankPost * :call SendClipBoard()
+augroup END
 
-" function ClipboardSend(txt)
-"   execute("!echo " . a:txt . " | lcopy")
-" endfunction
+function ClipboardSend(txt)
+  execute("!echo " . a:txt . " | lcopy")
+endfunction
 
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 set timeoutlen=500
 set viminfo='1000,f1
 set splitbelow
 " set termguicolors
 
-nnoremap <space>fy :let @+ = expand("%:p")<cr>
-" nnoremap <space>fy :silent call ClipboardSend(expand("%:p"))<cr>
+" nnoremap <space>fy :let @+ = expand("%:p")<cr>
+nnoremap <space>fy :silent call ClipboardSend(expand("%:p"))<cr>
 
 let $ZDOTDIR = $HOME
 if $NOVIMZSH
