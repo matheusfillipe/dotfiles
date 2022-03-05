@@ -255,7 +255,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'jkramer/vim-checkbox'
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+" Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 Plug 'jreybert/vimagit'
 Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
 " Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
@@ -268,6 +268,7 @@ Plug 'szw/vim-maximizer', Cond(!exists('g:vscode'))
 Plug 'puremourning/vimspector', Cond(!exists('g:vscode'))
 Plug 'Jorengarenar/COBOl.vim', Cond(!exists('g:vscode'))
 Plug 'dbeniamine/cheat.sh-vim', Cond(!exists('g:vscode'))
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
@@ -316,6 +317,10 @@ nmap <space>Bj <Plug>BookmarkMoveDown
 nmap <space>Bg <Plug>BookmarkMoveToLine
  
 " nnoremap  <leader>f <Plug>(easymotion-s)
+
+" Doge docstring
+let g:doge_enable_mappings = 1
+let g:doge_mapping = '<space>ds'
 
 " Magit
 nmap <space>gg :MagitOnly<cr>
@@ -549,9 +554,10 @@ let g:coc_global_extensions = [
   \ 'coc-perl',
   \ 'coc-dictionary',
 \ ]
-" pydocstring
+" python tabs and docstring
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
-nmap <silent> <space>cs <Plug>(pydocstring)
+" nmap <silent> <space>cs <Plug>(pydocstring)
+nmap <silent> <space>cs <Plug>(doge-generate)
 
 " Doom emacs like things
 nnoremap <c-_> gc<space>  
