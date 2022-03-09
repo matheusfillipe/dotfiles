@@ -478,6 +478,7 @@ lua << EOF
           ["<esc>"] = actions.close,
           ["<C-M-n>"] = (function() vim.cmd [[stopinsert]] end),
         },
+        n = {["d"] = actions.delete_buffer}
       },
       path_display = {
         'absolute',
@@ -487,10 +488,8 @@ lua << EOF
 EOF
 lua << EOF
   require("which-key").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
   }
+
 EOF
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
