@@ -256,7 +256,7 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'jkramer/vim-checkbox'
 " Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
 " Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
 Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
@@ -286,6 +286,7 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'madskjeldgaard/faust-nvim'
   Plug 'romgrk/nvim-treesitter-context'
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'TimUntersberger/neogit'
   " Plug 'tanvirtin/vgit.nvim'
   Plug 'lewis6991/gitsigns.nvim'
 endif
@@ -323,7 +324,7 @@ let g:doge_enable_mappings = 1
 let g:doge_mapping = '<space>ds'
 
 " Magit
-nmap <space>gg :MagitOnly<cr>
+nmap <space>gg :Neogit<cr>
 nmap <space>g<space> :!mg<cr>
 
 
@@ -332,6 +333,19 @@ if has('nvim-0.5') && !exists("g:vscode")
   lua << EOF
   require'treesitter-context'.setup{
     max_lines = 4,
+  }
+EOF
+
+  " Neogit magit for neovim
+  lua << EOF
+  local neogit = require('neogit')
+  neogit.setup {
+    mappings = {
+      status = {
+        ["p"] = "PushPopup",
+        ["f"] = "PullPopup",
+      }
+    }
   }
 EOF
 
@@ -571,7 +585,7 @@ let g:auto_save = 1
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_presave_hook = 'call AbortIfNotLang()'
 " let g:not_autosave = ["rust"]
-let g:not_autosave = ["magit"]
+let g:not_autosave = ["neogit"]
 function! AbortIfNotLang()
   if index(g:not_autosave, &filetype) >= 0
     let g:auto_save_abort = 1
