@@ -429,8 +429,8 @@ export PATH=$HOME/.local/bin:$PATH
 fpath=(~/.zsh.d/ $fpath)
 
 # Clipboard
-[ -f "$HOME/.zsh/plugins/zsh-system-clipboard" ] && source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
-export ZSH_SYSTEM_CLIPBOARD_SELECTION='primary'
+[ -e "$HOME/.zsh/plugins/zsh-system-clipboard" ] && source "$HOME/.zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh"
+export ZSH_SYSTEM_CLIPBOARD_SELECTION='PRIMARY'
 export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT='true'
 
 [ -z "$DISPLAY" ] && export DISPLAY=:0 
