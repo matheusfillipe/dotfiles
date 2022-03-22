@@ -2,6 +2,8 @@
 #Workaround for trump
 [[ "$TERM" == "dumb" ]] && unsetopt zle && PS1='$ ' && return
 
+[[ -e ~/.zsh_extrasrc ]] && source ~/.zsh_extrasrc
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
