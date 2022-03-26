@@ -323,10 +323,6 @@ nmap <space>Bg <Plug>BookmarkMoveToLine
 let g:doge_enable_mappings = 1
 let g:doge_mapping = '<space>ds'
 
-" Magit
-nmap <space>gg :Neogit<cr>
-nmap <space>g<space> :!mg<cr>
-
 
 if has('nvim-0.5') && !exists("g:vscode")
   " treesitter-context
@@ -1500,6 +1496,15 @@ tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
 function! Emacs()
   execute ':!emacsclient -n -s main -c +' . line('.') . ':' . col('.') . ' ' . expand("%:p") . ' &'
 endfunction
+
+function! Magit()
+  execute ':!mg'
+endfunction
+
 command! Emacs :call Emacs()
 nmap <C-CR> :Emacs<CR>
+
+" Magit
+nmap <space>gg :Neogit<cr>
+nmap <space>g<space> :call Magit()<cr>
 
