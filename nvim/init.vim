@@ -294,7 +294,7 @@ if has('nvim-0.6') && !exists('g:vscode')
   Plug 'github/copilot.vim'
 endif
 call plug#end()
-if empty(glob("~/.config/nvim/plugged"))
+if empty(glob("~/.config/nvim/plugged")) && empty(glob('~/.vim/autoload/plug.vim'))
     PlugInstall
 endif
 
