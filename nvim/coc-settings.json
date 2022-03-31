@@ -26,9 +26,7 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "svg",    // coc-svg support svg format
     "dart",   // coc-flutter support dart format */
-    "elixir", // diagnostic-languageserver support elixir format
-    "rust",
-    "eelixir" // diagnostic-languageserver support elixir format
+    "elixir" // diagnostic-languageserver support elixir format
   ],
   "flutter.openDevLogSplitCommand": "botright 10split",
   "html.autoClosingTags": true,
@@ -115,5 +113,6 @@
       "args": ["-"]
     }
   },
+  "coc.preferences.semanticTokensHighlights": false,
   "jedi.executable.command": "jedi-language-server"
 }

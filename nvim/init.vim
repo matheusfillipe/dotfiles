@@ -234,7 +234,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dart-lang/dart-vim-plugin', Cond(!exists('g:vscode'))
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'rust-lang/rust.vim'
+" Plug 'rust-lang/rust.vim'
 Plug 'lervag/vimtex', Cond(!exists('g:vscode'))
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
@@ -287,9 +287,9 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'romgrk/nvim-treesitter-context'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'TimUntersberger/neogit'
-  " Plug 'tanvirtin/vgit.nvim'
   Plug 'lewis6991/gitsigns.nvim'
 endif
+
 if has('nvim-0.6') && !exists('g:vscode')
   Plug 'github/copilot.vim'
 endif
@@ -401,7 +401,7 @@ EOF
   nnoremap <space>cd <cmd>Telescope coc definitions<cr>
   nnoremap <space>cD <cmd>Telescope coc declarations<cr>
   nnoremap <space>cr <cmd>Telescope coc references<cr>
-  nnoremap <space>ca <cmd>Telescope coc code_actions<cr>
+  nnoremap <space>ca <cmd>CocAction<cr>
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
 
 
@@ -519,9 +519,8 @@ require'nvim-treesitter.configs'.setup {
       disable = {"python"}
   }
 }
-
-
 EOF
+
 endif
 
 " Disable pear-tree on telescope
@@ -562,11 +561,13 @@ let g:coc_global_extensions = [
   \ 'coc-phpls',
   \ 'coc-perl',
   \ 'coc-dictionary',
+  \ 'coc-rust-analyzer',
 \ ]
 " python tabs and docstring
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
 " nmap <silent> <space>cs <Plug>(pydocstring)
 nmap <silent> <space>cs <Plug>(doge-generate)
+
 
 " Doom emacs like things
 nnoremap <c-_> gc<space>  
@@ -887,7 +888,7 @@ let g:startify_files_number = 1000
 
 vmap < <gv
 vmap > >gv
-" let g:rustfmt_autosave = 1
+
 let g:tex_flavor = 'latex'
 let g:dart_format_on_save = 1
 nnoremap <A-z> :TagbarOpenAutoClose<CR>
@@ -1508,3 +1509,11 @@ nmap <C-CR> :Emacs<CR>
 nmap <space>gg :Neogit<cr>
 nmap <space>g<space> :call Magit()<cr>
 
+
+nmap <F2> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
