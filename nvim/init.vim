@@ -269,6 +269,7 @@ Plug 'puremourning/vimspector', Cond(!exists('g:vscode'))
 Plug 'Jorengarenar/COBOl.vim', Cond(!exists('g:vscode'))
 Plug 'dbeniamine/cheat.sh-vim', Cond(!exists('g:vscode'))
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+Plug 'lilyinstarlight/vim-sonic-pi'
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
@@ -562,6 +563,7 @@ let g:coc_global_extensions = [
   \ 'coc-perl',
   \ 'coc-dictionary',
   \ 'coc-rust-analyzer',
+  \ 'coc-go',
 \ ]
 " python tabs and docstring
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
@@ -1476,8 +1478,22 @@ let runners['c'] = 'gcc %; ./a.out'
 let runners['cpp'] = 'g++ %; ./a.out'
 let runners['javascript'] = 'node %'
 let runners['rust'] = 'cd $(git rev-parse --show-toplevel); cargo run'
+let runners['go'] = 'go run .'
 let runners['java'] = 'cd $(git rev-parse --show-toplevel); ./gradlew installArmv7Release'
 let k = keys(runners)
+
+if executable("altty")
+  execute "nnoremap <F5> :silent exec \"!altty 'echo not implemented'\"<CR>"
+  execute "nnoremap <space>r :silent exec \"!altty 'echo not implemented'\"<CR>"
+  execute "nnoremap <F4> :nnoremap <lt>F5> :exec \"!altty '?'\" <lt>CR><left><left><left><left><left>"
+  execute "nnoremap <space>R :nnoremap <lt>space>r :exec \"!altty '?'\" <lt>CR><left><left><left><left><left>"
+else
+  execute "nnoremap <F5> :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 echo not implemented\"<CR>"
+  execute "nnoremap <space>r :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 echo not implemented\"<CR>"
+  execute "nnoremap <F4> :nnoremap <lt>F5> :exec \"FloatermNew --wintype=split --position=belowright --width=0.35 ?\" <lt>CR><left><left><left><left><left>"
+  execute "nnoremap <space>R :nnoremap <lt>space>r :exec \"FloatermNew --wintype=split --position=belowright --width=0.35 ?\" <lt>CR><left><left><left><left><left>"
+endif
+
 for i in k
   if executable("altty")
     execute "autocmd FileType " . i . " nnoremap <F5> :silent exec \"!altty '" . runners[i] . "'\"<CR>"
@@ -1492,8 +1508,26 @@ for i in k
   endif
 endfor
 
+" DEFAULT testers
+let testers = {}
+
+let testers['rust'] = 'cd $(git rev-parse --show-toplevel); cargo test'
+let k = keys(testers)
+for i in k
+  if executable("altty")
+    execute "autocmd FileType " . i . " nnoremap <space>ct :silent exec \"!altty '" . testers[i] . "'\"<CR>"
+    execute "autocmd FileType " . i . " nnoremap <space>T :nnoremap <lt>space>ct :exec \"!altty '" . testers[i] . "'\" <lt>CR><left><left><left><left><left>"
+  else
+    execute "autocmd FileType " . i . " nnoremap <space>ct :silent exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . testers[i] . "\"<CR>"
+    execute "autocmd FileType " . i . " nnoremap <space>T :nnoremap <lt>space>ct :exec \"FloatermNew --wintype=split --position=belowright --width=0.35 " . testers[i] . "\" <lt>CR><left><left><left><left><left>"
+  endif
+endfor
+
+" clear terminal
 tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
 
+
+" Emacs
 function! Emacs()
   execute ':!emacsclient -n -s main -c +' . line('.') . ':' . col('.') . ' ' . expand("%:p") . ' &'
 endfunction
@@ -1510,6 +1544,7 @@ nmap <space>gg :Neogit<cr>
 nmap <space>g<space> :call Magit()<cr>
 
 
+" Check highlight groups
 nmap <F2> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
     if !exists("*synstack")
@@ -1517,3 +1552,9 @@ function! <SID>SynStack()
     endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+" CocDiagnostics colors
+highlight! CocUnusedHighlight ctermfg=blue
+
+" Sonic PI
+let g:sonic_pi_keymaps_enabled = 0
