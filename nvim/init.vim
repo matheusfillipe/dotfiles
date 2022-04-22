@@ -283,8 +283,6 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'phaazon/hop.nvim'
   Plug 'AckslD/nvim-neoclip.lua'
   Plug 'ThePrimeagen/refactoring.nvim'
-  Plug 'gmoe/vim-faust'
-  Plug 'madskjeldgaard/faust-nvim'
   Plug 'romgrk/nvim-treesitter-context'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'TimUntersberger/neogit'
@@ -406,10 +404,6 @@ EOF
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
 
 
- " Faust
-lua << EOF
-require 'faust-nvim'.setup()
-EOF
 
   " Projects
 lua << EOF
@@ -1512,6 +1506,7 @@ endfor
 let testers = {}
 
 let testers['rust'] = 'cd $(git rev-parse --show-toplevel); cargo test'
+let testers['go'] = 'go test'
 let k = keys(testers)
 for i in k
   if executable("altty")
