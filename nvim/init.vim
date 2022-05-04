@@ -175,7 +175,7 @@ set number relativenumber
 set nu rnu
 nnoremap s :%s//g<left><left>
 nnoremap <Tab> <C-i>
-vnoremap s :s//g<left><left>
+vnoremap s :s/\%V/g<left><left>
 vnoremap . :normal .<cr> 
 
 " Color scheme (terminal)
@@ -498,7 +498,7 @@ lua << EOF
 EOF
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = {"swift", "phpdoc"}, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
