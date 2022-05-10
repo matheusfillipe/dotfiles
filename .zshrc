@@ -1,4 +1,4 @@
-#zmodload zsh/zprof 
+# zmodload zsh/zprof 
 #Workaround for trump
 [[ "$TERM" == "dumb" ]] && unsetopt zle && PS1='$ ' && return
 
@@ -435,4 +435,4 @@ export ZSH_SYSTEM_CLIPBOARD_SELECTION='PRIMARY'
 export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT='true'
 
 [ -z "$DISPLAY" ] && export DISPLAY=:0 
-
+# zprof

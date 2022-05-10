@@ -405,44 +405,52 @@ EOF
 
 
 
-  " Projects
-lua << EOF
-  project_dirs = {"~/Projects", "~/Programs", "~/projects", "~/programs", "~/Jobs"}
+  " " Projects
+" lua << EOF
+  " function lazyload_projects()
+  "   project_dirs = {"~/Projects", "~/Programs", "~/projects", "~/programs", "~/Jobs"}
 
-  function exists(file)
-     local ok, err, code = os.rename(file, file)
-     if not ok then
-        if code == 13 then
-           return true
-        end
-     end
-     return ok
-  end
+  "   function exists(file)
+  "      local ok, err, code = os.rename(file, file)
+  "      if not ok then
+  "         if code == 13 then
+  "            return true
+  "         end
+  "      end
+  "      return ok
+  "   end
 
-  function is_dir(path)
-    path = path:gsub( "~", os.getenv ("HOME"))
-    return exists(path.."/")
-  end
+  "   function is_dir(path)
+  "     path = path:gsub( "~", os.getenv ("HOME"))
+  "     return exists(path.."/")
+  "   end
 
-  dirs = {}
-  for _,v in pairs(project_dirs) do
-    if is_dir(v) then
-      table.insert(dirs, v)
-    end
-  end
+  "   dirs = {}
+  "   for _,v in pairs(project_dirs) do
+  "     if is_dir(v) then
+  "       table.insert(dirs, v)
+  "     end
+  "   end
 
-  require('telescope').setup {
-  extensions = {
-    project = {
-      base_dirs = dirs,
-      hidden_files = true
-  }
-}
-}
-EOF
-  lua require'telescope'.load_extension('project')
+  "   require('telescope').setup {
+  "   extensions = {
+  "     project = {
+  "       base_dirs = dirs,
+  "       hidden_files = false
+  "     }
+  "   }
+  "   }
+  "   require'telescope'.load_extension('project')
+  " end
 
-  nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
+" vim.cmd([[autocmd User LazyLoadProject lua lazyload_projects()]])
+" vim.defer_fn(function ()
+  " vim.cmd([[doautocmd User LazyLoadProject]])
+" end, 80)  
+
+" EOF
+
+  " nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
   " Emojis
   lua require("telescope").load_extension("emoji")
@@ -1467,6 +1475,7 @@ let runners = {}
 
 let runners['cobol'] = 'cobc -x %; ./%:r'
 let runners['bash'] = 'bash %'
+let runners['sh'] = './%'
 let runners['python'] = 'python3 %'
 let runners['c'] = 'gcc %; ./a.out'
 let runners['cpp'] = 'g++ %; ./a.out'
