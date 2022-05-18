@@ -270,6 +270,7 @@ Plug 'Jorengarenar/COBOl.vim', Cond(!exists('g:vscode'))
 Plug 'dbeniamine/cheat.sh-vim', Cond(!exists('g:vscode'))
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 Plug 'lilyinstarlight/vim-sonic-pi'
+Plug 'whonore/Coqtail'
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
