@@ -401,8 +401,21 @@ EOF
   nnoremap <space>cd <cmd>Telescope coc definitions<cr>
   nnoremap <space>cD <cmd>Telescope coc declarations<cr>
   nnoremap <space>cr <cmd>Telescope coc references<cr>
-  nnoremap <space>ca <cmd>CocAction<cr>
+  nnoremap <space>ca <Plug>(coc-codeaction)<cr>
+  nnoremap <space>cq <Plug>(coc-fix-current)<cr>
+  vnoremap <space>cf <Plug>(coc-format-selected)<cr>
+  xnoremap <space>cf <Plug>(coc-format-selected)<cr>
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
+
+  function! ShowDocumentation()
+    if CocAction('hasProvider', 'hover')
+      call CocActionAsync('doHover')
+    else
+      call feedkeys('K', 'in')
+    endif
+  endfunction
+
+  nnoremap <silent> K :call ShowDocumentation()<CR>
 
 
 

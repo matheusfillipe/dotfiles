@@ -90,7 +90,7 @@
     }
   },
   "diagnostic-languageserver.formatFiletypes": {
-    "python": ["black", "isort", "docformatter"],
+    "python": ["autopep8", "black", "isort", "docformatter"],
     "dart": "dartfmt",
     "elixir": "mix_format",
     "eelixir": "mix_format",
@@ -99,6 +99,9 @@
     "blade": "blade-formatter"
   },
   "diagnostic-languageserver.formatters": {
+    "autopep8": {
+      "command": "autopep8"
+    },
     "black": {
       "command": "black",
       "args": ["-q", "-"]
