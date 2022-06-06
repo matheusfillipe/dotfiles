@@ -982,6 +982,7 @@ if !exists('g:vscode')
 endif
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>d <Plug>(coc-definition)
+nmap <leader>D :tab split<CR><Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>r <Plug>(coc-rename)
 xmap <leader>F  <Plug>(coc-format-selected)
