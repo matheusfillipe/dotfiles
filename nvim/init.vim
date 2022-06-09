@@ -232,7 +232,7 @@ Plug 'preservim/nerdtree', Cond(!exists('g:vscode'))
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight', Cond(!exists('g:vscode'))
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-Plug 'dart-lang/dart-vim-plugin', Cond(!exists('g:vscode'))
+" Plug 'dart-lang/dart-vim-plugin', Cond(!exists('g:vscode'))
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Plug 'rust-lang/rust.vim'
 Plug 'lervag/vimtex', Cond(!exists('g:vscode'))
@@ -1488,6 +1488,7 @@ autocmd FileType cobol set dictionary+=~/.config/nvim/cobol.dict
 " DEFAULT F5 RUNNERS RUN FILES
 let runners = {}
 
+let runners['dart'] = 'cd $(git rev-parse --show-toplevel); dart run'
 let runners['cobol'] = 'cobc -x %; ./%:r'
 let runners['bash'] = 'bash %'
 let runners['sh'] = './%'
@@ -1529,6 +1530,7 @@ endfor
 " DEFAULT testers
 let testers = {}
 
+let runners['dart'] = 'cd $(git rev-parse --show-toplevel); dart test'
 let testers['rust'] = 'cd $(git rev-parse --show-toplevel); cargo test'
 let testers['go'] = 'go test'
 let k = keys(testers)

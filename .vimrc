@@ -346,5 +346,9 @@ nmap gx :!xdg-open <c-r><c-a><cr>
 " nnoremap gP i<CR><Esc>PkJxJx
 " nnoremap gp a<CR><Esc>PkJxJx
 
+inoremap <C-S> <Esc>:w<CR>a
+nnoremap <C-S> :w<CR>
+vnoremap <C-S> <Esc>:w<CR>
 
+vnoremap s :s/\%V/g<left><left>
 
