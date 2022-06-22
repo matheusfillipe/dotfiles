@@ -277,7 +277,6 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'tom-anders/telescope-vim-bookmarks.nvim'
   Plug 'folke/which-key.nvim'
-  Plug 'xiyaowong/telescope-emoji.nvim'
   Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'fannheyward/telescope-coc.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -466,19 +465,6 @@ EOF
 
   " nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
-  " Emojis
-  lua require("telescope").load_extension("emoji")
-  nnoremap <space>ie <cmd>Telescope emoji search<cr>
-lua << EOF
-  require("telescope-emoji").setup({
-    action = function(emoji)
-      -- argument emoji is a table.
-      -- {name="", value="", cagegory="", description=""}
-      vim.fn.setreg("*", emoji.value)
-      print([[Press p or "*p to paste this emoji]] .. emoji.value)
-    end,
-})
-EOF
 
   " Pick from all bookmarks
   lua require('telescope').load_extension('vim_bookmarks')
@@ -897,6 +883,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeSortOrder = ['\/$', '*', '[[-timestamp]]']
+autocmd FileType nerdtree nmap <buffer> <Tab> o
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 set encoding=utf8
 set inccommand=split
