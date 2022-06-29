@@ -95,7 +95,8 @@
   },
   "diagnostic-languageserver.formatters": {
     "autopep8": {
-      "command": "autopep8"
+      "command": "autopep8",
+      "args": ["-i"]
     },
     "black": {
       "command": "black",

@@ -569,6 +569,11 @@ let g:coc_global_extensions = [
 \ ]
 " python tabs and docstring
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
+
+" Coc Format is broken for python
+autocmd FileType python command! Format :silent !autopep8 -i %
+
+
 " nmap <silent> <space>cs <Plug>(pydocstring)
 nmap <silent> <space>cs <Plug>(doge-generate)
 
