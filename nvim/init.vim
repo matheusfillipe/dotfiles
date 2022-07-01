@@ -206,7 +206,7 @@ Plug 'honza/vim-snippets', Cond(!exists('g:vscode'))
 Plug 'tell-k/vim-autopep8'
 Plug 'lambdalisue/suda.vim'
 Plug 'liuchengxu/space-vim-dark', Cond(!exists('g:vscode'))
-Plug 'Yggdroot/indentLine'    
+" Plug 'Yggdroot/indentLine'    
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
 " Plug 'maxbrunsfeld/vim-emacs-bindings'
@@ -253,7 +253,7 @@ Plug '907th/vim-auto-save'
 Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'preservim/vim-markdown'
 Plug 'jkramer/vim-checkbox'
 " Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 " Plug 'jreybert/vimagit'
@@ -271,6 +271,7 @@ Plug 'dbeniamine/cheat.sh-vim', Cond(!exists('g:vscode'))
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 Plug 'lilyinstarlight/vim-sonic-pi'
 Plug 'whonore/Coqtail'
+Plug 'mbbill/undotree'
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
@@ -285,6 +286,8 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'ThePrimeagen/refactoring.nvim'
   Plug 'romgrk/nvim-treesitter-context'
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'sindrets/diffview.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'TimUntersberger/neogit'
   Plug 'lewis6991/gitsigns.nvim'
 endif
@@ -296,6 +299,10 @@ call plug#end()
 if empty(glob("~/.config/nvim/plugged")) && empty(glob('~/.vim/autoload/plug.vim'))
     PlugInstall
 endif
+
+" UndoTree
+nmap <a-u> :UndotreeToggle<cr>:UndotreeFocus<cr>
+
 
 " clear terminal
 nmap <c-w><c-l> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
@@ -340,7 +347,10 @@ EOF
         ["p"] = "PushPopup",
         ["f"] = "PullPopup",
       }
-    }
+    },
+   integrations = {
+      diffview = true  
+    },
   }
 EOF
 
@@ -522,6 +532,11 @@ require'nvim-treesitter.configs'.setup {
       disable = {"python"}
   }
 }
+EOF
+
+lua <<EOF
+  local actions = require("diffview.actions")
+  require("diffview").setup()
 EOF
 
 endif
@@ -1021,6 +1036,7 @@ endif
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 CocFormat :call CocAction('format')
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
@@ -1571,3 +1587,14 @@ highlight! CocUnusedHighlight ctermfg=blue
 
 " Sonic PI
 let g:sonic_pi_keymaps_enabled = 0
+
+
+
+
+" make plugins stop hiding stuff (conflics with identline)
+let g:vim_json_syntax_conceal = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_json_conceal=0
+let g:markdown_syntax_conceal=0
+
