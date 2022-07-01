@@ -206,7 +206,7 @@ Plug 'honza/vim-snippets', Cond(!exists('g:vscode'))
 Plug 'tell-k/vim-autopep8'
 Plug 'lambdalisue/suda.vim'
 Plug 'liuchengxu/space-vim-dark', Cond(!exists('g:vscode'))
-" Plug 'Yggdroot/indentLine'    
+Plug 'Yggdroot/indentLine'    
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
 " Plug 'maxbrunsfeld/vim-emacs-bindings'
@@ -1595,6 +1595,7 @@ let g:sonic_pi_keymaps_enabled = 0
 let g:vim_json_syntax_conceal = 0
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
-let g:vim_json_conceal=0
-let g:markdown_syntax_conceal=0
+let g:vim_json_conceal = 0
+let g:markdown_syntax_conceal = 0
+let g:indentLine_fileTypeExclude = ['markdown', 'json']
 
