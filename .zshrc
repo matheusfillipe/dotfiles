@@ -437,3 +437,5 @@ export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT='true'
 
 [ -z "$DISPLAY" ] && export DISPLAY=:0 
 # zprof
+
+eval $(thefuck --alias)

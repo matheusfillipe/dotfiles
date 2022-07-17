@@ -293,8 +293,14 @@ if has('nvim-0.5') && !exists('g:vscode')
 endif
 
 if has('nvim-0.6') && !exists('g:vscode')
+  imap <silent><script><expr> <C-E> copilot#Accept("<End>")
+  let g:copilot_no_tab_map = v:true
+  let g:copilot_assume_mapped = v:true
   Plug 'github/copilot.vim'
+else
+  inoremap <C-e> <End>
 endif
+
 call plug#end()
 if empty(glob("~/.config/nvim/plugged")) && empty(glob('~/.vim/autoload/plug.vim'))
     PlugInstall
@@ -1210,7 +1216,6 @@ inoremap <C-S> <Esc>:w<CR>a
 nnoremap <C-S> :w<CR>
 inoremap <M-BS> <C-w>
 inoremap <C-a> <Home>
-inoremap <C-e> <End>
 inoremap <M-d> <Esc>vexi
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
@@ -1598,4 +1603,37 @@ let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_json_conceal = 0
 let g:markdown_syntax_conceal = 0
 let g:indentLine_fileTypeExclude = ['markdown', 'json']
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
+
+" Neovide
+let g:neovide_transparency=0.92
+let g:neovide_cursor_animation_length=0.1
+let g:neovide_cursor_vfx_mode = "railgun"
+
+
+" Like bufdo but restore the current buffer.
+function! BufDo(command)
+  let currBuff=bufnr("%")
+  execute 'bufdo ' . a:command
+  execute 'buffer ' . currBuff
+endfunction
+
+com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
+function! ReplaceInBuffers(search_as_default)
+  if a:search_as_default == 1
+    " clean pattern regex chars
+    let search_str = substitute(@/, "\\\\<", "", "")
+    let search_str = substitute(search_str, "\\\\>", "", "")
+    let search_str = substitute(search_str, "\\\\c", "", "/\c")
+  else
+    let search_str = ''
+  endif
+  let opts = {'prompt': 'Replace with: ', 'default': search_str, 'cancelreturn': 'qwertyuiop'}
+  let replace_str = input(opts)
+  if replace_str != 'qwertyuiop'
+    :silent! execute "Bufdo %s//".replace_str."/ge | update"
+  endif
+endfunction
+
+command! BufDo :call ReplaceInBuffers(1)<cr>
