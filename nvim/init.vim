@@ -1608,7 +1608,7 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " Neovide
 let g:neovide_transparency=0.92
-let g:neovide_cursor_animation_length=0.1
+let g:neovide_cursor_animation_length=0
 let g:neovide_cursor_vfx_mode = "railgun"
 
 
