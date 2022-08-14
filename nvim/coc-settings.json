@@ -44,7 +44,12 @@
             "directory": "/tmp/ccls"
           }
         }
-    }
+      },
+      "csharp-ls": {
+        "command": "csharp-ls",
+        "filetypes": ["cs"],
+        "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
+      }
   },
   "diagnostic-languageserver.filetypes": {
     "python": "flake8",
