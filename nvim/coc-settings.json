@@ -116,6 +116,9 @@
       "args": ["-"]
     }
   },
+
+  "suggest.noselect": true,
+  "suggest.enablePreselect": false,
   "coc.preferences.semanticTokensHighlights": false,
   "jedi.executable.command": "jedi-language-server"
 }
