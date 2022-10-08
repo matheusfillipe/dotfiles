@@ -387,7 +387,8 @@ EOF
   nnoremap  <leader>/ :HopPattern<cr>
 
   " Find files using Telescope command-line sugar.
-  nnoremap <space>ff <cmd>Telescope find_files<cr>
+  nnoremap <space>FF <cmd>Telescope find_files<cr>
+  nnoremap <space>ff <cmd>Telescope git_files<cr>
   nnoremap <space>fr <cmd>Telescope oldfiles<cr>
   nnoremap <space><C-r> <cmd>Telescope registers<cr>
   nnoremap <space><space> <cmd>Telescope find_files<cr>
@@ -1350,7 +1351,7 @@ endif
 nnoremap <C-l> v$h
 nnoremap <C-h> v0
 inoremap <C-CR> <cr><C-w>
-nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
+nnoremap <space>pp :lua require'telescope'.extensions.project.project{}<cr>
 
 if exists('g:vscode')
   command! Nu call VSCodeNotify('extension.toggle')
@@ -1658,3 +1659,11 @@ function! ReplaceInBuffers(search_as_default)
 endfunction
 
 command! BufDo :call ReplaceInBuffers(1)<cr>
+
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap <leader>p "_dP
