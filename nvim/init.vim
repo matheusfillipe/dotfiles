@@ -621,8 +621,8 @@ function! AbortIfNotLang()
 endfunction
 
 " insert mode on terminal
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
+" autocmd BufWinEnter,WinEnter term://* startinsert
+" autocmd BufLeave term://* stopinsert
 
 " shorts
 " Save on Ctrl-S
@@ -1288,11 +1288,14 @@ endfunction
 
 nmap <M-;>      :call CommentToggle(0)<CR>
 nmap <C-/>      :call CommentToggle(0)<CR>
-nmap     :<C-u>call CommentToggle(0)<CR>
+nmap          :call CommentToggle(0)<CR>
+nmap          :call CommentToggle(0)<CR>
 vmap <C-/> :<C-u>call CommentToggle(1)<CR>
 vmap     :<C-u>call CommentToggle(1)<CR>
 vmap <M-;> :<C-u>call CommentToggle(1)<CR>
 xmap <M-;> :<C-u>call CommentToggle(1)<CR>
+nmap <C-_>      :call CommentToggle(0)<CR>
+vmap <C-_> :<C-u>call CommentToggle(1)<CR>
 
 function! ColonToggle()
     execute ':silent! s/\([^ ]\) *$/\1;/'   
