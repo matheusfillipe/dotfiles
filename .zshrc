@@ -444,3 +444,6 @@ export ZSH_SYSTEM_CLIPBOARD_TMUX_SUPPORT='true'
 
 
 export PATH=$HOME/.dotnet/tools/:$PATH
+
+# Expand aliases
+zstyle ':completion:*' completer _expand_alias _complete _ignored

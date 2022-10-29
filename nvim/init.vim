@@ -203,6 +203,7 @@ endfunction
 " let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
 call plug#begin()
 Plug 'honza/vim-snippets', Cond(!exists('g:vscode'))
+Plug 'airblade/vim-rooter'
 Plug 'tell-k/vim-autopep8'
 Plug 'lambdalisue/suda.vim'
 Plug 'liuchengxu/space-vim-dark', Cond(!exists('g:vscode'))
@@ -393,6 +394,7 @@ EOF
   nnoremap <space><C-r> <cmd>Telescope registers<cr>
   nnoremap <space><space> <cmd>Telescope find_files<cr>
   nnoremap <space>fg <cmd>Telescope live_grep<cr>
+  vnoremap <space>fg "zy:Telescope live_grep default_text=<C-r>z<cr>
   nnoremap <space>b <cmd>Telescope buffers<cr>
   nnoremap <space>: <cmd>Telescope command_history<cr>
   nnoremap <space>h/ <cmd>Telescope search_history<cr>
@@ -493,26 +495,43 @@ EOF
   lua require('telescope').load_extension('neoclip')
   nmap <leader>C :Telescope neoclip<cr>
 
+  lua << EOF
+  require("telescope").setup({
+    extensions = {
+      coc = {
+          -- theme = 'ivy',
+          prefer_locations = true, -- always use Telescope locations to preview definitions/declarations/implementations etc
+      }
+    },
+  })
+  require('telescope').load_extension('coc')
+EOF
+
 lua << EOF
 
   local actions = require('telescope.actions')
   -- Global remapping
   ------------------------------
+  local action_layout = require("telescope.actions.layout")
   require('telescope').setup{
     defaults = {
+      layout_strategy = "horizontal",
+      layout_config = {
+        horizontal = { width = 0.99, height = 0.99, preview_cutoff = 0 }
+      },
       mappings = {
         i = {
           ["<C-k>"] = actions.move_selection_previous,
           ["<C-j>"] = actions.move_selection_next,
+          ["<M-p>"] = action_layout.toggle_preview,
+          ["<C-u>"] = false,
           ["<CR>"] = actions.select_default,
           ["<esc>"] = actions.close,
           ["<C-M-n>"] = (function() vim.cmd [[stopinsert]] end),
         },
         n = {["d"] = actions.delete_buffer}
       },
-      path_display = {
-        'absolute',
-      },
+      path_display = { "truncate", "smart"},
     }
   }
 EOF
@@ -716,7 +735,7 @@ let g:camelcasemotion_key = '<leader>'
 " sunmap b
 " sunmap e
 " sunmap ge
-let g:airline_theme='luna'
+let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
 
 
@@ -1070,6 +1089,10 @@ nnoremap <nowait><expr> <A-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<
 nnoremap <nowait><expr> <A-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 inoremap <nowait><expr> <A-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
 inoremap <nowait><expr> <A-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+nnoremap <nowait><expr> <A-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <A-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <A-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <A-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 
 " NeoVim-only mapping for visual mode scroll
 " Useful on signatureHelp after jump placeholder of snippet expansion
@@ -1376,6 +1399,8 @@ endif
 if has('nvim-0.5') && !exists('g:vscode')
   nnoremap <space>fp :lua require("telescope.builtin").find_files({prompt_title = "< vimrc >", cwd = "~/.config/nvim/"})<cr>
   nnoremap <space>fG :lua require("telescope.builtin").grep_string()<CR>
+  vnoremap <space>fG "zy:Telescope grep_string default_text=<C-r>z<cr>
+
 else
   nnoremap <space>fp :e $MYVIMRC<cr>
 end
@@ -1385,6 +1410,7 @@ cnoremap <C-y> <c-r>*
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 
 nnoremap <leader>cc i- [ ] 
 map <space>[ :b#<cr>
@@ -1599,7 +1625,7 @@ command! Emacs :call Emacs()
 nmap <C-CR> :Emacs<CR>
 
 " Magit
-nmap <space>gg :Neogit<cr>
+nmap <space>gg :lua require('neogit').open()<cr>
 nmap <space>g<space> :call Magit()<cr>
 
 
@@ -1664,9 +1690,12 @@ endfunction
 command! BufDo :call ReplaceInBuffers(1)<cr>
 
 " delete without yanking
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
+nnoremap <leader>x "_dd
+vnoremap <leader>x "_d
 
 " replace currently selected text with default register
 " without yanking it
 vnoremap <leader>p "_dP
+
+let g:rooter_manual_only = 1
+nnoremap <space>gr :Rooter<CR>

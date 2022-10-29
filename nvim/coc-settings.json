@@ -119,6 +119,7 @@
 
   "suggest.noselect": true,
   "suggest.enablePreselect": false,
-  "coc.preferences.semanticTokensHighlights": false,
+  "coc.preferences.semanticTokensHighlights": true,
+  "coc.preferences.useQuickfixForLocations": true,
   "jedi.executable.command": "jedi-language-server"
 }
