@@ -447,3 +447,6 @@ export PATH=$HOME/.dotnet/tools/:$PATH
 
 # Expand aliases
 zstyle ':completion:*' completer _expand_alias _complete _ignored
+
+
+export PYTHONBREAKPOINT=ipdb.set_trace 

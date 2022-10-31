@@ -419,7 +419,8 @@ EOF
   nnoremap <space>cd <cmd>Telescope coc definitions<cr>
   nnoremap <space>cD <cmd>Telescope coc declarations<cr>
   nnoremap <space>cr <cmd>Telescope coc references<cr>
-  nnoremap <space>ca <Plug>(coc-codeaction)
+  nnoremap <space>ca <Plug>(coc-codeaction-selected)
+  nnoremap <space>cA <Plug>(coc-codeaction)
   nnoremap <space>cq <Plug>(coc-fix-current)
   vnoremap <space>cf <Plug>(coc-format-selected)
   xnoremap <space>cf <Plug>(coc-format-selected)
