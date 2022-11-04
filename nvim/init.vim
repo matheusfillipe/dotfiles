@@ -419,8 +419,8 @@ EOF
   nnoremap <space>cd <cmd>Telescope coc definitions<cr>
   nnoremap <space>cD <cmd>Telescope coc declarations<cr>
   nnoremap <space>cr <cmd>Telescope coc references<cr>
-  nnoremap <space>ca <Plug>(coc-codeaction-selected)
-  nnoremap <space>cA <Plug>(coc-codeaction)
+  vnoremap <space>ca <Plug>(coc-codeaction-selected)
+  nnoremap <space>ca <Plug>(coc-codeaction)
   nnoremap <space>cq <Plug>(coc-fix-current)
   vnoremap <space>cf <Plug>(coc-format-selected)
   xnoremap <space>cf <Plug>(coc-format-selected)
@@ -618,6 +618,7 @@ let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-css',
   \ 'coc-jedi',
+  \ 'coc-pyright',
   \ 'coc-diagnostic',
   \ 'coc-json',
   \ 'coc-phpls',
@@ -1069,6 +1070,8 @@ inoremap <silent><expr> <C-j>
       \ CheckBackspace() ? "\<C-j>" :
       \ coc#refresh()
 
+inoremap <silent><expr> <M-CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <expr><C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
@@ -1137,7 +1140,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Snippets
 
 " Use <A-j> for both expand and jump (make expand higher priority.)
-imap <M-CR> <Plug>(coc-snippets-expand)
+" imap <M-CR> <Plug>(coc-snippets-expand)
 imap <A-l> <Plug>(coc-snippets-expand-jump)
 imap <M-L> <Plug>(coc-snippets-expand)
 
@@ -1715,5 +1718,24 @@ vnoremap <leader>x "_d
 " without yanking it
 vnoremap <leader>p "_dP
 
+" go to root folder
 let g:rooter_manual_only = 1
 nnoremap <space>gr :Rooter<CR>
+
+" Delete all buffers except in open tabs
+function! DeleteHiddenBuffers()
+  let tpbl=[]
+  let closed = 0
+  call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+    if getbufvar(buf, '&mod') == 0
+      silent execute 'bwipeout' buf
+      let closed += 1
+    endif
+  endfor
+  echo "Closed ".closed." hidden buffers"
+endfunction
+
+command! BDeleteHidden :call DeleteHiddenBuffers()
+autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
+

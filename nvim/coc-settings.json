@@ -121,5 +121,20 @@
   "suggest.enablePreselect": false,
   "coc.preferences.semanticTokensHighlights": true,
   "coc.preferences.useQuickfixForLocations": true,
-  "jedi.executable.command": "jedi-language-server"
+
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportGeneralTypeIssues": false
+  },
+
+  "jedi.enable": false,
+  "jedi.executable.command": "jedi-language-server",
+  "jedi.startupMessage": true,
+  "jedi.workspace.symbols.ignoreFolders": [
+    ".nox",
+    ".tox",
+    ".venv",
+    "__pycache__",
+    "venv"
+  ],
+  "jedi.markupKindPreferred": "markdown"
 }
