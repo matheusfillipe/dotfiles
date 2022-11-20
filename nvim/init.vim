@@ -420,7 +420,7 @@ EOF
   nnoremap <space>cD <cmd>Telescope coc declarations<cr>
   nnoremap <space>cr <cmd>Telescope coc references<cr>
   vnoremap <space>ca <Plug>(coc-codeaction-selected)
-  nnoremap <space>ca <Plug>(coc-codeaction)
+  nnoremap <space>ca <Plug>(coc-codeaction-cursor)
   nnoremap <space>cq <Plug>(coc-fix-current)
   vnoremap <space>cf <Plug>(coc-format-selected)
   xnoremap <space>cf <Plug>(coc-format-selected)
@@ -636,6 +636,7 @@ autocmd FileType python command! Format :silent !autopep8 -i %
 
 " nmap <silent> <space>cs <Plug>(pydocstring)
 nmap <silent> <space>cs <Plug>(doge-generate)
+let g:doge_doc_standard_python = 'reST'
 
 
 " Doom emacs like things
@@ -1110,7 +1111,7 @@ nnoremap <nowait><expr> <A-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<
 nnoremap <nowait><expr> <A-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 inoremap <nowait><expr> <A-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
 inoremap <nowait><expr> <A-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-nnoremap <nowait><expr> <A-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+" nnoremap <nowait><expr> <A-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <nowait><expr> <A-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 inoremap <nowait><expr> <A-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
 inoremap <nowait><expr> <A-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"

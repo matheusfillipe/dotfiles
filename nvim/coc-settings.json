@@ -90,7 +90,7 @@
     }
   },
   "diagnostic-languageserver.formatFiletypes": {
-    "python": ["black", "autopep8", "isort", "docformatter"],
+    "python": ["autopep8", "black", "isort", "docformatter"],
     "dart": "dartfmt",
     "elixir": "mix_format",
     "eelixir": "mix_format",
@@ -125,6 +125,7 @@
   "python.analysis.diagnosticSeverityOverrides": {
     "reportGeneralTypeIssues": false
   },
+  "python.formatting.provider": "autopep8",
 
   "jedi.enable": false,
   "jedi.executable.command": "jedi-language-server",
