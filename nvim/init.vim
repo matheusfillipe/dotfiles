@@ -202,6 +202,8 @@ function! Cond(cond, ...)
 endfunction
 " let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
 call plug#begin()
+Plug 'matheusfillipe/grep_app.nvim'
+Plug 'andymass/vim-matchup'
 Plug 'honza/vim-snippets', Cond(!exists('g:vscode'))
 Plug 'airblade/vim-rooter'
 Plug 'tell-k/vim-autopep8'
@@ -519,6 +521,9 @@ lua << EOF
       layout_strategy = "horizontal",
       layout_config = {
         horizontal = { width = 0.99, height = 0.99, preview_cutoff = 0 }
+      },
+      preview = {
+        timeout = 5000,
       },
       mappings = {
         i = {
@@ -943,8 +948,9 @@ tnoremap <M-W> <C-\><C-n>:tablast<CR>
 " nnoremap tc :tabclose<CR>
 " nnoremap <Tab> :tabn<CR>
 nnoremap <S-Tab> :tabp<CR>
-nnoremap <S-Tab> %
-vnoremap <S-Tab> %
+nmap <S-Tab> %
+vmap <S-Tab> %
+
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeChDirMode = 2
@@ -1585,6 +1591,7 @@ let runners['javascript'] = 'node %'
 let runners['rust'] = 'cd $(git rev-parse --show-toplevel); cargo run'
 let runners['go'] = 'go run .'
 let runners['java'] = 'cd $(git rev-parse --show-toplevel); ./gradlew installArmv7Release'
+let runners['lua'] = 'lua %'
 let k = keys(runners)
 
 if executable("altty")
@@ -1740,3 +1747,9 @@ endfunction
 command! BDeleteHidden :call DeleteHiddenBuffers()
 autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
 
+
+lua << EOF
+  require('telescope').load_extension('grep_app')
+EOF
+nnoremap <space>ga <cmd>Telescope grep_app<cr>
+vnoremap <space>ga <cmd>Telescope grep_app<cr>
