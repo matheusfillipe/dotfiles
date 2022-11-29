@@ -841,6 +841,7 @@ nnoremap <C-M-l> <C-w>l
 noremap ZW :bd<CR>
 nnoremap <space>n :call vm#commands#ctrln(1)<CR>
 vnoremap <space>n :call vm#commands#ctrln(1)<CR>
+vnoremap <M-n> :call vm#commands#ctrln(1)<CR>
 
 " Window Movements
 nnoremap <space>wh <C-w>h
@@ -1752,4 +1753,6 @@ lua << EOF
   require('telescope').load_extension('grep_app')
 EOF
 nnoremap <space>ga <cmd>Telescope grep_app<cr>
-vnoremap <space>ga <cmd>Telescope grep_app<cr>
+nnoremap <space>gz <cmd>Telescope grep_app live<cr>
+vnoremap <space>ga "zy:Telescope grep_app search_query=<C-r>z<cr>
+
