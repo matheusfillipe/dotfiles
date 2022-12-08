@@ -641,8 +641,10 @@ autocmd FileType python command! Format :silent !autopep8 -i %
 
 " nmap <silent> <space>cs <Plug>(pydocstring)
 nmap <silent> <space>cs <Plug>(doge-generate)
+nmap <silent> <space>cSg :DogeGenerate google<cr>
+nmap <silent> <space>cSn :DogeGenerate numpy<cr>
+nmap <silent> <space>cSs :DogeGenerate sphinx<cr>
 let g:doge_doc_standard_python = 'reST'
-
 
 " Doom emacs like things
 nnoremap <c-_> gc<space>  
@@ -1750,9 +1752,25 @@ autocmd FileType python let b:coc_root_patterns = ['.git', '.env', 'venv', '.ven
 
 
 lua << EOF
+  require("telescope").setup({
+    extensions = {
+      grep_app = {
+        max_results = 20,
+      }
+    },
+  })
   require('telescope').load_extension('grep_app')
 EOF
-nnoremap <space>ga <cmd>Telescope grep_app<cr>
-nnoremap <space>gz <cmd>Telescope grep_app live<cr>
-vnoremap <space>ga "zy:Telescope grep_app search_query=<C-r>z<cr>
 
+nnoremap <space>ga <cmd>Telescope grep_app<cr>
+vnoremap <space>ga "zy:Telescope grep_app search_query=<C-r>z<cr>
+nnoremap <space>gz <cmd>Telescope grep_app live<cr>
+nnoremap <space>gol <cmd>Telescope grep_app open_line<cr>
+vnoremap <space>gol <esc><cmd>Telescope grep_app open_line<cr>
+nnoremap <space>gor <cmd>Telescope grep_app open_repo<cr>
+nnoremap <space>gcl <cmd>Telescope grep_app copy_line_url<cr>
+nnoremap <space>gcr <cmd>Telescope grep_app copy_repo_url<cr>
+vnoremap <space>gcl <esc><cmd>Telescope grep_app copy_line_url visual=true<cr>
+
+set foldmethod=syntax
+set nofoldenable

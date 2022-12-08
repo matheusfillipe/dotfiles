@@ -450,3 +450,5 @@ zstyle ':completion:*' completer _expand_alias _complete _ignored
 
 
 export PYTHONBREAKPOINT=ipdb.set_trace 
+
+alias pinggoogle="ping 8.8.8.8 | sed -u 's/.*time=\([0-9.]\+\).*/\1 ms/' | ttyplot -t ping -u ms"
