@@ -275,6 +275,8 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 Plug 'lilyinstarlight/vim-sonic-pi'
 Plug 'whonore/Coqtail'
 Plug 'mbbill/undotree'
+Plug 'terror/chatgpt.nvim',
+" {'do': ':!pip3 install -r requirements.txt'}
 if has('nvim-0.5') && !exists('g:vscode')
   " The real cool stuff
   Plug 'nvim-lua/popup.nvim'
