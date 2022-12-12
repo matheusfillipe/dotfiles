@@ -295,6 +295,7 @@ if has('nvim-0.5') && !exists('g:vscode')
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'TimUntersberger/neogit'
   Plug 'lewis6991/gitsigns.nvim'
+  Plug 'nvim-telescope/telescope-github.nvim'
 endif
 
 if has('nvim-0.6') && !exists('g:vscode')
@@ -430,6 +431,11 @@ EOF
   xnoremap <space>cf <Plug>(coc-format-selected)
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
 
+  nnoremap <space>ghi lua require('telescope').extensions.gh.issues()<cr>
+  nnoremap <space>ghp lua require('telescope').extensions.gh.pull_request()<cr>
+  nnoremap <space>ghg lua require('telescope').extensions.gh.gist()<cr>
+  nnoremap <space>ghr lua require('telescope').extensions.gh.run()<cr>
+
   function! ShowDocumentation()
     if CocAction('hasProvider', 'hover')
       call CocActionAsync('doHover')
@@ -490,6 +496,8 @@ EOF
   " nnoremap <space>p :lua require'telescope'.extensions.project.project{}<cr>
 
 
+  " github telescope gh cli telescope
+  lua require('telescope').load_extension('gh')
   " Pick from all bookmarks
   lua require('telescope').load_extension('vim_bookmarks')
   nmap <space><CR> :Telescope vim_bookmarks all<cr>
