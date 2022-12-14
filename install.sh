@@ -12,6 +12,8 @@ then
   cp -r ~/.novimZsh/ .
   cp ~/.novimZsh/.zshrc .novimZsh/
   cp ~/.pylintrc .pylintrc
+  cp ~/.zsh/postzshsourceprofile .zsh/
+  cp ~/.zsh/zdummyprofile .zsh/
   git add .; git commit -m "$2"; git push origin master;
   exit 0
 fi
