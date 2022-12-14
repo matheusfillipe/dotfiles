@@ -405,3 +405,8 @@ function gcp_prompt() {
 
 unalias gcp
 alias gcp=gcp_prompt
+
+
+for i in ~/.zsh/postz*profile; do
+    [[ -e $i ]] && source $i
+done

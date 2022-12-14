@@ -431,10 +431,10 @@ EOF
   xnoremap <space>cf <Plug>(coc-format-selected)
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
 
-  nnoremap <space>ghi lua require('telescope').extensions.gh.issues()<cr>
-  nnoremap <space>ghp lua require('telescope').extensions.gh.pull_request()<cr>
-  nnoremap <space>ghg lua require('telescope').extensions.gh.gist()<cr>
-  nnoremap <space>ghr lua require('telescope').extensions.gh.run()<cr>
+  nnoremap <space>ghi <cmd>Telescope gh issues<cr>
+  nnoremap <space>ghp <cmd>Telescope gh pull_request<cr>
+  nnoremap <space>ghg <cmd>Telescope gh gist<cr>
+  nnoremap <space>ghr <cmd>Telescope gh run<cr>
 
   function! ShowDocumentation()
     if CocAction('hasProvider', 'hover')
@@ -533,7 +533,7 @@ lua << EOF
         horizontal = { width = 0.99, height = 0.99, preview_cutoff = 0 }
       },
       preview = {
-        timeout = 5000,
+        timeout = 10000,
       },
       mappings = {
         i = {
