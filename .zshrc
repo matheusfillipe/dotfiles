@@ -3,9 +3,12 @@
 [[ "$TERM" == "dumb" ]] && unsetopt zle && PS1='$ ' && return
 
 [[ -e ~/.zsh_extrasrc ]] && source ~/.zsh_extrasrc
-for i in ~/.zsh/z*profile; do
-    [[ -e $i ]] && source $i
-done
+
+if [ -f ~/.zsh/z*profile ]; then
+  for i in ~/.zsh/z*profile; do
+      [[ -e $i ]] && source $i
+  done
+fi
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -407,6 +410,8 @@ unalias gcp
 alias gcp=gcp_prompt
 
 
-for i in ~/.zsh/postz*profile; do
-    [[ -e $i ]] && source $i
-done
+if [ -f ~/.zsh/postz*profile ]; then
+  for i in ~/.zsh/postz*profile; do
+      [[ -e $i ]] && source $i
+  done
+fi
