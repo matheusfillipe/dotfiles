@@ -1,6 +1,8 @@
 #!/bin/bash
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/.vimrc -o ~/.vimrc
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/.zshrc -o ~/.zshrc
+curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/.zsh/zdummyprofile -o ~/.zsh/zdummyprofile
+curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/.zsh/postzshsourceprofile -o ~/.zsh/postzshsourceprofile
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/.tmux.conf -o ~/.tmux.conf
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/nvim/init.vim -o ~/.config/nvim/init.vim
 curl https://raw.githubusercontent.com/matheusfillipe/dotfiles/master/nvim/spatch.diff -o ~/.config/nvim/spatch.diff
