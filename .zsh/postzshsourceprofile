@@ -1,0 +1,28 @@
+ZSH_DOTENV_FILENAMES=(aliases.sh)
+
+if [[ -z $ZSH_DOTENV_SOURCED_FILES ]]; then
+  ZSH_DOTENV_SOURCED_FILES=()
+fi
+
+source_env() {
+  for alias_filename in "${ZSH_DOTENV_FILENAMES[@]}"; do
+    alias_filename="$(pwd)/$alias_filename"
+    can_source=1
+    for sourced_filename in "${ZSH_DOTENV_FILENAMES[@]}"; do
+      if [[ "$alias_filename" == "$sourced_filename" ]]; then
+        can_source=0
+      fi
+    done
+    if [[ -f "$alias_filename" && $can_source -eq 1 ]]; then
+      setopt localoptions allexport
+      echo "Sourcing: '$alias_filename'"
+      source "$alias_filename"
+      ZSH_DOTENV_SOURCED_FILES+=("$alias_filename")
+    fi
+  done
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook chpwd source_env
+
+source_env
