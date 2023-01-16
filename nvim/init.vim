@@ -183,129 +183,94 @@ set t_Co=256
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-" put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
-" in ~/.vim/colors/ and uncomment:
-" colorscheme solarized
-" if empty(glob('~/.vim/autoload/plug.vim'))
-"   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-"       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-"         endif
+
 "TERM_FANCY_CURSOR  = 'true'
 set nocompatible
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25-Cursor,r-cr-o:hor20
 
-" vscode neovim forced me to do this
-function! Cond(cond, ...)
-  let opts = get(a:000, 0, {})
-  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
-endfunction
 " let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
 call plug#begin()
 Plug 'matheusfillipe/grep_app.nvim'
 Plug 'andymass/vim-matchup'
-Plug 'honza/vim-snippets', Cond(!exists('g:vscode'))
+Plug 'honza/vim-snippets'
 Plug 'airblade/vim-rooter'
-Plug 'tell-k/vim-autopep8'
 Plug 'lambdalisue/suda.vim'
-Plug 'liuchengxu/space-vim-dark', Cond(!exists('g:vscode'))
+Plug 'liuchengxu/space-vim-dark'
 Plug 'Yggdroot/indentLine'    
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-sensible' 
-" Plug 'maxbrunsfeld/vim-emacs-bindings'
-Plug 'tmsvg/pear-tree', Cond(!exists('g:vscode'))
+Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'fidian/hexmode' 
-" Plug 'davidhalter/jedi-vim'
-" Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'bkad/CamelCaseMotion'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-Plug 'vim-airline/vim-airline', Cond(!exists('g:vscode'))
-Plug 'vim-airline/vim-airline-themes', Cond(!exists('g:vscode'))
-Plug 'voldikss/vim-floaterm', Cond(!exists('g:vscode'))
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'voldikss/vim-floaterm'
 Plug 'reedes/vim-wordy'
-Plug 'easymotion/vim-easymotion', Cond(!exists('g:vscode'))
-Plug 'asvetliakov/vim-easymotion', Cond(exists('g:vscode'), { 'as': 'vsc-easymotion' })
 Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-repeat'
-Plug 'stanangeloff/php.vim', Cond(!exists('g:vscode'))
-Plug 'preservim/nerdtree', Cond(!exists('g:vscode'))
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight', Cond(!exists('g:vscode'))
+Plug 'stanangeloff/php.vim'
+Plug 'preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'dart-lang/dart-vim-plugin', Cond(!exists('g:vscode'))
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'rust-lang/rust.vim'
-Plug 'lervag/vimtex', Cond(!exists('g:vscode'))
+Plug 'lervag/vimtex'
 Plug 'qpkorr/vim-bufkill'
 Plug 'chr4/nginx.vim'
-Plug 'neoclide/coc.nvim', Cond(!exists('g:vscode'), {'branch': 'release'})
-Plug 'junegunn/fzf.vim', Cond(!exists('g:vscode'))
-Plug 'junegunn/fzf', Cond(!exists('g:vscode') , { 'do': { -> fzf#install() } })
-Plug 'antoinemadec/coc-fzf', Cond(!exists('g:vscode'))
-" Plug 'jceb/vim-orgmode', Cond(!exists('g:vscode'))
+Plug 'neoclide/coc.nvim'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'antoinemadec/coc-fzf'
 Plug 'sakhnik/nvim-gdb' , {  ' do ' :  ' :!./install.sh '  }
-" Plug 'sheerun/vim-polyglot', Cond(!exists('g:vscode'))
-Plug 'joshdick/onedark.vim', Cond(!exists('g:vscode'))
+Plug 'joshdick/onedark.vim'
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
-" Plug 'eliba2/vim-node-inspect'
-Plug 'mg979/vim-visual-multi', Cond(!exists('g:vscode'), {'branch': 'master'})
+Plug 'mg979/vim-visual-multi'
 Plug '907th/vim-auto-save'
 Plug 'mcchrish/nnn.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
 Plug 'jkramer/vim-checkbox'
-" Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
-" Plug 'jreybert/vimagit'
-Plug 'chrisbra/Colorizer', Cond(!exists('g:vscode'))
-" Plug 'SidOfc/mkdx', Cond(!exists('g:vscode'))
-Plug 'MattesGroeger/vim-bookmarks', Cond(!exists('g:vscode'))
-Plug 'dstein64/vim-startuptime', Cond(!exists('g:vscode'))
-Plug 'luochen1990/rainbow', Cond(!exists('g:vscode'))
-" Plug 'p00f/nvim-ts-rainbow', Cond(!exists('g:vscode'))
-Plug 'farfanoide/vim-kivy', Cond(!exists('g:vscode'))
-Plug 'szw/vim-maximizer', Cond(!exists('g:vscode'))
-Plug 'puremourning/vimspector', Cond(!exists('g:vscode'))
-Plug 'Jorengarenar/COBOl.vim', Cond(!exists('g:vscode'))
-Plug 'dbeniamine/cheat.sh-vim', Cond(!exists('g:vscode'))
+Plug 'chrisbra/Colorizer'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'dstein64/vim-startuptime'
+Plug 'luochen1990/rainbow'
+Plug 'puremourning/vimspector'
+Plug 'Jorengarenar/COBOl.vim'
+Plug 'dbeniamine/cheat.sh-vim'
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 Plug 'lilyinstarlight/vim-sonic-pi'
 Plug 'whonore/Coqtail'
 Plug 'mbbill/undotree'
-Plug 'terror/chatgpt.nvim',
-" {'do': ':!pip3 install -r requirements.txt'}
-if has('nvim-0.5') && !exists('g:vscode')
-  " The real cool stuff
-  Plug 'nvim-lua/popup.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-  Plug 'tom-anders/telescope-vim-bookmarks.nvim'
-  Plug 'folke/which-key.nvim'
-  Plug 'nvim-telescope/telescope-project.nvim'
-  Plug 'fannheyward/telescope-coc.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'phaazon/hop.nvim'
-  Plug 'AckslD/nvim-neoclip.lua'
-  Plug 'ThePrimeagen/refactoring.nvim'
-  Plug 'romgrk/nvim-treesitter-context'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'sindrets/diffview.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'TimUntersberger/neogit'
-  Plug 'lewis6991/gitsigns.nvim'
-  Plug 'nvim-telescope/telescope-github.nvim'
-endif
+Plug 'dhruvasagar/vim-zoom'
+" The real cool stuff
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'tom-anders/telescope-vim-bookmarks.nvim'
+Plug 'folke/which-key.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'phaazon/hop.nvim'
+Plug 'AckslD/nvim-neoclip.lua'
+Plug 'ThePrimeagen/refactoring.nvim'
+Plug 'romgrk/nvim-treesitter-context'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'sindrets/diffview.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'TimUntersberger/neogit'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'nvim-telescope/telescope-github.nvim'
+Plug 'pwntester/octo.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'github/copilot.vim'
 
-if has('nvim-0.6') && !exists('g:vscode')
-  imap <silent><script><expr> <C-E> copilot#Accept("<End>")
-  let g:copilot_no_tab_map = v:true
-  let g:copilot_assume_mapped = v:true
-  Plug 'github/copilot.vim'
-else
-  inoremap <C-e> <End>
-endif
+imap <silent><script><expr> <C-E> copilot#Accept("<End>")
+let g:copilot_no_tab_map = v:true
+let g:copilot_assume_mapped = v:true
 
 call plug#end()
 if empty(glob("~/.config/nvim/plugged")) && empty(glob('~/.vim/autoload/plug.vim'))
@@ -335,7 +300,6 @@ nmap <space>Bk <Plug>BookmarkMoveUp
 nmap <space>Bj <Plug>BookmarkMoveDown
 nmap <space>Bg <Plug>BookmarkMoveToLine
  
-" nnoremap  <leader>f <Plug>(easymotion-s)
 
 " Doge docstring
 let g:doge_enable_mappings = 1
@@ -430,11 +394,6 @@ EOF
   vnoremap <space>cf <Plug>(coc-format-selected)
   xnoremap <space>cf <Plug>(coc-format-selected)
   nnoremap <space>si <cmd>Telescope coc document_symbols<cr>
-
-  nnoremap <space>ghi <cmd>Telescope gh issues<cr>
-  nnoremap <space>ghp <cmd>Telescope gh pull_request<cr>
-  nnoremap <space>ghg <cmd>Telescope gh gist<cr>
-  nnoremap <space>ghr <cmd>Telescope gh run<cr>
 
   function! ShowDocumentation()
     if CocAction('hasProvider', 'hover')
@@ -869,7 +828,8 @@ nnoremap <space>w0 <C-w>0
 nnoremap <space>ws <C-w>s
 nnoremap <space>wv <C-w>v
 nnoremap <space>wq <C-w>q
-nnoremap <space>wm <C-w>o
+" nnoremap <space>wm <C-w>m
+nnoremap <space>wm <Plug>(zoom-toggle)
 nnoremap <space>wx <C-w>x
 nnoremap <space>wd :bd
 nnoremap <C-w><space> <C-w>w
@@ -1784,3 +1744,51 @@ vnoremap <space>gcl <esc><cmd>Telescope grep_app copy_line_url visual=true<cr>
 
 set foldmethod=syntax
 set nofoldenable
+
+
+" GITHUB PR REVIEW
+lua << EOF
+  require"octo".setup()
+  local wk = require("which-key")
+  wk.register({
+      g = {
+          name = "+Git",
+          h = {
+              name = "+Github",
+              g = {"<cmd>Telescope gh gist<cr>", "Gists"},
+              c = {
+                  name = "+Commits",
+              },
+              i = {
+                  name = "+Issues",
+                  l = { "<cmd>Telescope gh issues<cr>", "Telescope List"},
+              },
+              R = {
+                  name = "+Review",
+              },
+              r = { "<cmd>Telescope gh run<cr>", "Runner Actions" },
+              p = {
+                  name = "+Pull Request",
+                  l = { "<cmd>Telescope gh pull_request<cr>" , "Telescope List"},
+              },
+              t = {
+                  name = "+Threads",
+              },
+          },
+      },
+  }, { prefix = "<space>" })
+
+  -- This is your opts table
+  require("telescope").setup {
+    extensions = {
+      ["ui-select"] = {
+        require("telescope.themes").get_dropdown {
+          -- even more opts
+        }
+      }
+    }
+  }
+  -- To get ui-select loaded and working with telescope, you need to call
+  -- load_extension, somewhere after setup function:
+  require("telescope").load_extension("ui-select")
+EOF

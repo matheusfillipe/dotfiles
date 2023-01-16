@@ -4,11 +4,9 @@
 
 [[ -e ~/.zsh_extrasrc ]] && source ~/.zsh_extrasrc
 
-if [ -f ~/.zsh/z*profile ]; then
-  for i in ~/.zsh/z*profile; do
-      [[ -e $i ]] && source $i
-  done
-fi
+for i in ~/.zsh/z*profile; do
+    [[ -e $i ]] && source $i
+done
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -395,12 +393,6 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 alias pinggoogle="ping 8.8.8.8 | sed -u 's/.*time=\([0-9.]\+\).*/\1 ms/' | ttyplot -t ping -u ms"
 
 
-function gcp_cluster() {
-  echo "$1" | cut -d . -f1 | xargs echo ""
-}
-
-KUBE_PS1_CLUSTER_FUNCTION=gcp_cluster
-
 ORIGINAL_PS1=$PS1
 function gcp_prompt() {
   PROMPT='$(kube_ps1)'$ORIGINAL_PS1
@@ -410,8 +402,6 @@ unalias gcp
 alias gcp=gcp_prompt
 
 
-if [ -f ~/.zsh/postz*profile ]; then
-  for i in ~/.zsh/postz*profile; do
-      [[ -e $i ]] && source $i
-  done
-fi
+for i in ~/.zsh/postz*profile; do
+    [[ -e $i ]] && source $i
+done
