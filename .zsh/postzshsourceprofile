@@ -1,26 +1,47 @@
 ZSH_DOTENV_FILENAMES=(aliases.sh)
+ZSH_DOTENV_LIST="$HOME/.zsh/dotenvlist.txt"
 
 if [[ -z $ZSH_DOTENV_SOURCED_FILES ]]; then
   ZSH_DOTENV_SOURCED_FILES=()
 fi
 
+# If ZSH_DOTENV_LIST doesn't exist create it
+if [[ ! -f $ZSH_DOTENV_LIST ]]; then
+  touch $ZSH_DOTENV_LIST
+fi
+
 source_env() {
   for alias_filename in "${ZSH_DOTENV_FILENAMES[@]}"; do
     alias_filename="$(pwd)/$alias_filename"
-    can_source=1
-    for sourced_filename in "${ZSH_DOTENV_FILENAMES[@]}"; do
-      if [[ "$alias_filename" == "$sourced_filename" ]]; then
-        can_source=0
+    # Check if on ZSH_DOTENV_LIST
+    if grep -qw "$alias_filename" "$ZSH_DOTENV_LIST"; then
+      can_source=1
+      for sourced_filename in "${ZSH_DOTENV_FILENAMES[@]}"; do
+        if [[ "$alias_filename" == "$sourced_filename" ]]; then
+          can_source=0
+        fi
+      done
+      if [[ -f "$alias_filename" && $can_source -eq 1 ]]; then
+        setopt localoptions allexport
+        echo "Sourcing: '$alias_filename'"
+        source "$alias_filename"
+        ZSH_DOTENV_SOURCED_FILES+=("$alias_filename")
       fi
-    done
-    if [[ -f "$alias_filename" && $can_source -eq 1 ]]; then
-      setopt localoptions allexport
-      echo "Sourcing: '$alias_filename'"
-      source "$alias_filename"
-      ZSH_DOTENV_SOURCED_FILES+=("$alias_filename")
     fi
   done
 }
+
+# Add realpath of file into ZSH_DOTENV_LIST
+mkalias () {
+  # If no arguments are passed, print usage
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: mkalias <file>"
+    return 1
+  fi
+  echo $(realpath $1) >> $ZSH_DOTENV_LIST
+  source_env
+}
+
 
 autoload -U add-zsh-hook
 add-zsh-hook chpwd source_env
