@@ -628,7 +628,7 @@ let g:auto_save = 1
 let g:auto_save_events = ["InsertLeave", "TextChanged"]
 let g:auto_save_presave_hook = 'call AbortIfNotLang()'
 " let g:not_autosave = ["rust"]
-let g:not_autosave = ["neogit"]
+let g:not_autosave = ["neogit", "octo"]
 function! AbortIfNotLang()
   if index(g:not_autosave, &filetype) >= 0
     let g:auto_save_abort = 1
@@ -1755,25 +1755,78 @@ lua << EOF
           name = "+Git",
           h = {
               name = "+Github",
-              g = {"<cmd>Telescope gh gist<cr>", "Gists"},
+              g = {
+                name = "+Gists",
+                t = {"<cmd>Telescope gh gist<cr>", "Telescope Gists"},
+                s = {"<cmd>Octo gist list", "List Gists"},
+              },
               c = {
-                  name = "+Commits",
+                  name = "+Comments",
+                  a = {"<cmd>Octo comment add<cr>", "Add Comment"},
+                  d = {"<cmd>Octo comment delete<cr>", "Delete Comment"},
+                  t = {"<cmd>Octo reaction +1<cr>", "👍"},
+                  f = {"<cmd>Octo reaction -1<cr>", "👎"},
+                  e = {"<cmd>Octo reaction eyes<cr>", "👀"},
+                  l = {"<cmd>Octo reaction laugh<cr>", "😂"},
+                  r = {"<cmd>Octo reaction rocket<cr>", "🚀"},
+                  u = {"<cmd>Octo reaction confused<cr>", "😕"},
               },
               i = {
                   name = "+Issues",
-                  l = { "<cmd>Telescope gh issues<cr>", "Telescope List"},
+                  t = { "<cmd>Telescope gh issues<cr>", "Telescope List"},
+                  c = { "<cmd>Octo issue create<cr>", "Creates a new issue"},
+                  C = { "<cmd>Octo issue close<cr>", "Closes an issue"},
+                  e = { "<cmd>Octo issue edit<cr>", "Edits an issue"},
+                  s = { "<cmd>Octo issue search<cr>", "Searches for issues"},
+                  b = { "<cmd>Octo issue browser<cr>", "Opens the issue in the browser"},
+                  u = { "<cmd>Octo issue url<cr>", "Copies the issue url to the clipboard"},
               },
               R = {
-                  name = "+Review",
+                  name = "+Repo",
+                  t = { "<cmd>Octo repo list<cr>", "Lists your repos" },
+                  f = { "<cmd>Octo repo fork<cr>", "Forks repo" },
+                  b = { "<cmd>Octo repo browser<cr>", "Opens repo in browser" },
+                  u = { "<cmd>Octo repo url<cr>", "Copies repo url" },
               },
-              r = { "<cmd>Telescope gh run<cr>", "Runner Actions" },
+              r = {
+                  name = "+Review",
+                  R = {
+                    name = "+Reviewers",
+                    a = { "<cmd>Octo assignee add<cr>", "Add Reviewer" },
+                    r = { "<cmd>Octo assignee remove<cr>", "Remove Reviewer" },
+                  },
+                  a = { "<cmd>Octo assignee add<cr>", "Assigns a reviewer" },
+                  s = { "<cmd>Octo review start<cr>", "Starts a review" },
+                  S = { "<cmd>Octo review submit<cr>", "Submits a review" },
+                  r = { "<cmd>Octo review resume<cr>", "Resumes a review" },
+                  d = { "<cmd>Octo review discard<cr>", "Discards a review" },
+                  c = { "<cmd>Octo review comments<cr>", "Lists pending review comments" },
+                  C = { "<cmd>Octo review commit<cr>", "Pick a specific commit to review" },
+              },
+              a = { "<cmd>Telescope gh run<cr>", "Runner Actions" },
               p = {
                   name = "+Pull Request",
-                  l = { "<cmd>Telescope gh pull_request<cr>" , "Telescope List"},
+                  t = { "<cmd>Telescope gh pull_request<cr>" , "Telescope List"},
+                  c = { "<cmd>Octo pr create<cr>", "Creates a new PR" },
+                  l = { "<cmd>Octo pr list<cr>", "Lists PRs" },
+                  s = { "<cmd>Octo pr search<cr>", "Searches PRs" },
+                  C = { "<cmd>Octo pr close<cr>", "Closes a PR" },
+                  p = { "<cmd>Octo pr checkout<cr>", "Checks out a PR" },
+                  d = { "<cmd>Octo pr diff<cr>", "Shows a PR diff" },
+                  b = { "<cmd>Octo pr browser<cr>", "Opens a PR in the browser" },
+                  u = { "<cmd>Octo pr url<cr>", "Copies a PR url to the clipboard" },
               },
               t = {
                   name = "+Threads",
+                  r = { "<cmd>Octo thread resolve<cr>", "Resolves a thread" },
+                  u = { "<cmd>Octo thread unresolve<cr>", "Unresolves a thread" },
               },
+              l = {
+                  name = "+Labels",
+                  a = { "<cmd>Octo label add<cr>", "Adds a label" },
+                  r = { "<cmd>Octo label remove<cr>", "Removes a label" },
+              },
+              s = {"<cmd>Octo search<cr>", "Search on github"},
           },
       },
   }, { prefix = "<space>" })
