@@ -400,8 +400,11 @@ function gcp_prompt() {
 
 unalias gcp
 alias gcp=gcp_prompt
+alias gr='cd $(git rev-parse --show-toplevel)'
+export PATH="${PATH}:${HOME}/.krew/bin"
 
 
 for i in ~/.zsh/postz*profile; do
     [[ -e $i ]] && source $i
 done
+

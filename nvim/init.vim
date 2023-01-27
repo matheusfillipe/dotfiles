@@ -1738,7 +1738,9 @@ nnoremap <space>gz <cmd>Telescope grep_app live<cr>
 nnoremap <space>gol <cmd>Telescope grep_app open_line<cr>
 vnoremap <space>gol <esc><cmd>Telescope grep_app open_line<cr>
 nnoremap <space>gor <cmd>Telescope grep_app open_repo<cr>
+nnoremap <space>gof <cmd>Telescope grep_app open_file<cr>
 nnoremap <space>gcl <cmd>Telescope grep_app copy_line_url<cr>
+nnoremap <space>gcy <cmd>Telescope grep_app copy_file_url<cr>
 nnoremap <space>gcr <cmd>Telescope grep_app copy_repo_url<cr>
 vnoremap <space>gcl <esc><cmd>Telescope grep_app copy_line_url visual=true<cr>
 
@@ -1760,6 +1762,9 @@ lua << EOF
                 t = {"<cmd>Telescope gh gist<cr>", "Telescope Gists"},
                 s = {"<cmd>Octo gist list", "List Gists"},
               },
+              b = {
+                name = "+Branch",
+                },
               c = {
                   name = "+Comments",
                   a = {"<cmd>Octo comment add<cr>", "Add Comment"},
@@ -1773,7 +1778,7 @@ lua << EOF
               },
               i = {
                   name = "+Issues",
-                  t = { "<cmd>Telescope gh issues<cr>", "Telescope List"},
+                  l = { "<cmd>Telescope gh issues<cr>", "Telescope List"},
                   c = { "<cmd>Octo issue create<cr>", "Creates a new issue"},
                   C = { "<cmd>Octo issue close<cr>", "Closes an issue"},
                   e = { "<cmd>Octo issue edit<cr>", "Edits an issue"},
@@ -1783,7 +1788,7 @@ lua << EOF
               },
               R = {
                   name = "+Repo",
-                  t = { "<cmd>Octo repo list<cr>", "Lists your repos" },
+                  l = { "<cmd>Octo repo list<cr>", "Lists your repos" },
                   f = { "<cmd>Octo repo fork<cr>", "Forks repo" },
                   b = { "<cmd>Octo repo browser<cr>", "Opens repo in browser" },
                   u = { "<cmd>Octo repo url<cr>", "Copies repo url" },
@@ -1792,10 +1797,10 @@ lua << EOF
                   name = "+Review",
                   R = {
                     name = "+Reviewers",
-                    a = { "<cmd>Octo assignee add<cr>", "Add Reviewer" },
-                    r = { "<cmd>Octo assignee remove<cr>", "Remove Reviewer" },
+                    a = { "<cmd>Octo reviwer add<cr>", "Add Reviewer" },
+                    r = { "<cmd>Octo reviwer remove<cr>", "Remove Reviewer" },
                   },
-                  a = { "<cmd>Octo assignee add<cr>", "Assigns a reviewer" },
+                  a = { "<cmd>Octo reviewer add<cr>", "Assigns a reviewer" },
                   s = { "<cmd>Octo review start<cr>", "Starts a review" },
                   S = { "<cmd>Octo review submit<cr>", "Submits a review" },
                   r = { "<cmd>Octo review resume<cr>", "Resumes a review" },
@@ -1809,10 +1814,14 @@ lua << EOF
                   t = { "<cmd>Telescope gh pull_request<cr>" , "Telescope List"},
                   c = { "<cmd>Octo pr create<cr>", "Creates a new PR" },
                   l = { "<cmd>Octo pr list<cr>", "Lists PRs" },
-                  s = { "<cmd>Octo pr search<cr>", "Searches PRs" },
+                  s = { "<cmd>Octo pr search<cr>", "Searches PRs and issues" },
                   C = { "<cmd>Octo pr close<cr>", "Closes a PR" },
                   p = { "<cmd>Octo pr checkout<cr>", "Checks out a PR" },
                   d = { "<cmd>Octo pr diff<cr>", "Shows a PR diff" },
+                  m = { "<cmd>Octo pr merge<cr>", "Merges a PR" },
+                  a = { "<cmd>Octo pr checks<cr>", "Shows PR Action checks" },
+                  p = { "<cmd>Octo pr checkout<cr>", "Checks out the PR" },
+                  r = { "<cmd>Octo pr reopen<cr>", "Reopens a PR" },
                   b = { "<cmd>Octo pr browser<cr>", "Opens a PR in the browser" },
                   u = { "<cmd>Octo pr url<cr>", "Copies a PR url to the clipboard" },
               },
